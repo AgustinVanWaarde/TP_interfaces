@@ -15,7 +15,17 @@ async function fetchJuegos(){
     }
 }
 
-
+function juegosPorGenero(genero){
+    let juegosFiltrados = [];
+    for(let j=0; i < juegos.length; i++){
+        for(let g; g < juegos[i].genres.length; g++){
+            if(juegos[i].genres[g] === genero){
+                juegosFiltrados.push(juegos[i]);
+            }
+        }
+    }
+    return juegosFiltrados;
+}
 
 async function inicializarCarrousels(){
     await fetchJuegos();
