@@ -112,8 +112,35 @@ async function crearCarrouselChico(juegos,genero){
 }
 
 // FUNCIÓN PARA MOVER EL CARRUSEL CHICO
-function configurarCarruselChico(carrusel, botonPrev, botonNext) {
+function configurarCarruselChico(carrusel, botonAnterior, botonSiguiente) {
+    let currentIndex = 0;
+    const cardsToShow = 6; // Número de cards visibles
+    const cardWidth = 185; // Ancho de la carta + margenes
 
+    function updateCarrusel() {
+        const offset = -currentIndex * cardWidth;
+        carrusel.style.transform = `translateX(${offset}px)`;
+    }
+
+    function siguienteImagen() {
+        const totalCards = carrusel.children.length;
+        const maxIndex = totalCards - cardsToShow;
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateCarrusel();
+        }
+    }
+
+    function anteriorImagen() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarrusel();
+        }
+    }
+
+    // Event listeners
+    botonSiguiente.addEventListener('click', siguienteImagen);
+    botonAnterior.addEventListener('click', anteriorImagen);
 }
 
 // FUNCION PARA CREAR UNA CARD
