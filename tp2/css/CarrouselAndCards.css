@@ -1,59 +1,85 @@
-/* Estilos para el contenedor del carrusel y las cards */
-.contenedor-carrousel-grande{
-    border-radius: 35px;
-    border: solid #70412C 8px;
-    max-width: 100%;
-    height: 460px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
-    background-color: #8B5F4C;
-    gap: 5px; /* Controla el espacio entre categoria y cards */
-}
+/* CARROUESEL CHICO DESDE ACA */
 
-/* Título de categoría */
-.categoria {
-    margin: 0;
-    padding: 0;
-}
-
-.boton-carrusel-left img{
-    width: 90px;
-    height: 97px;
-    align-items: center;
-    rotate: 180deg;
-    gap: 0px;
+/* Estilos para cada card chica individual */
+.card-chica {
+    width: 160px;
+    height: 165px;
+    border-radius: 20px;
+    border: 4px solid #70412C;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-image: url('../imgs/pegInterfacesPropio.png');*/
 }
 
-.boton-carrusel-right img{
-    width: 90px;
-    height: 97px;
-    align-items: center;
-    gap: 0px;
-    cursor: pointer;
-}
-
-/* Estilos para el texto del título de categoría */
-.categoria p {
-    margin: 4px 0 3px 0; /* Reducido el margin-top a -5px */
-    font-family: 'Inter', Arial, sans-serif;
+/* Estilos para el contenedor del carrousel chico nuevo */
+h2 {
+    font-family: 'Inter';
+    width: 50%;
     font-size: 24px;
     font-weight: 600;
-    color: white;
-    text-align: center;
+    color: #000000;
+    text-align: left;
+    margin-left: 40px;
+    margin-top: 30px;
+    margin-bottom: 1px;
 }
 
-/* Estilos para las cards */
-.cards-grandes {
+.carrousel-conteiner-chico {
+    max-width: 100%;
+    height: 185px;
+    overflow: hidden;
+    background-color: #8B5F4C;
+    border-radius: 35px;
+    border: solid #70412C 3px;
+    align-content: center;
+    position: relative; /* Necesario para posicionar los botones */
     display: flex;
-    gap: 15px;
-    padding-bottom: 20px;
-    justify-content: center;
     align-items: center;
 }
+
+.cards-categoria-chico {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: start;
+    gap: 15px;
+    margin-left: 60px;
+}
+
+.button-carrousel-chico {
+    position: absolute;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0.6; /* Hace la imagen menos opaca (40% visible) */
+}
+
+.button-prev-chico {
+    left: 0px; /* Botón izquierdo pegado al borde */
+    rotate: 180deg;
+}
+
+.button-next-chico {
+    right: 15px; /* Botón derecho pegado al borde */
+}
+
+.button-carrousel-chico:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+
+
+/* CARROUSEL GRANDE DESDE ACA */
 
 /* Estilos para cada card individual */
 .card-grande {
@@ -70,48 +96,88 @@
     background-repeat: no-repeat;
 }
 
-
-/*    CARROUSEL CHICO PARA ABAJO    */
-
-
-/*contenedor para las cards chicas*/
-.contenedor-carrousel-chico{
-    border-radius: 35px;
-    border: solid #70412C 3px;
-    max-width: 100%;
-    height: 195px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-    background-color: #8B5F4C;
-    gap: 0px; /* Controla el espacio entre categoria y cards */
-}
-
-/* Estilos para cada card chica individual */
-.card-chica {
-    width: 150px;
-    height: 150px;
-    border-radius: 20px;
-    border: 4px solid #70412C;
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+/* Estilos para las imagenes dentro de las cards grandes */
+.card-grande div {
+    width: 100%;
+    height: 92%;
+    background-image: url('../imgs/pegInterfacesPropio.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
 }
 
-/* Estilos para las cards chicas */
-.cards-chicas {
+/* Estilos para el nombre de los juegos dentro de las cards grandes */
+.card-grande p {
+    background-color: white;
+    width: 100%;
+    height: 8%;
+    margin-top: 0px;
+    font-family: 'Inter';
     display: flex;
-    gap: 20px;
     justify-content: center;
+    align-items: center;
+    font-size: 14px;
 }
 
-/* Estilos para el texto del título de categoría en carrusel chico */
-.contenedor-carrousel-chico .categoria p {
-    margin: -8px 0 0 0;
+/* Estilos para el contenedor del carrusel y las cards */
+.carrousel-conteiner-grande{
+    border-radius: 35px;
+    border: solid #70412C 8px;
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los botones */
+    max-width: 100%;
+    height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 40px;
+    background-color: #8B5F4C;
+}
+
+/* Estilos para el texto del título dentro del contenedor del carrusel grande */
+.carrousel-conteiner-grande h2 {
+    color: white;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: -30px;
+}
+
+/* Estilo para donde van las cards dentro del contenedor del carrusel grande desde js */
+.cards-categoria-grande {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin: 20px 0 0 80px;
+}
+
+/* Estilos para los botones del carrusel grande generales */
+.button-carrousel-grande {
+    position: absolute;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0.6;
+}
+
+/* Estilos para el boton previo/izquierdo del carrusel grande */
+.button-prev-grande {
+    left: 5px; /* Botón izquierdo pegado al borde */
+    rotate: 180deg;
+}
+
+/* Estilos para el boton siguiente/derecho del carrusel grande */
+.button-next-grande {
+    right: 15px; /* Botón derecho pegado al borde */
+}
+
+/* Efecto hover para los botones del carrusel grande */
+.button-carrousel-grande:hover {
+    transform: scale(1.1);
+    opacity: 1;
 }

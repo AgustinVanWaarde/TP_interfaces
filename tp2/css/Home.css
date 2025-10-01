@@ -3,11 +3,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter';
-    font-size: 30px;
+    font-size: 24px;
     font-style: normal;
     text-align: center;
 }
 
+
+
+/* HEADER */
 /* Estilos para la barra de navegación */
 header {
     background-color: #8B5F4C;
@@ -16,6 +19,7 @@ header {
     border-bottom: #381505 3px solid;
 }
 
+/* Estilos grid para el navbar */
 .grid-navbar {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -50,6 +54,7 @@ header {
     justify-content: center;
 }
 
+/* medidas y estilos de las imagenes de los botones */
 .menu-hamburguesa img,
 .menu-ayuda img,
 .menu-perfil img {
@@ -59,6 +64,7 @@ header {
     transition: transform 0.2s ease;
 }
 
+/* Efecto hover para las imágenes de los botones */
 .menu-hamburguesa img:hover,
 .menu-ayuda img:hover,
 .menu-perfil img:hover {
@@ -72,7 +78,7 @@ header {
     justify-content: center;
 }
 
-
+/* Estilos para el texto del título */
 .titulo h1 {
     color: #ffffff;
     margin: 0;
@@ -82,7 +88,45 @@ header {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Estilos para la imagen del logo */
 .titulo img {
     width: 60px;
     height: 55px;
+}
+
+/* BOTON JUGAR */
+.boton-jugar {
+    background-color: #4169E1 ;
+    filter: brightness(1.4);
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px; /* Bordes muy redondeados */
+    padding: 15px 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3); /* Sombra azulada */
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hover más oscuro */
+.boton-jugar:hover {
+    background-color: #4169E1;
+    filter: brightness(1);
+    transform: translateY(-2px); /* Se eleva un poco */
+    box-shadow: 0 6px 20px rgba(93, 76, 219, 0.4); /* Sombra más intensa */
+}
+
+/* Cuando se presiona */
+.boton-jugar:active {
+    transform: translateY(0); /* Vuelve a la posición */
+    box-shadow: 0 2px 10px rgba(93, 76, 219, 0.3);
 }
