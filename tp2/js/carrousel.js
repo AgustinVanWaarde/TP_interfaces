@@ -15,6 +15,7 @@ async function fetchJuegos(){
     }
 }
 
+
 // FUNCION PARA CREAR UN CARROUSEL GRANDE
 async function crearCarrouselGrande(juegos,genero){
     //selecciono el main donde van los carrousels
@@ -30,7 +31,8 @@ async function crearCarrouselGrande(juegos,genero){
 
     //creo el titulo de categoria del carrousel
     const tituloCategoria = document.createElement('h2');
-    tituloCategoria.textContent = 'Juegos de la Categoria ' + genero;
+    tituloCategoria.className = 'titulo-categoria-grande';
+    tituloCategoria.textContent = 'Juegos ' + genero;
 
     //creo el boton siguiente
     const botonSiguiente = document.createElement('img');
@@ -60,7 +62,10 @@ async function crearCarrouselGrande(juegos,genero){
     //inserto la section en el main
     main.appendChild(section);
 
+    // configuro el carrusel grande
+    configurarCarrusel(juegosCarrousel, botonAnterior, botonSiguiente, "grande");
 }
+
 
 // FUNCION PARA CREAR UN CARROUSEL CHICO
 async function crearCarrouselChico(juegos,genero){
@@ -73,7 +78,7 @@ async function crearCarrouselChico(juegos,genero){
 
     //creo el titulo de categoria del carrousel
     const tituloCategoria = document.createElement('h2');
-    tituloCategoria.textContent = 'Juegos de la Categoria ' + genero;
+    tituloCategoria.textContent = 'Juegos de ' + genero;
 
     //creo el contenedor del carrousel
     const carrouselContainer = document.createElement('div');
@@ -107,22 +112,33 @@ async function crearCarrouselChico(juegos,genero){
     //inserto la section en el main
     main.appendChild(section);
 
-    // *** FUNCIONALIDAD DEL CARRUSEL CHICO ***
-    configurarCarruselChico(juegosCarrousel, botonAnterior, botonSiguiente);
+    // configuro el carrusel chico
+    configurarCarrusel(juegosCarrousel, botonAnterior, botonSiguiente, "chico");
 }
 
-// FUNCIÓN PARA MOVER EL CARRUSEL CHICO
-function configurarCarruselChico(carrusel, botonAnterior, botonSiguiente) {
-    let currentIndex = 0;
-    const cardsToShow = 6; // Número de cards visibles
-    const cardWidth = 185; // Ancho de la carta + margenes
 
-    function updateCarrusel() {
-        const offset = -currentIndex * cardWidth;
-        carrusel.style.transform = `translateX(${offset}px)`;
+// FUNCION PARA MOVER EL CARRUSEL (GENERICA)
+function configurarCarrusel(carrusel, botonAnterior, botonSiguiente, tipo) {
+    let maxWidth;// Ancho de la carta + margenes
+    let cardsToShow// Numero de cards visibles
+    if(tipo.toLowerCase() === 'grande'){
+        maxWidth = 340;
+        cardsToShow = 3; 
+    }else if(tipo.toLowerCase() === 'chico'){
+        maxWidth = 170;
+        cardsToShow = 6;
     }
 
-    function siguienteImagen() {
+    let currentIndex = 0;// Indice actual del carrusel
+
+    // Función para actualizar la posición del carrusel
+    function updateCarrusel() {
+        const offset = -currentIndex * maxWidth;// Ancho de la carta + margenes
+        carrusel.style.transform = `translateX(${offset}px)`;// Muevo el carrusel
+    }
+
+    // Funciones para ir a la imagen siguiente
+    function nextImage() {
         const totalCards = carrusel.children.length;
         const maxIndex = totalCards - cardsToShow;
         if (currentIndex < maxIndex) {
@@ -131,7 +147,8 @@ function configurarCarruselChico(carrusel, botonAnterior, botonSiguiente) {
         }
     }
 
-    function anteriorImagen() {
+    // Función para ir a la imagen anterior
+    function prevImage() {
         if (currentIndex > 0) {
             currentIndex--;
             updateCarrusel();
@@ -139,36 +156,39 @@ function configurarCarruselChico(carrusel, botonAnterior, botonSiguiente) {
     }
 
     // Event listeners
-    botonSiguiente.addEventListener('click', siguienteImagen);
-    botonAnterior.addEventListener('click', anteriorImagen);
+    botonSiguiente.addEventListener('click', nextImage);
+    botonAnterior.addEventListener('click', prevImage);
 }
+
 
 // FUNCION PARA CREAR UNA CARD
 function crearCard(juego,estilo){
     const card = document.createElement('div');
     card.className = estilo;
 
-    if(estilo === "card-grande"){
+    if(estilo.toLowerCase() === "card-grande"){
         // Debug: verificar si llegan los datos --->LLEGAN
         //console.log("Creando card para:", juego.name, "Imagen:", juego.background_image);
 
         const divImagen = document.createElement('div');
         divImagen.style.backgroundImage = `url(${juego.background_image})`;
 
-        const nombreJuego = document.createElement('p');
-        nombreJuego.innerHTML = juego.name;
-        card.appendChild(divImagen);
-        card.appendChild(nombreJuego);
-        /*card.innerHTML = `
+        const nombreJuego = document.createElement('h3');
+        nombreJuego.className = 'nombre-juego';
+        nombreJuego.textContent = juego.name;
+        //card.appendChild(divImagen);
+        //card.appendChild(nombreJuego);
+        card.style.backgroundImage = `url(${juego.background_image})`;
+        card.innerHTML = `
             <h2>${juego.name}</h2>
-            <p>Descripción: ${juego.description}</p>
-            <p>Valoración: ${juego.rating}</p>
+            <p>Lanzamiento: ${juego.released}</p>
+            <p class="valoracion">Valoración: ${juego.rating}</p>
             <button class="boton-jugar">Jugar</button>
-        `;*/
+        `;
         return card;
     }
 
-    else if(estilo === "card-chica"){
+    else if(estilo.toLowerCase() === "card-chica"){
         const card = document.createElement('div');
         card.className = estilo;
         
@@ -176,14 +196,15 @@ function crearCard(juego,estilo){
         //console.log("Creando card para:", juego.name, "Imagen:", juego.background_image);
         
         card.style.backgroundImage = `url(${juego.background_image})`;
-        /*card.innerHTML = `
+        card.innerHTML = `
             <h2>${juego.name}</h2>
-            <p>Valoracion: ${juego.rating}</p>
             <button class="boton-jugar">Jugar</button>
-        `;*/
+        `;
+
         return card;       
     }
 }
+
 
 // FUNCION PARA FILTRAR JUEGOS POR GENERO
 async function juegosPorGenero(genero){
@@ -198,13 +219,28 @@ async function juegosPorGenero(genero){
     return juegosFiltrados;
 }
 
+// FUNCION PARA FILTRAR JUEGOS MAS VALORADOS
+async function juegosMasValorados(){
+    //copia el array de juegos y lo ordena por rating
+    const juegosOrdenados = juegos;
+    juegosOrdenados.sort((a, b) => b.rating - a.rating);
+
+    // toma los primeros 20 juegos,por lo tanto los 20 mas valorados
+    const juegosFiltrados = juegos.map(j => j).slice(0, 20);
+    return juegosFiltrados;
+}
+
+
 // FUNCION PARA INICIALIZAR LOS CARROUSELS
 async function inicializarCarrousels(){
     await fetchJuegos();
-    await crearCarrouselGrande(await juegosPorGenero('sHooTer'),'Shooter');
+    await crearCarrouselGrande(await juegosMasValorados(),'Mas Valorados');
     await crearCarrouselChico(await juegosPorGenero('Action'),'Action');
     await crearCarrouselChico(await juegosPorGenero('Indie'),'Indie');
     await crearCarrouselChico(await juegosPorGenero('Adventure'),'Adventure');
+    await crearCarrouselChico(await juegosPorGenero('RPG'),'RPG');
+
+    console.log("Carrousels creados");
 }
 
 inicializarCarrousels();

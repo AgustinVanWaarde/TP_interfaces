@@ -1,21 +1,23 @@
 body {
+    font-family: "Jersey 15", "Inter", 'sans-serif';
     background-color: #DAC8A2;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter';
-    font-size: 24px;
-    font-style: normal;
-    text-align: center;
+    color: #FFFFFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-
-
 
 /* HEADER */
 /* Estilos para la barra de navegación */
 header {
     background-color: #8B5F4C;
     padding: 0px;
+    justify-content: center;
+    align-items: start;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*position: fixed;
+    width: 100%; ----> hacer header fijo en pantalla al scroll
+    z-index: 100;*/
     border-bottom: #381505 3px solid;
 }
 
@@ -92,41 +94,4 @@ header {
 .titulo img {
     width: 60px;
     height: 55px;
-}
-
-/* BOTON JUGAR */
-.boton-jugar {
-    background-color: #4169E1 ;
-    filter: brightness(1.4);
-    width: 30px;
-    height: 30px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    border-radius: 50px; /* Bordes muy redondeados */
-    padding: 15px 40px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3); /* Sombra azulada */
-    transition: all 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Hover más oscuro */
-.boton-jugar:hover {
-    background-color: #4169E1;
-    filter: brightness(1);
-    transform: translateY(-2px); /* Se eleva un poco */
-    box-shadow: 0 6px 20px rgba(93, 76, 219, 0.4); /* Sombra más intensa */
-}
-
-/* Cuando se presiona */
-.boton-jugar:active {
-    transform: translateY(0); /* Vuelve a la posición */
-    box-shadow: 0 2px 10px rgba(93, 76, 219, 0.3);
 }
