@@ -1,0 +1,246 @@
+/* IMPORTAR TIPOGRAFÍA */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
+/* ESTILOS GENERALES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Jersey 15", sans-serif;
+    background-color: #DAC8A2;
+    color: #FFFFFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CONTENIDO PRINCIPAL */
+main {
+    padding: 2rem;
+    min-height: 80vh;
+    flex: 1;
+    background-color: #DAC8A2;
+}
+
+
+/* Redes sociales */
+.social-links {
+    text-align: center;
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    justify-content: space-evenly;
+    padding-top: 0.5rem;
+}
+.social-links a {
+    color: #FFFFFF;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-links a:hover {
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* FOOTER STYLES */
+
+.footer-subtitulo{
+    font-size: 1.6rem;
+    text-align: center;
+    color: #FF7979;
+    font-weight: 300;
+    line-height: 1.3;
+}
+.gamer-footer {
+    background-color: #8B5F4C;
+    color: #FFFFFF;
+    padding: 1rem 1rem;
+    margin-top: auto;
+    width: 100%;
+    min-height: 20px;
+}
+
+/* CONTENEDOR PRINCIPAL CON FLEXBOX */
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0;
+}
+
+/* COLUMNAS UNA AL LADO DE LA OTRA */
+.footer-column {
+    flex: 1;
+    padding: 0 1.5rem;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* LÍNEAS DIVISORIAS ENTRE COLUMNAS */
+.column-divider {
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+.footer-column h2 {
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    font-size: 1.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #FFFFFF;
+    padding-bottom: 0.5rem;
+}
+
+
+.footer-list {
+    list-style: none;
+    flex: 1;
+}
+
+.footer-list li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-list a {
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    display: block;
+    padding: 0.25rem ;
+    font-weight: 400;
+}
+
+.footer-list a:hover {
+    color: #F0E6D2;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    padding-left: 0.5rem;
+}
+
+/* Información de contacto */
+.contact-info {
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    font-weight: 400;
+    flex: 0.02;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info strong {
+    color: #FFFFFF;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+
+
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .footer-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .footer-column {
+        flex: 0 0 calc(50% - 2rem);
+        margin-bottom: 2rem;
+    }
+    
+    .column-divider:nth-child(2),
+    .column-divider:nth-child(6) {
+        display: none;
+    }
+    
+    .column-divider:nth-child(4) {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .gamer-footer {
+        padding: 2rem 1rem;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+    }
+    
+    .footer-column {
+        flex: 1 0 100%;
+        padding: 1rem 0;
+        min-height: auto;
+        text-align: center;
+    }
+    
+    .column-divider {
+        display: none;
+    }
+    
+    .footer-column h2 {
+        font-size: 1.3rem;
+    }
+    
+    .footer-column h3 {
+        font-size: 0.95rem;
+        min-height: auto;
+    }
+    
+    .social-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-column h2 {
+        font-size: 1.2rem;
+    }
+    
+    .footer-column h3 {
+        font-size: 0.9rem;
+    }
+    
+    .footer-list a {
+        font-size: 0.9rem;
+    }
+    
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+}
