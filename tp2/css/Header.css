@@ -141,6 +141,13 @@ header {
     visibility: visible;
 }
 
+#categorias-lista {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+}
+
 /* Opciones del menú hamburguesa */
 .opciones-menu-hamburguesa a {
     color: #FFFFFF;

@@ -1,6 +1,7 @@
 "use strict";
 
 const juegos = [];//--> array global de juegos
+const generos = [];//--> array global de generos
 
 const juegoPropioPeg = {
     name: "Peg Solitarie", 
@@ -9,8 +10,9 @@ const juegoPropioPeg = {
     rating: 5
 }
 
-async function fetchJuegos(){
+export async function fetchJuegos(){
     try {
+        juegos.length = 0;
         const response = await fetch('https://vj.interfaces.jima.com.ar/api');
         const games = await response.json();
         if(response.ok){
@@ -19,6 +21,37 @@ async function fetchJuegos(){
             });
         }
         console.log("juegos cargados: ",juegos);
+
+        // Extraigo todos los generos unicos de los juegos
+        juegos.forEach(juego => {
+            juego.genres.forEach(genero => {
+                if(!generos.includes(genero.name)){
+                    generos.push(genero.name);
+                }
+            });
+        });
+
+
+        // Agrego los generos al menu hamburguesa
+        const categoriasLista = document.getElementById('categorias-lista');
+        if(categoriasLista){
+            categoriasLista.innerHTML = '';// Limpio el contenido actual
+
+            // Agrego un enlace para volver al home
+            const enlaceHome = document.createElement('a');
+            enlaceHome.href = '#';
+            enlaceHome.textContent = 'Inicio';
+            enlaceHome.id = 'volver-al-home';
+            categoriasLista.appendChild(enlaceHome);
+
+            for(let i=0; i< 10; i++){
+                const enlace = document.createElement('a');
+                enlace.href = '#';
+                enlace.textContent = generos[i];
+                categoriasLista.appendChild(enlace);
+            }
+        }
+
     } catch (error) {
         console.error('Error fetching juegos:', error);
     }
@@ -235,27 +268,27 @@ async function juegosMasValorados(){
     const juegosOrdenados = juegos;
     juegosOrdenados.sort((a, b) => b.rating - a.rating);
 
-    // toma los primeros 20 juegos,por lo tanto los 20 mas valorados
+    // toma los primeros 20 juegos,por lo tanto los 20 mas valorados y con map crea un nuevo array
     const juegosFiltrados = juegos.map(j => j).slice(0, 19);
     juegosFiltrados.unshift(juegoPropioPeg);//agrego mi juego propio al inicio del array
     return juegosFiltrados;
 }
 
 
-// FUNCION PARA INICIALIZAR LOS CARROUSELS
-export async function inicializarCarrousels(){
-    const main = document.getElementById('main-content');
-    main.innerHTML = '';//limpio el main para evitar duplicados
-    await fetchJuegos();
-    await crearCarrouselGrande(await juegosMasValorados(),'Mas Valorados');
-    await crearCarrouselChico(await juegosPorGenero('Action'),'Action');
-    await crearCarrouselChico(await juegosPorGenero('Indie'),'Indie');
-    await crearCarrouselChico(await juegosPorGenero('Adventure'),'Adventure');
-    await crearCarrouselChico(await juegosPorGenero('RPG'),'RPG');
-
-    console.log("Carrousels creados");
+// FUNCION PARA FILTRAR TODOS LOS GENEROS
+export function getGeneros(){
+    return generos;
 }
 
-//inicializarCarrousels();
+
+// FUNCION PARA INICIALIZAR LOS CARROUSELS
+export async function inicializarCarrousels(){
+    await fetchJuegos();
+    await crearCarrouselGrande(await juegosMasValorados(),'Mas Valorados');
+    await crearCarrouselChico(await juegosPorGenero('Action'),'Accion');
+    await crearCarrouselChico(await juegosPorGenero('Indie'),'Indie');
+    await crearCarrouselChico(await juegosPorGenero('Adventure'),'Aventura');
+    await crearCarrouselChico(await juegosPorGenero('RPG'),'RPG');
+}
 
 

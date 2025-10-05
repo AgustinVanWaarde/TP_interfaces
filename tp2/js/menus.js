@@ -1,5 +1,7 @@
 "use strict";
 
+import { getGeneros } from './carrousel.js';
+
 // Elementos del DOM
 const btnHamburguesa = document.getElementById('btn-hamburguesa');
 const btnPerfil = document.getElementById('btn-perfil');
@@ -8,9 +10,15 @@ const menuHamburguesa = document.querySelector('.opciones-menu-hamburguesa');
 const menuPerfil = document.querySelector('.opciones-perfil');
 const overlay = document.querySelector('.menu-overlay');
 
+
 // Variables de estado
 let hamburguesaAbierto = false;
 let perfilAbierto = false;
+
+
+// Funcion para agregar los generos al menu hamburguesa al cargar la pagina
+getGeneros();
+
 
 // Función para toggle del menú hamburguesa
 function toggleMenuHamburguesa() {
@@ -59,14 +67,16 @@ function toggleMenuPerfil() {
 // Evento click en botón hamburguesa
 btnHamburguesa.addEventListener('click', toggleMenuHamburguesa);
 
+
 // Evento click en botón perfil
 btnPerfil.addEventListener('click', toggleMenuPerfil);
+
 
 // Evento para volver al home al hacer click en logo
 const logo = document.querySelector('.titulo-grupo');
 logo.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
-        behavior: 'smooth' // ⭐ Animación suave
+        behavior: 'smooth'//animacion suave
     });
 });

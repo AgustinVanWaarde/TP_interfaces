@@ -154,7 +154,7 @@ export function generarFormularios() {
     section.innerHTML = forumularioLogin + formularioRegistro;
     main.appendChild(section);
 
-    // Agregar eventos a los links después de insertar el HTML
+    // Agregar eventos a los links después de insertar el HTML para dar vuelta los forms
     let linkRegistrar = document.querySelector('.link-registrate')
     linkRegistrar.addEventListener('click', (e) => {
         e.preventDefault();
@@ -166,11 +166,4 @@ export function generarFormularios() {
         e.preventDefault();
         flipToLogin();
     });
-
-    // Eventos para los links y cargar carrousels al iniciar sesion
-    let btnIniciarSesion = document.querySelectorAll('.btn-iniciar-sesion');
-    btnIniciarSesion.forEach(btn => {
-        btn.addEventListener('click', inicializarCarrousels);
-    });
-
 }
