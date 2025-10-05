@@ -1,4 +1,13 @@
+"use strict";
+
 const juegos = [];//--> array global de juegos
+
+const juegoPropioPeg = {
+    name: "Peg Solitarie", 
+    background_image: "./imgs/pegSolitariePropio.png",
+    released: "2025-05-29",
+    rating: 5
+}
 
 async function fetchJuegos(){
     try {
@@ -19,7 +28,7 @@ async function fetchJuegos(){
 // FUNCION PARA CREAR UN CARROUSEL GRANDE
 async function crearCarrouselGrande(juegos,genero){
     //selecciono el main donde van los carrousels
-    const main = document.getElementById('main-carrousels');
+    const main = document.getElementById('main-content');
 
     //creo la seccion del carrousel
     const section = document.createElement('section');
@@ -70,7 +79,7 @@ async function crearCarrouselGrande(juegos,genero){
 // FUNCION PARA CREAR UN CARROUSEL CHICO
 async function crearCarrouselChico(juegos,genero){
     //selecciono el main donde van los carrousels
-    const main = document.getElementById('main-carrousels');
+    const main = document.getElementById('main-content');
 
     //creo la seccion del carrousel
     const section = document.createElement('section');
@@ -78,6 +87,7 @@ async function crearCarrouselChico(juegos,genero){
 
     //creo el titulo de categoria del carrousel
     const tituloCategoria = document.createElement('h2');
+    tituloCategoria.className = 'titulo-categoria-chico';
     tituloCategoria.textContent = 'Juegos de ' + genero;
 
     //creo el contenedor del carrousel
@@ -125,7 +135,7 @@ function configurarCarrusel(carrusel, botonAnterior, botonSiguiente, tipo) {
         maxWidth = 340;
         cardsToShow = 3; 
     }else if(tipo.toLowerCase() === 'chico'){
-        maxWidth = 170;
+        maxWidth = 168;
         cardsToShow = 6;
     }
 
@@ -226,13 +236,16 @@ async function juegosMasValorados(){
     juegosOrdenados.sort((a, b) => b.rating - a.rating);
 
     // toma los primeros 20 juegos,por lo tanto los 20 mas valorados
-    const juegosFiltrados = juegos.map(j => j).slice(0, 20);
+    const juegosFiltrados = juegos.map(j => j).slice(0, 19);
+    juegosFiltrados.unshift(juegoPropioPeg);//agrego mi juego propio al inicio del array
     return juegosFiltrados;
 }
 
 
 // FUNCION PARA INICIALIZAR LOS CARROUSELS
-async function inicializarCarrousels(){
+export async function inicializarCarrousels(){
+    const main = document.getElementById('main-content');
+    main.innerHTML = '';//limpio el main para evitar duplicados
     await fetchJuegos();
     await crearCarrouselGrande(await juegosMasValorados(),'Mas Valorados');
     await crearCarrouselChico(await juegosPorGenero('Action'),'Action');
@@ -243,5 +256,6 @@ async function inicializarCarrousels(){
     console.log("Carrousels creados");
 }
 
-inicializarCarrousels();
+//inicializarCarrousels();
+
 

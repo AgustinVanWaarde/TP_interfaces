@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+
 /* Redes sociales */
 .social-links {
     text-align: center;
@@ -51,7 +52,7 @@
     background-color: #8B5F4C;
     color: #FFFFFF;
     padding: 1rem 1rem;
-    margin-top: 60px;
+    margin-top: 60px; 
     width: 100%;
     min-height: 20px;
 }
@@ -141,3 +142,99 @@
     display: block;
     margin-bottom: 0.8rem;
 }
+
+
+
+
+
+/* ================================================ */
+/*          RESPONSIVE MOBILE - FOOTER              */
+/* ================================================ */
+@media (max-width: 768px) {
+    /* Footer general */
+    .gamer-footer {
+        padding: 32px 16px; /* 2rem = 32px, 1rem = 16px */
+        margin-top: 40px;
+    }
+    
+    /* Contenedor principal - CAMBIO A COLUMNA */
+    .footer-container {
+        flex-direction: column; /* ⭐ Columnas una debajo de otra */
+        gap: 0px;
+    }
+    
+    /* Columnas individuales */
+    .footer-column {
+        flex: none;
+        width: 100%;
+        padding: 24px 0; /* 1.5rem = 24px */
+        min-height: auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separador horizontal */
+    }
+    
+    .footer-column:last-child {
+        border-bottom: none; /* Última columna sin borde */
+    }
+    
+    /* OCULTAR divisores verticales en mobile */
+    .column-divider {
+        display: none; /* ⭐ No se necesitan en mobile */
+    }
+    
+    /* Títulos de columna */
+    .footer-column h2 {
+        font-size: 22px; /* 1.4rem = 22.4px ≈ 22px */
+        margin-bottom: 13px; /* 0.8rem = 12.8px ≈ 13px */
+        padding-bottom: 6px; /* 0.4rem = 6.4px ≈ 6px */
+        text-align: center;
+    }
+    
+    /* Lista de enlaces */
+    .footer-list {
+        flex: none;
+    }
+    
+    .footer-list li {
+        margin-bottom: 8px; /* 0.5rem = 8px */
+    }
+    
+    .footer-list a {
+        font-size: 19px; /* 1.2rem = 19.2px ≈ 19px */
+        padding: 5px 8px; /* 0.3rem = 4.8px ≈ 5px, 0.5rem = 8px */
+        text-align: center;
+    }
+    
+    /* Información de contacto */
+    .contact-info {
+        font-size: 19px; /* 1.2rem = 19.2px ≈ 19px */
+        text-align: center;
+        line-height: 1.8;
+    }
+    
+    .contact-info strong {
+        margin-bottom: 10px; /* 0.6rem = 9.6px ≈ 10px */
+    }
+    
+    /* Redes sociales */
+    .social-links {
+        gap: 13px; /* 0.8rem = 12.8px ≈ 13px */
+        margin-top: 16px; /* 1rem = 16px */
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        font-size: 18px; /* 1.1rem = 17.6px ≈ 18px */
+    }
+    
+    /* Subtítulo */
+    .footer-subtitulo {
+        font-size: 19px; /* 1.2rem = 19.2px ≈ 19px */
+        padding: 0 16px; /* 1rem = 16px */
+        margin: 8px 0; /* 0.5rem = 8px */
+    }
+}
+
+

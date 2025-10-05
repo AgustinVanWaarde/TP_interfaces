@@ -1,13 +1,14 @@
 /* CARROUESEL CHICO DESDE ACA */
 
 /* card chica normal */
+
 .card-chica {
     width: 160px;
     height: 165px;
     border-radius: 20px;
     border: 4px solid #70412C;
     overflow: hidden;
-    position: relative; /* ⭐ IMPORTANTE: Para que ::before y contenido se posicionen dentro */
+    position: relative; /* importante: Para que ::before y contenido se posicionen dentro */
     transition: all 0.3s ease;
     cursor: pointer;
     display: flex;
@@ -74,11 +75,11 @@
 }
 
 /* estilos de los textos de categorias (h2) */
-h2 {
+.titulo-categoria-chico {
     font-family: 'Inter';
     width: 50%;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     color: #000000;
     text-align: left;
     margin-left: 40px;
@@ -89,7 +90,7 @@ h2 {
 /* Estilos para el contenedor del carrousel chico nuevo */
 .carrousel-conteiner-chico {
     max-width: 100%;
-    height: 185px;
+    height: 190px;
     overflow: hidden;
     background-color: #8B5F4C;
     border-radius: 35px;
@@ -137,6 +138,8 @@ h2 {
     transform: scale(1.1);
     opacity: 1;
 }
+
+
 
 
 
@@ -266,11 +269,15 @@ h2 {
 /* Estilos para el texto del título dentro del contenedor del carrusel grande */
 .titulo-categoria-grande {
     color: white;
+    font-family: 'inter', sans-serif;
     width: 100%;
+    font-size: 24px;
+    font-weight: 500;
     position: absolute;
     display: flex;
+    z-index: 1;
     justify-content: center;
-    top: -30px;
+    top: 0px;
 }
 
 /* Estilo para donde van las cards dentro del contenedor del carrusel grande desde js */
@@ -355,3 +362,198 @@ h2 {
     box-shadow: 0 2px 10px rgba(14, 3, 85, 0.781);
 }
 
+
+
+
+
+
+/* ================================================ */
+/* 📱 RESPONSIVE MOBILE - CARRUSELES */
+/* ================================================ */
+
+@media (max-width: 768px) {
+    
+    /* CARRUSEL CHICO */
+    
+    /* Contenedor del carrusel - SCROLLEABLE */
+    .carrousel-conteiner-chico {
+        height: auto;
+        padding: 15px 15px;
+        overflow-x: auto; /* Permite scroll horizontal */
+        border-radius: 20px;
+        scrollbar-width: none; /* ocultar barra de scroll */
+        scroll-behavior: smooth;/* Indicador visual de scroll suave */
+    }
+
+    /* Cards container - Sin transform, con scroll */
+    .cards-categoria-chico {
+        margin-left: 0;
+        gap: 12px;
+        transform: none;
+        transition: none;
+    }
+    
+    /* Cards chicas - Info siempre visible su info */
+    .card-chica {
+        width: 150px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: flex-end;
+        gap: 5px;
+    }
+    
+    /* Overlay difuminado desde mitad hacia abajo - siempre visible la sombra */
+    .card-chica::before {
+        opacity: 1; /* Siempre visible en mobile */
+        background: linear-gradient(/* difumina la card desde mitad hacia abajo y la parte de abajo es la mas opaca */
+            to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.5) 60%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+    
+    /* Contenido (título) - siempre visible */
+    .card-chica > * {
+        opacity: 1; /* Siempre visible */
+        transform: none; /* Sin animación */
+        padding: 10px 8px;
+        margin: 0;
+    }
+    
+    /* Título del juego en card chica */
+    .card-chica h2 {
+        font-size: 13px;
+        line-height: 1.1;
+        padding: 0 5px;
+    }
+
+    .card-chica .boton-jugar {
+        width: 40%;
+        height: 12%;
+        margin-bottom: 10px;
+    }
+    
+    /* Desactivar hover effects en mobile */
+    .card-chica:hover {
+        transform: none; /* Sin scale en mobile */
+    }
+    
+    /* Título de categoría */
+    .titulo-categoria-chico {
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        width: auto;
+    }
+
+    /* Estilos para los botones del carrusel chico generales */
+    .button-carrousel-chico {
+        display: none;
+    }
+    
+    
+
+
+    /* CARRUSEL GRANDE */
+    
+    /* Contenedor del carrusel grande - scrolleable */
+    .carrousel-conteiner-grande {
+        height: auto;
+        padding: 15px 15px;
+        overflow-x: scroll; /* permite scroll horizontal */
+        border-radius: 20px;
+        scrollbar-width: none; /* ocultar barra de scroll */
+        scroll-behavior: smooth;
+    }
+    
+    /* Cards container grande */
+    .cards-categoria-grande {
+        margin-left: 0px;
+        gap: 10px;
+        transform: none; /* desactiva movimiento por botones */
+        transition: none;
+    }
+    
+    /* ocultar botones del carrousel */
+    .button-carrousel-grande {
+        display: none;
+    }
+    
+    /* Cards grandes - Más pequeñas en mobile */
+    .card-grande {
+        width: 220px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: flex-end;
+        gap: 0px;
+        margin: 0px;
+    }
+    
+    /* Overlay difuminado - SIEMPRE VISIBLE */
+    .card-grande::before {
+        opacity: 1;
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 35%,
+            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 5) 100%
+        );
+    }
+    
+    /* Contenido card grande - siempre visible */
+    .card-grande > * {
+        opacity: 1;
+        position: relative;
+        margin: 0px;
+    }
+    
+    /* Título card grande */
+    .card-grande h2 {
+        font-size: 18px;
+        padding: 0 10px;
+        margin-bottom: -25px;
+    }
+
+    .card-grande p.valoracion {
+        font-size: 14px;
+        margin: 6px 0 12px 0;
+        opacity: 1;
+        visibility: visible;
+        margin: 0px;
+    }
+    
+    /* Texto de plataformas */
+    .card-grande p {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    /* Botón jugar en mobile */
+    .card-grande .boton-jugar {
+        width: 55%;
+        height: 30px;
+        font-size: 14px;
+        margin-bottom: 30px;
+        margin-top: 12px;
+    }
+    
+    /* Desactivar hover effects en mobile */
+    .card-grande:hover {
+        transform: none;
+        transition: none;
+    }
+    
+    /* Título de categoría grande */
+    .titulo-categoria-grande {
+        font-size: 22px;
+        width: 100vw;
+        text-align: center;
+    }
+}

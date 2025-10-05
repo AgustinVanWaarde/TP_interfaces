@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/Header.css">
     <link rel="stylesheet" href="css/CarrouselAndCardsHome.css">
     <link rel="stylesheet" href="css/Footer.css">
+    <link rel="stylesheet" href="css/Login.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Jersey+15&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- importo los iconos de Font Awesome -->
     <title>Retro Games</title>
@@ -15,7 +16,14 @@
         <nav class="grid-navbar">
             <!-- Hamburguesa izquierda -->
             <div class="menu-hamburguesa">
-                <img src="imgs/menuHamburguesa.png" alt="menu hamburguesa">
+                <img id="btn-hamburguesa" src="imgs/menuHamburguesa.png" alt="menu hamburguesa">
+                <nav class="opciones-menu-hamburguesa opciones-menu-hamburguesa-oculto">
+                    <h2>Categorias:</h2>
+                    <a href="#">Inicio</a>
+                    <a href="#">Accion</a>
+                    <a href="#">Aventura</a>
+                    <a href="#">RPG</a>
+                </nav>
             </div>
             
             <!-- Título central (Retro + Logo + Games) -->
@@ -37,13 +45,29 @@
                     <img src="imgs/botonAyuda.png" alt="botonAyuda">
                 </div>
                 <div class="menu-perfil">
-                    <img src="imgs/botonPerfil.png" alt="botonPerfil">
+                    <img id="btn-perfil" src="imgs/botonPerfil.png" alt="botonPerfil">
+                    <nav class="opciones-perfil">
+                        <div class="grupo-perfil">
+                            <div class="perfil-info">
+                                <img src="imgs/fotoPerfil.png" alt="botonPerfil">
+                                <span class="nombre-usuario">Usuario123</span>
+                            </div>
+                            <a class="opcion-perfil" href="#">Perfil</a>
+                            <a class="opcion-perfil" href="#">Configuracion</a>
+                            <a class="opcion-perfil" href="#">Soporte</a>
+                        </div>
+                        <div class="grupo-cerrar-sesion">
+                            <a id="btn-cerrar-sesion" class="opcion-perfil" href="#">Cerrar Sesion</a>
+                        </div>
+                    </nav>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main id="main-carrousels">
+    <div class="menu-overlay"></div>
+
+    <main id="main-content">
         
     </main>
 
@@ -115,6 +139,7 @@
             </div>
         </div>
     </footer>
-    <script src="js/carrousel.js"></script>
+    <script type="module" src="js/flujos.js"></script>
+    <script src="js/menus.js"></script>
 </body>
 </html>
