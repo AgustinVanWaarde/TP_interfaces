@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/General.css">
     <link rel="stylesheet" href="css/Header.css">
     <link rel="stylesheet" href="css/CarrouselAndCardsHome.css">
     <link rel="stylesheet" href="css/Footer.css">
@@ -70,6 +71,12 @@
         <img src="imgs/logo.png" alt="logo" class="loader-logo">
         <div class="loader-spinner"></div>
         <p class="loader-text">CARGANDO JUEGOS...</p>
+
+        <!-- ⭐ AGREGAR: Barra de progreso -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="progress-text" id="progress-text">0%</p>
     </div>
 
     <!-- Overlay para el menu hamburguesa -->

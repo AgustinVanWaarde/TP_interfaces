@@ -5,6 +5,42 @@
 
 
 
+/* Aimacion del carrousel de skew al moverse (se mueve en eje X y Y ligeramente) */
+.card-skew-right {
+    animation: skewRight 0.5s ease;
+}
+
+.card-skew-left {
+    animation: skewLeft 0.5s ease;
+}
+
+@keyframes skewRight {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    50% {
+        transform: skew(5deg, 3deg) translateX(2px);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
+}
+
+@keyframes skewLeft {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    50% {
+        transform: skew(-5deg, -3deg) translateX(-2px);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
+}
+
+
+
+
 /* CARROUESEL CHICO DESDE ACA */
 
 /* Ultima section de carrousels chico le pongo 60px de margin bottom para que no choque con el footer */
@@ -30,38 +66,6 @@
     background-position: center;
     background-repeat: no-repeat;
     /* La imagen se pone desde JavaScript: background-image: url(...) */
-}
-
-.card-skew-right {
-    animation: skewRight 0.5s ease;
-}
-
-.card-skew-left {
-    animation: skewLeft 0.5s ease;
-}
-
-@keyframes skewRight {
-    0% {
-        transform: skew(0deg, 0deg);
-    }
-    50% {
-        transform: skew(4deg, 2deg) translateX(2px);
-    }
-    100% {
-        transform: skew(0deg, 0deg);
-    }
-}
-
-@keyframes skewLeft {
-    0% {
-        transform: skew(0deg, 0deg);
-    }
-    50% {
-        transform: skew(-4deg, -2deg) translateX(-2px);
-    }
-    100% {
-        transform: skew(0deg, 0deg);
-    }
 }
 
 /* Capa oscura que aparece al hacer hover,semicapa de la card */
@@ -345,9 +349,21 @@
     position: absolute;
 }
 
+.boton-anterior-hidden {
+    visibility: hidden;
+    transform: translateX(-60px);/* mueve el boton al final de la izquierda */
+    transition: all 0.7s ease;
+}
+
 .boton-siguiente {
     right: 25px;
     position: absolute;
+}
+
+.boton-siguiente-hidden {
+    visibility: hidden;
+    transform: translateX(60px);/* mueve el boton al final de la derecha */
+    transition: all 0.7s ease;
 }
 
 .boton-carrusel:hover {
@@ -417,6 +433,7 @@
     filter: brightness(1);/*/ Cambiado a 1 para que no se aclare más */
     transform: translateY(-2px); /* Se eleva un poco */
     box-shadow: 0 6px 20px rgba(26, 11, 141, 0.4); /* Sombra más intensa */
+    animation: rotarSuave 1.2s ease; /* Animación de rotación suave */
 }
 
 /* Cuando se presiona */
@@ -425,9 +442,15 @@
     box-shadow: 0 2px 10px rgba(14, 3, 85, 0.781);
 }
 
-
-
-
+/* Animación de rotación suave del boton jugar */
+@keyframes rotarSuave {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
 
 
 /* ================================================ */

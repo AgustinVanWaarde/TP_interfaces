@@ -1,20 +1,24 @@
 "use strict";
 import { inicializarCarrousels } from './carrousel.js';
 
-// Alternar formularios con animación
+// Alternar formularios con animacion de volteo
 
 // Va hacia el formulario de REGISTRO
+// Oculta el login y muestra el registro con efecto de volteo
 function flipToRegister() {
     const loginForm = document.querySelector('.fondo-formulario:not(.formulario-registro)');
     const registerForm = document.querySelector('.formulario-registro');
     
+    // Inicia la animacion de volteo en el login
     loginForm.classList.add('flipping');
     
+    // Despues de 300ms oculta el login y muestra el registro
     setTimeout(() => {
         loginForm.style.display = 'none';
         registerForm.style.display = 'flex';
         registerForm.classList.add('flipping');
         
+        // Remueve la clase de animacion para que quede estatico
         setTimeout(() => {
             registerForm.classList.remove('flipping');
         }, 50);
@@ -22,17 +26,21 @@ function flipToRegister() {
 }
 
 // Va hacia el formulario de LOGIN
+// Oculta el registro y muestra el login con efecto de volteo
 function flipToLogin() {
     const loginForm = document.querySelector('.fondo-formulario:not(.formulario-registro)');
     const registerForm = document.querySelector('.formulario-registro');
     
+    // Inicia la animacion de volteo en el registro
     registerForm.classList.add('flipping');
     
+    // Despues de 300ms oculta el registro y muestra el login
     setTimeout(() => {
         registerForm.style.display = 'none';
         loginForm.style.display = 'flex';
         loginForm.classList.add('flipping');
         
+        // Remueve la clase de animacion para que quede estatico
         setTimeout(() => {
             loginForm.classList.remove('flipping');
         }, 50);
@@ -155,15 +163,18 @@ export function generarFormularios() {
         flipToLogin();
     });
 
-    // Mostrar/Ocultar contraseña
+    // Mostrar u ocultar contraseña al hacer click en el icono del ojo
     document.querySelectorAll('.toggle-password').forEach(toggle => {
         toggle.addEventListener('click', function() {
-            const passwordInput = toggle.previousElementSibling;// Aggaro el hermano anterior del toggle (input de password anterior a imagen)
+            // Obtiene el input de password que esta antes de la imagen
+            const passwordInput = toggle.previousElementSibling;
+            
+            // Alterna entre mostrar y ocultar la contraseña
             if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
+                passwordInput.type = 'text'; // Muestra la contraseña
                 this.src = './imgs/mostrar.png';
             } else {
-                passwordInput.type = 'password';
+                passwordInput.type = 'password'; // Oculta la contraseña
                 this.src = './imgs/esconder.png';
             }
         });

@@ -55,16 +55,6 @@ async function crearCarrouselGrande(juegos,genero){
     tituloCategoria.className = 'titulo-categoria-grande';
     tituloCategoria.textContent = 'Juegos ' + genero;
 
-    //creo el boton siguiente
-    const botonSiguiente = document.createElement('img');
-    botonSiguiente.className = 'button-carrousel-grande button-next-grande';
-    botonSiguiente.src = './imgs/botonCarrusel.png';
-
-    //creo el boton anterior
-    const botonAnterior = document.createElement('img');
-    botonAnterior.className = 'button-carrousel-grande button-prev-grande';
-    botonAnterior.src = './imgs/botonCarrusel.png';
-
     //creo un boton siguiente
     const botonTempCarrouselSiguiente = document.createElement('button');
     botonTempCarrouselSiguiente.className = 'boton-carrusel boton-carrusel-grande boton-siguiente';
@@ -120,16 +110,6 @@ async function crearCarrouselChico(juegos,genero){
     const carrouselContainer = document.createElement('div');
     carrouselContainer.className = 'carrousel-conteiner-chico';
 
-    //creo el boton siguiente
-    const botonSiguiente = document.createElement('img');
-    botonSiguiente.className = 'button-carrousel-chico button-next-chico';
-    botonSiguiente.src = './imgs/botonCarrusel.png';
-
-    //creo el boton anterior
-    const botonAnterior = document.createElement('img');
-    botonAnterior.className = 'button-carrousel-chico button-prev-chico';
-    botonAnterior.src = './imgs/botonCarrusel.png';
-
     //creo un boton siguiente
     const botonTempCarrouselSiguiente = document.createElement('button');
     botonTempCarrouselSiguiente.className = 'boton-carrusel boton-carrusel-chico boton-siguiente';
@@ -168,60 +148,89 @@ async function crearCarrouselChico(juegos,genero){
 
 
 // FUNCION PARA MOVER EL CARRUSEL (GENERICA)
+// Configura el comportamiento de desplazamiento de un carrusel
+// Funciona tanto para carrusel grande como chico
 function configurarCarrusel(carrusel, botonAnterior, botonSiguiente, tipo) {
-    let maxWidth; // Ancho de la carta + margenes
-    let cardsToShow; // Numero de cards visibles
-    let cards; //selecciona todas las cards
+    let cardWidth; // Ancho de cada carta en pixeles
+    let gap = 15; // Espacio entre cartas en pixeles (igual para ambos tipos)
+    let cardsToShow; // Cuantas cards se ven al mismo tiempo en pantalla
+    let cardsToMove; // Cuantas cards se mueven por click
+    let cards; // Todas las cards del carrusel
 
+    // Configuracion segun el tipo de carrusel
     if(tipo.toLowerCase() === 'grande'){
-        maxWidth = 340;
+        cardWidth = 330;
         cardsToShow = 3; 
+        cardsToMove = 1.5;
         cards = carrusel.querySelectorAll('.card-grande');
     }else if(tipo.toLowerCase() === 'chico'){
-        maxWidth = 172 ;
-        cardsToShow = 6;
+        cardWidth = 165;
+        cardsToShow = 7;
+        cardsToMove = 2;
         cards = carrusel.querySelectorAll('.card-chica')
     }
 
-    let currentIndex = 0;// Indice actual del carrusel
+    let currentIndex = 0; // Posicion actual del carrusel (empieza en 0)
+    let totalCards = cards.length; // Cantidad total de cards
+    let maxIndex = totalCards - cardsToShow; // Posicion maxima a la que puede llegar (evita espacios vacios)
 
-    // Función para actualizar la posición del carrusel
+    // Funcion para actualizar la posicion del carrusel
+    // Calcula cuanto debe moverse el carrusel segun el indice actual
     function updateCarrusel() {
-        const offset = -currentIndex * maxWidth;// Ancho de la carta + margenes
-        carrusel.style.transform = `translateX(${offset}px)`;// Muevo el carrusel
+        // Calcula el desplazamiento: (ancho de card + espacio) multiplicado por la posicion actual
+        // El signo negativo es porque se mueve hacia la izquierda
+        let offset = -(cardWidth + gap) * currentIndex;
+        carrusel.style.transform = `translateX(${offset}px)`;
+
+        // Oculta el boton anterior si estamos al inicio
+        if (currentIndex === 0) {
+            botonAnterior.classList.add('boton-anterior-hidden');
+        } else {
+            botonAnterior.classList.remove('boton-anterior-hidden');
+        }
+
+        // Oculta el boton siguiente si estamos al final
+        if (currentIndex === maxIndex) {
+            botonSiguiente.classList.add('boton-siguiente-hidden');
+        } else {
+            botonSiguiente.classList.remove('boton-siguiente-hidden');
+        }
     }
 
-    // Funciones para ir a la imagen siguiente
+    // Funcion para avanzar el carrusel
     function nextImage() {
-        const totalCards = carrusel.children.length;
-        const maxIndex = totalCards - cardsToShow;
         if (currentIndex < maxIndex) {
-            currentIndex++;
+            // Suma la cantidad de cards a mover, pero sin pasar del maximo
+            // Math.min asegura que no sobrepase maxIndex
+            currentIndex = Math.min(currentIndex + cardsToMove, maxIndex);
             updateCarrusel();
         }
     }
 
-    // Función para ir a la imagen anterior
+    // Funcion para retroceder el carrusel
     function prevImage() {
         if (currentIndex > 0) {
-            currentIndex--;
+            // Resta la cantidad de cards a mover, pero sin bajar de 0
+            // Math.max asegura que no sea menor a 0
+            currentIndex = Math.max(currentIndex - cardsToMove, 0);
             updateCarrusel();
         }
     }
 
 
-    // Agrego los event listeners a los botones
+    // Eventos para los botones de navegacion
 
+    // Boton siguiente: mueve el carrusel a la derecha con animacion skew
     botonSiguiente.addEventListener('click', () => {
-        // Agrego clase para animacion a las cards
+        // Agrega clase de animacion a todas las cards (inclinacion hacia la derecha)
         cards.forEach(card => {
             card.classList.add('card-skew-right');
         });
 
-        //muevo el carrusel
+        // Mueve el carrusel
         nextImage();
 
-        // Quito la clase de animacion despues de 0.5s
+        // Remueve la animacion despues de 500ms (duracion de la animacion en CSS)
         setTimeout(() => {
             cards.forEach(card => {
                 card.classList.remove('card-skew-right');
@@ -229,19 +238,26 @@ function configurarCarrusel(carrusel, botonAnterior, botonSiguiente, tipo) {
         }, 500);
     });
 
+    // Boton anterior: mueve el carrusel a la izquierda con animacion skew
     botonAnterior.addEventListener('click', () => {
+        // Agrega clase de animacion a todas las cards (inclinacion hacia la izquierda)
         cards.forEach(card => {
             card.classList.add('card-skew-left');
         });
 
+        // Mueve el carrusel
         prevImage();
 
+        // Remueve la animacion despues de 500ms
         setTimeout(() => {
             cards.forEach(card => {
                 card.classList.remove('card-skew-left');
             });
         }, 500);
     });
+
+    // Boton anterior deshabilitado al inicio
+    botonAnterior.classList.add('boton-anterior-hidden');
 }
 
 
@@ -251,7 +267,7 @@ function crearCard(juego,estilo){
     card.className = estilo;
 
     if(estilo.toLowerCase() === "card-grande"){
-        // Debug: verificar si llegan los datos --->LLEGAN
+        // Prueba pra verificar si llegan los datos --->LLEGAN
         //console.log("Creando card para:", juego.name, "Imagen:", juego.background_image);
 
         const divImagen = document.createElement('div');
@@ -260,8 +276,7 @@ function crearCard(juego,estilo){
         const nombreJuego = document.createElement('h3');
         nombreJuego.className = 'nombre-juego';
         nombreJuego.textContent = juego.name;
-        //card.appendChild(divImagen);
-        //card.appendChild(nombreJuego);
+
         card.style.backgroundImage = `url(${juego.background_image})`;
         card.innerHTML = `
             <h2>${juego.name}</h2>
@@ -276,7 +291,7 @@ function crearCard(juego,estilo){
         const card = document.createElement('div');
         card.className = estilo;
         
-        // Debug: verificar si llegan los datos--->LLEGAN
+        // Prueba para verificar si llegan los datos--->LLEGAN
         //console.log("Creando card para:", juego.name, "Imagen:", juego.background_image);
         
         card.style.backgroundImage = `url(${juego.background_image})`;
@@ -291,10 +306,14 @@ function crearCard(juego,estilo){
 
 
 // FUNCION PARA FILTRAR JUEGOS POR GENERO
+// Recorre todos los juegos y devuelve solo los que pertenecen al genero solicitado
 async function juegosPorGenero(genero){
     const juegosFiltrados = [];
+    // Primer bucle recorre todos los juegos
     for(let j=0; j < juegos.length; j++){
+        // Segundo bucle recorre los generos de cada juego (un juego puede tener varios generos)
         for(let g=0; g < juegos[j].genres.length; g++){
+            // Si encuentra el genero buscado, agrega el juego al array y sale del bucle interno
             if(juegos[j].genres[g].name.toLowerCase() === genero.toLowerCase()){
                 juegosFiltrados.push(juegos[j]);
             }
@@ -304,19 +323,24 @@ async function juegosPorGenero(genero){
 }
 
 // FUNCION PARA FILTRAR JUEGOS MAS VALORADOS
+// Ordena los juegos por rating de mayor a menor y devuelve los primeros 20
 async function juegosMasValorados(){
-    //copia el array de juegos y lo ordena por rating
+    // Ordena el array de juegos por rating de forma descendente
+    // sort compara dos elementos: si b.rating > a.rating, b va primero como en JAVA con el collections.sort
     const juegosOrdenados = juegos;
     juegosOrdenados.sort((a, b) => b.rating - a.rating);
 
-    // toma los primeros 20 juegos,por lo tanto los 20 mas valorados y con map crea un nuevo array
+    // Toma solo los primeros 20 juegos (del 0 al 19)
+    // map crea una copia del array y slice corta desde el inicio hasta la posicion 19
     const juegosFiltrados = juegos.map(j => j).slice(0, 19);
-    juegosFiltrados.unshift(juegoPropioPeg);//agrego mi juego propio al inicio del array
+    
+    // Agrega nuestro juego propio al inicio del array
+    juegosFiltrados.unshift(juegoPropioPeg);
     return juegosFiltrados;
 }
 
 
-// FUNCION PARA FILTRAR TODOS LOS GENEROS
+// FUNCION PARA FILTRAR TODOS LOS GENEROS Y RETORNARLOS
 export async function getGeneros(){
     await fetchJuegos();
     return generos;

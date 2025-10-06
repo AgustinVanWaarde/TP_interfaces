@@ -1,28 +1,3 @@
-/* ESTILOS GENERALES */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Jersey 15", "Inter", 'sans-serif';
-    background-color: #DAC8A2;
-    display: flex;
-    flex-direction: column;
-    color: #FFFFFF;
-    min-height: 100vh; /* ocupa toda la altura de la pantalla como minimo */
-    width: 100%;
-}
-
-/* crece el main para ocupar el espacio restante entre header y footer */
-main {
-    flex: 1;
-}
-
-
-
-
 /* ================================================ */
 /*                  HEADER STYLES                    */
 /* ================================================ */
@@ -311,6 +286,12 @@ header {
 /*               MOBILE FIRST - HEADER              */
 /* ================================================ */
 @media (max-width: 768px) {
+    /* Ocultar barra de scroll pero mantener funcionalidad */
+    html{
+        scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+        scroll-behavior: smooth;
+        overflow-y: scroll;
+    }
 
     header{
         align-items: center;

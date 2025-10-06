@@ -18,22 +18,23 @@ let perfilAbierto = false;
 
 
 
-// Función para toggle del menú hamburguesa
+// Funcion para abrir o cerrar el menu hamburguesa
+// Solo puede haber un menu abierto a la vez
 function toggleMenuHamburguesa() {
     if (hamburguesaAbierto) {
-        // CERRAR menú
+        // Si el menu ya esta abierto, lo cierra
         overlay.classList.remove('menu-overlay-active');
         menuHamburguesa.classList.remove('opciones-menu-hamburguesa-active');
         btnHamburguesa.src = './imgs/menuHamburguesa.png';
         hamburguesaAbierto = false;
     } 
     else {
+        // Si el menu perfil esta abierto, lo cierra primero
         if(perfilAbierto){
-            // CERRAR menú perfil si está abierto
             menuPerfil.classList.remove('opciones-perfil-active');
             perfilAbierto = false;
         }
-        // ABRIR menú
+        // Abre el menu hamburguesa
         overlay.classList.add('menu-overlay-active');
         menuHamburguesa.classList.add('opciones-menu-hamburguesa-active');
         btnHamburguesa.src = './imgs/cerrarHamburguesa.png';
@@ -43,21 +44,22 @@ function toggleMenuHamburguesa() {
 
 
 
-// Funcion para toggle del menu perfil
+// Funcion para abrir o cerrar el menu de perfil
+// Solo puede haber un menu abierto a la vez
 function toggleMenuPerfil() {
     if (perfilAbierto) {
-        // CERRAR menú
+        // Si el menu ya esta abierto, lo cierra
         overlay.classList.remove('menu-overlay-active');
         menuPerfil.classList.remove('opciones-perfil-active');
         perfilAbierto = false;
     } 
     else {
+        // Si el menu hamburguesa esta abierto, lo cierra primero
         if(hamburguesaAbierto){
-            // CERRAR menú hamburguesa si está abierto
             menuHamburguesa.classList.remove('opciones-menu-hamburguesa-active');
             hamburguesaAbierto = false;
         }
-        // ABRIR menú
+        // Abre el menu de perfil
         overlay.classList.add('menu-overlay-active');
         menuPerfil.classList.add('opciones-perfil-active');
         perfilAbierto = true;
@@ -96,10 +98,18 @@ async function cargarGenerosAlMenu(){
 // Evento click en botón hamburguesa
 btnHamburguesa.addEventListener('click', toggleMenuHamburguesa);
 
-
-
 // Evento click en botón perfil
 btnPerfil.addEventListener('click', toggleMenuPerfil);
+
+// Evento click en overlay(cualquier lado de la pantalla) para cerrar menús
+overlay.addEventListener('click' , () => {
+    if(hamburguesaAbierto){
+        toggleMenuHamburguesa(); // Cierro el menu hamburguesa si está abierto
+    }
+    if(perfilAbierto){
+        toggleMenuPerfil(); // Cierro el menu perfil si está abierto
+    }
+})
 
 
 
@@ -126,11 +136,7 @@ async function cargarGenerosYbotonHome(){
         if(hamburguesaAbierto){
             toggleMenuHamburguesa(); // Cierro el menu hamburguesa si está abierto
         }
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'//animacion suave
-        });
+        
     });
 }
 
@@ -145,11 +151,6 @@ document.getElementById('btn-cerrar-sesion').addEventListener('click', async (e)
     if(perfilAbierto){
         toggleMenuPerfil(); // Cierro el menu perfil si está abierto
     }
-
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'//animacion suave
-    });
 });
 
 
