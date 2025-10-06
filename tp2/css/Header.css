@@ -1,3 +1,10 @@
+/* ESTILOS GENERALES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: "Jersey 15", "Inter", 'sans-serif';
     background-color: #DAC8A2;
@@ -10,14 +17,16 @@ body {
 
 /* crece el main para ocupar el espacio restante entre header y footer */
 main {
-    flex: 1; /* Crece para ocupar todo el espacio disponible */
+    flex: 1;
 }
 
 
 
 
+/* ================================================ */
+/*                  HEADER STYLES                    */
+/* ================================================ */
 
-/* HEADER */
 
 /* Estilos para la barra de navegación */
 header {

@@ -32,19 +32,19 @@ function ocultarLoader(loader) {
 
 
 //inicializarCarrousels
-async function inicializarCarrouselsEnMain(){
+export async function inicializarCarrouselsEnMain(){
     main.innerHTML = ''; // Limpia todo
     mostrarLoader();
 
     await inicializarCarrousels();
 
-    console.log("Carrousels inicializados");
+    console.log("Carrousels Cargados");
 }
 
 
 
 //inicializarConLogin
-async function inicializarConLogin(){
+export async function inicializarConLogin(){
     main.innerHTML = ''; // Limpia todo
     await generarFormularios();
 
@@ -53,21 +53,36 @@ async function inicializarConLogin(){
     btnIniciarSesion.forEach(btn => {
         btn.addEventListener('click', inicializarCarrouselsEnMain);
     });
+
+    
+    // Evento para boton registrar en formulario de registro para ir al home
+    let btnRegistrar = document.getElementById('boton-registrar');
+    btnRegistrar.addEventListener('click', async (e) => {
+        e.preventDefault(); // Prevenir envío por defecto
+            
+        // obtener el formulario
+        const form = btnRegistrar.closest('form');
+        
+        // validar usando validation
+        if (form.checkValidity()) {
+            // formulario válido, proceder
+            await inicializarCarrouselsEnMain();
+        } else {
+            // formulario inválido, mostrar errores
+            form.reportValidity(); // Muestra los mensajes de error nativos
+            console.log('Por favor completa todos los campos requeridos');
+        }
+    });
+
 }
 
-
-// Evento para cerrar sesion y volver al login generico
-document.getElementById('btn-cerrar-sesion').addEventListener('click', inicializarConLogin);
 
 
 // Incializacion de la pagina con login
 inicializarConLogin();
 
-// Cargo los juegos y para traer generos al iniciar la pagina
-fetchJuegos();
 
-// Evento para volver al home tocando la categoria "home"
-document.getElementById('volver-al-home').addEventListener('click', inicializarCarrouselsEnMain);
+
 
     
 

@@ -1,7 +1,18 @@
+/* ================================================ */
+/*      STYLES FOR CARROUSELS AND CARDS HOME       */
+/* ================================================ */
+
+
+
+
 /* CARROUESEL CHICO DESDE ACA */
 
-/* card chica normal */
+/* Ultima section de carrousels chico le pongo 60px de margin bottom para que no choque con el footer */
+.cards-chicas:last-child {
+    margin-bottom:80px;
+}
 
+/* card chica normal */
 .card-chica {
     width: 160px;
     height: 165px;
@@ -19,6 +30,38 @@
     background-position: center;
     background-repeat: no-repeat;
     /* La imagen se pone desde JavaScript: background-image: url(...) */
+}
+
+.card-skew-right {
+    animation: skewRight 0.5s ease;
+}
+
+.card-skew-left {
+    animation: skewLeft 0.5s ease;
+}
+
+@keyframes skewRight {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    50% {
+        transform: skew(4deg, 2deg) translateX(2px);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
+}
+
+@keyframes skewLeft {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    50% {
+        transform: skew(-4deg, -2deg) translateX(-2px);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
 }
 
 /* Capa oscura que aparece al hacer hover,semicapa de la card */
@@ -61,6 +104,11 @@
     text-align: center;
 }
 
+.card-chica .boton-jugar {
+    position: absolute;
+    bottom: 5px
+}
+
 .card-chica:hover::before {
     opacity: 1;
 }
@@ -83,7 +131,7 @@
     color: #000000;
     text-align: left;
     margin-left: 40px;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 1px;
 }
 
@@ -108,35 +156,7 @@
     align-content: start;
     gap: 15px;
     margin-left: 60px;
-    transition: transform 0.4s ease;
-}
-
-/* Estilos para los botones del carrusel chico generales */
-.button-carrousel-chico {
-    position: absolute;
-    cursor: pointer;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10;
-    opacity: 0.6; /* Hace la imagen menos opaca (40% visible) */
-}
-
-.button-prev-chico {
-    left: 0px; /* Botón izquierdo pegado al borde */
-    rotate: 180deg;
-}
-
-.button-next-chico {
-    right: 15px; /* Botón derecho pegado al borde */
-}
-
-.button-carrousel-chico:hover {
-    transform: scale(1.1);
-    opacity: 1;
+    transition: all 0.4s ease;
 }
 
 
@@ -289,36 +309,79 @@
     transition: transform 0.3s ease;
 }
 
-/* Estilos para los botones del carrusel grande generales */
-.button-carrousel-grande {
-    position: absolute;
+
+
+
+
+/* BOTONES DEL CARROUSEL CHICO Y GRANDE */
+
+.boton-carrusel {
+    border-radius: 30px;
+    background: #426df0 ; /*  Azul sega */
+    border: 3px solid #1E3A8A; /* Azul oscuro para el borde */
     cursor: pointer;
-    width: 80px;
-    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10;
-    opacity: 0.6;
+    opacity: 0.90;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0 #0F1E47; /* Sombra azul muy oscuro */
+    position: relative;
+    z-index: 15;
 }
 
-/* Estilos para el boton previo/izquierdo del carrusel grande */
-.button-prev-grande {
-    left: 0px; /* Botón izquierdo pegado al borde */
-    rotate: 180deg;
+.boton-carrusel-grande {
+    width: 60px;
+    height: 60px;
 }
 
-/* Estilos para el boton siguiente/derecho del carrusel grande */
-.button-next-grande {
-    right: 15px; /* Botón derecho pegado al borde */
+.boton-carrusel-chico {
+    width: 45px;
+    height: 45px;
 }
 
-/* Efecto hover para los botones del carrusel grande */
-.button-carrousel-grande:hover {
-    transform: scale(1.1);
+.boton-anterior {
+    left: 5px;
+    position: absolute;
+}
+
+.boton-siguiente {
+    right: 25px;
+    position: absolute;
+}
+
+.boton-carrusel:hover {
     opacity: 1;
+    background: #6aaaf3;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 #0F1E47;
 }
+
+.boton-carrusel:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 #0F1E47;
+}
+
+/* Flecha simple con borders */
+.flecha-pixel {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.flecha-derecha {
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 3px;
+}
+
+.flecha-izquierda {
+    border-width: 8px 12px 8px 0;
+    border-color: transparent #fff transparent transparent;
+    margin-right: 3px;
+}
+
+
 
 
 
@@ -449,11 +512,6 @@
         margin-top: 20px;
         width: auto;
     }
-
-    /* Estilos para los botones del carrusel chico generales */
-    .button-carrousel-chico {
-        display: none;
-    }
     
     
 
@@ -476,11 +534,6 @@
         gap: 10px;
         transform: none; /* desactiva movimiento por botones */
         transition: none;
-    }
-    
-    /* ocultar botones del carrousel */
-    .button-carrousel-grande {
-        display: none;
     }
     
     /* Cards grandes - Más pequeñas en mobile */
@@ -555,5 +608,13 @@
         font-size: 22px;
         width: 100vw;
         text-align: center;
+    }
+
+
+
+
+    /* ocultar botones del carrousel */
+    .boton-carrusel {
+        display: none;
     }
 }

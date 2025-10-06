@@ -42,19 +42,7 @@ function flipToLogin() {
 // Eventos para los links
 
 
-// Mostrar/Ocultar contraseña
-document.querySelectorAll('.toggle-password').forEach(toggle => {
-    toggle.addEventListener('click', function() {
-        const passwordInput = toggle.previousElementSibling;// Aggaro el hermano anterior del toggle (input de password anterior a imagen)
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            this.src = 'imgs/mostrar.png';
-        } else {
-            passwordInput.type = 'password';
-            this.src = 'imgs/esconder.png';
-        }
-    });
-});
+
 
 
 const forumularioLogin = 
@@ -132,15 +120,15 @@ const formularioRegistro =
                         </div>
                     </div>
 
-                    <button type="submit" class="boton-iniciar btn-iniciar-sesion">Registrar</button>
+                    <button type="submit" id="boton-registrar" class="boton-iniciar ">Registrar</button>
                 </form>
                 <div class="opciones-extra">
                     <span class="texto-no-cuenta">¿Ya tienes una cuenta?</span>
                     <a href="#" class="link-iniciar">Iniciar sesión</a>
                 </div>
                 <div class="botones-sociales botones-sociales-registro">
-                    <button class="boton-facebook"><img class="logo-facebook" src="imgs/logo facebook.jpg" alt="Facebook"><span class="texto-facebook">Continuar con Facebook</span></button>
-                    <button class="boton-google"><img class="logo-google" src="imgs/logo google.jpg" alt="Google"><span class="texto-google">Continuar con Google</span></button>
+                    <button class="boton-facebook btn-iniciar-sesion"><img class="logo-facebook" src="imgs/logo facebook.jpg" alt="Facebook"><span class="texto-facebook">Continuar con Facebook</span></button>
+                    <button class="boton-google btn-iniciar-sesion"><img class="logo-google" src="imgs/logo google.jpg" alt="Google"><span class="texto-google">Continuar con Google</span></button>
                 </div>
             </div> <!-- cierre formulario-registro -->`
 
@@ -165,5 +153,19 @@ export function generarFormularios() {
     linkIniciarSesion.addEventListener('click', (e) => {
         e.preventDefault();
         flipToLogin();
+    });
+
+    // Mostrar/Ocultar contraseña
+    document.querySelectorAll('.toggle-password').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const passwordInput = toggle.previousElementSibling;// Aggaro el hermano anterior del toggle (input de password anterior a imagen)
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.src = './imgs/mostrar.png';
+            } else {
+                passwordInput.type = 'password';
+                this.src = './imgs/esconder.png';
+            }
+        });
     });
 }

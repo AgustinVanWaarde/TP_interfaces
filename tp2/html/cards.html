@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/Header.css">
     <link rel="stylesheet" href="../css/Footer.css">
     <link rel="stylesheet" href="../css/CarrouselAndCardsHome.css">
+    <link rel="stylesheet" href="../css/boton.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Jersey+15&display=swap" rel="stylesheet">
     <title>Retro Games</title>
 </head>
@@ -49,7 +50,12 @@
         <section id="cards-grandes">
             <div class="carrousel-conteiner-grande">
                 <h2>Categoria</h2>
-                <img class="button-carrousel-grande button-prev-grande" src="../imgs/botonCarrusel.png" alt="button">
+
+                <!-- Botón izquierda (anterior) -->
+                <button class="boton-carrusel boton-anterior">
+                    <div class="flecha-pixel flecha-izquierda"></div>
+                </button>                
+
                 <article class="cards-categoria-grande">
                     <div class="card-grande">
                         <div></div>
@@ -59,7 +65,11 @@
                     <div class="card-grande"></div>
                     <div class="card-grande"></div>           
                 </article>
-                <img class="button-carrousel-grande button-next-grande" src="../imgs/botonCarrusel.png" alt="button">
+
+                <!-- Botón derecha (siguiente) -->
+                <button class="boton-carrusel boton-siguiente">
+                    <div class="flecha-pixel flecha-derecha"></div>
+                </button>
             </div>
         </section>
 

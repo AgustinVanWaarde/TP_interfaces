@@ -1,3 +1,10 @@
+/* ================================================ */
+/*                  LOGIN STYLES                     */
+/* ================================================ */
+
+
+
+
 /* Contenedor principal del formulario */
 .formulario-login {
 	min-height: 100%;
@@ -6,14 +13,29 @@
 	background-image: url('../imgs/fondoMario.png');
 	background-size: cover;
 	background-position: center;
+	position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-	margin-bottom: -60px;
 	padding: 40px 0 60px 0;
     font-family: 'Jersey 15', Arial, sans-serif;
 }
 
+
+/* Efecto para pixelear el fondo con la foto de mario */
+.formulario-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../imgs/fondoMario.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(1.5px);
+    z-index: 0;
+}
 
 /* Fondo del formulario */
 .fondo-formulario {

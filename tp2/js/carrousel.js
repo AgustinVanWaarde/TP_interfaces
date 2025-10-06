@@ -1,7 +1,7 @@
 "use strict";
 
 const juegos = [];//--> array global de juegos
-const generos = [];//--> array global de generos
+let generos = [];//--> array global de generos
 
 const juegoPropioPeg = {
     name: "Peg Solitarie", 
@@ -30,28 +30,7 @@ export async function fetchJuegos(){
                 }
             });
         });
-
-
-        // Agrego los generos al menu hamburguesa
-        const categoriasLista = document.getElementById('categorias-lista');
-        if(categoriasLista){
-            categoriasLista.innerHTML = '';// Limpio el contenido actual
-
-            // Agrego un enlace para volver al home
-            const enlaceHome = document.createElement('a');
-            enlaceHome.href = '#';
-            enlaceHome.textContent = 'Inicio';
-            enlaceHome.id = 'volver-al-home';
-            categoriasLista.appendChild(enlaceHome);
-
-            for(let i=0; i< 10; i++){
-                const enlace = document.createElement('a');
-                enlace.href = '#';
-                enlace.textContent = generos[i];
-                categoriasLista.appendChild(enlace);
-            }
-        }
-
+        console.log("generos cargados: ",generos);
     } catch (error) {
         console.error('Error fetching juegos:', error);
     }
@@ -86,6 +65,20 @@ async function crearCarrouselGrande(juegos,genero){
     botonAnterior.className = 'button-carrousel-grande button-prev-grande';
     botonAnterior.src = './imgs/botonCarrusel.png';
 
+    //creo un boton siguiente
+    const botonTempCarrouselSiguiente = document.createElement('button');
+    botonTempCarrouselSiguiente.className = 'boton-carrusel boton-carrusel-grande boton-siguiente';
+    const divBotonSiguiente = document.createElement('div');
+    divBotonSiguiente.className = 'flecha-pixel flecha-derecha';
+    botonTempCarrouselSiguiente.appendChild(divBotonSiguiente);
+
+    //creo un boton anterior
+    const botonTempCarrouselAnterior = document.createElement('button');
+    botonTempCarrouselAnterior.className = 'boton-carrusel boton-carrusel-grande boton-anterior';
+    const divBotonAnterior = document.createElement('div');
+    divBotonAnterior.className = 'flecha-pixel flecha-izquierda';
+    botonTempCarrouselAnterior.appendChild(divBotonAnterior);
+
     //creo las cards
     const juegosCarrousel = document.createElement('article');
     juegosCarrousel.className = 'cards-categoria-grande';
@@ -97,15 +90,15 @@ async function crearCarrouselGrande(juegos,genero){
     //armo toda la section del carrousel
     section.appendChild(carrouselContainer);
     carrouselContainer.appendChild(tituloCategoria);
-    carrouselContainer.appendChild(botonAnterior);
+    carrouselContainer.appendChild(botonTempCarrouselAnterior);
     carrouselContainer.appendChild(juegosCarrousel);
-    carrouselContainer.appendChild(botonSiguiente);
+    carrouselContainer.appendChild(botonTempCarrouselSiguiente);
 
     //inserto la section en el main
     main.appendChild(section);
 
     // configuro el carrusel grande
-    configurarCarrusel(juegosCarrousel, botonAnterior, botonSiguiente, "grande");
+    configurarCarrusel(juegosCarrousel, botonTempCarrouselAnterior, botonTempCarrouselSiguiente, "grande");
 }
 
 
@@ -137,6 +130,20 @@ async function crearCarrouselChico(juegos,genero){
     botonAnterior.className = 'button-carrousel-chico button-prev-chico';
     botonAnterior.src = './imgs/botonCarrusel.png';
 
+    //creo un boton siguiente
+    const botonTempCarrouselSiguiente = document.createElement('button');
+    botonTempCarrouselSiguiente.className = 'boton-carrusel boton-carrusel-chico boton-siguiente';
+    const divBotonSiguiente = document.createElement('div');
+    divBotonSiguiente.className = 'flecha-pixel flecha-derecha';
+    botonTempCarrouselSiguiente.appendChild(divBotonSiguiente);
+
+    //creo un boton anterior
+    const botonTempCarrouselAnterior = document.createElement('button');
+    botonTempCarrouselAnterior.className = 'boton-carrusel boton-carrusel-chico boton-anterior';
+    const divBotonAnterior = document.createElement('div');
+    divBotonAnterior.className = 'flecha-pixel flecha-izquierda';
+    botonTempCarrouselAnterior.appendChild(divBotonAnterior);
+
     //creo las cards
     const juegosCarrousel = document.createElement('article');
     juegosCarrousel.className = 'cards-categoria-chico';
@@ -148,28 +155,32 @@ async function crearCarrouselChico(juegos,genero){
     //armo toda la section del carrousel
     section.appendChild(tituloCategoria);
     section.appendChild(carrouselContainer);
-    carrouselContainer.appendChild(botonAnterior);
+    carrouselContainer.appendChild(botonTempCarrouselAnterior);
     carrouselContainer.appendChild(juegosCarrousel);
-    carrouselContainer.appendChild(botonSiguiente);
+    carrouselContainer.appendChild(botonTempCarrouselSiguiente);
 
     //inserto la section en el main
     main.appendChild(section);
 
     // configuro el carrusel chico
-    configurarCarrusel(juegosCarrousel, botonAnterior, botonSiguiente, "chico");
+    configurarCarrusel(juegosCarrousel, botonTempCarrouselAnterior, botonTempCarrouselSiguiente, "chico");
 }
 
 
 // FUNCION PARA MOVER EL CARRUSEL (GENERICA)
 function configurarCarrusel(carrusel, botonAnterior, botonSiguiente, tipo) {
-    let maxWidth;// Ancho de la carta + margenes
-    let cardsToShow// Numero de cards visibles
+    let maxWidth; // Ancho de la carta + margenes
+    let cardsToShow; // Numero de cards visibles
+    let cards; //selecciona todas las cards
+
     if(tipo.toLowerCase() === 'grande'){
         maxWidth = 340;
         cardsToShow = 3; 
+        cards = carrusel.querySelectorAll('.card-grande');
     }else if(tipo.toLowerCase() === 'chico'){
-        maxWidth = 168;
+        maxWidth = 172 ;
         cardsToShow = 6;
+        cards = carrusel.querySelectorAll('.card-chica')
     }
 
     let currentIndex = 0;// Indice actual del carrusel
@@ -198,9 +209,39 @@ function configurarCarrusel(carrusel, botonAnterior, botonSiguiente, tipo) {
         }
     }
 
-    // Event listeners
-    botonSiguiente.addEventListener('click', nextImage);
-    botonAnterior.addEventListener('click', prevImage);
+
+    // Agrego los event listeners a los botones
+
+    botonSiguiente.addEventListener('click', () => {
+        // Agrego clase para animacion a las cards
+        cards.forEach(card => {
+            card.classList.add('card-skew-right');
+        });
+
+        //muevo el carrusel
+        nextImage();
+
+        // Quito la clase de animacion despues de 0.5s
+        setTimeout(() => {
+            cards.forEach(card => {
+                card.classList.remove('card-skew-right');
+            });
+        }, 500);
+    });
+
+    botonAnterior.addEventListener('click', () => {
+        cards.forEach(card => {
+            card.classList.add('card-skew-left');
+        });
+
+        prevImage();
+
+        setTimeout(() => {
+            cards.forEach(card => {
+                card.classList.remove('card-skew-left');
+            });
+        }, 500);
+    });
 }
 
 
@@ -276,14 +317,17 @@ async function juegosMasValorados(){
 
 
 // FUNCION PARA FILTRAR TODOS LOS GENEROS
-export function getGeneros(){
+export async function getGeneros(){
+    await fetchJuegos();
     return generos;
 }
 
 
 // FUNCION PARA INICIALIZAR LOS CARROUSELS
 export async function inicializarCarrousels(){
-    await fetchJuegos();
+    if(juegos.length === 0)
+        await fetchJuegos();
+
     await crearCarrouselGrande(await juegosMasValorados(),'Mas Valorados');
     await crearCarrouselChico(await juegosPorGenero('Action'),'Accion');
     await crearCarrouselChico(await juegosPorGenero('Indie'),'Indie');

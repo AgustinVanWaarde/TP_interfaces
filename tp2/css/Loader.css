@@ -1,3 +1,8 @@
+/* ================================================ */
+/*                  LOADER STYLES                    */
+/* ================================================ */
+
+
 
 
 /* Contenedor principal del loader - ocupa toda la pantalla */
@@ -30,7 +35,7 @@
     border: 8px solid rgba(255, 121, 121, 0.2);
     border-top: 8px solid #FF7979;
     border-radius: 50%;
-    animation: spin 1.5s linear infinite;/* duracion de 1 segundo, giro continuo, lineal */
+    animation: spin 1.5s linear infinite;/* duracion de 1.5 segundos, giro continuo, lineal */
 }
 
 /* Animación de giro */
