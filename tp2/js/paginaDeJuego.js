@@ -68,7 +68,7 @@ export function crearPaginaDeJuego() {
             </div>
 
             <div class="propaganda">
-                <video loop muted autoplay>
+                <video id="reproductor-video" loop muted autoplay playsinline>
                     <source src="./videos/Nuevas Papas Coated. Llegaron para hacer mucho ruido 😉🍟.mp4" type="video/mp4">
                     Tu navegador no soporta la etiqueta de video.
                 </video>

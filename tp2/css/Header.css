@@ -19,11 +19,63 @@ header {
 /* Estilos grid para el navbar */
 .grid-navbar {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Grupo de botones izquierda (Hamburguesa + Barra de búsqueda) */
+.hamburguesa-y-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 90px;
+}
+
+.barra-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    border: 2px solid #5c5c5c;
+    border-radius: 50px;
+    background-color: rgba(240, 240, 240, 0.288);
+}
+
+.barra-busqueda input {
+    width: 200px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Inter';
+    font-size: 16px;
+    background-color: transparent;
+    outline: none;
+}
+
+.barra-busqueda input::placeholder {
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.747);
+}
+
+.barra-busqueda button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.barra-busqueda button:hover {
+    color: #426df0;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
 }
 
 /* Grupo del título central (Retro + Logo + Games) */
@@ -38,6 +90,7 @@ header {
 .botones-derecha {
     display: flex;
     align-items: center;
+    justify-content: end;
     gap: 15px;
 }
 
@@ -301,7 +354,12 @@ header {
 
     /* Estilos grid para el navbar */
     .grid-navbar {
+        grid-template-columns: auto 1fr auto;
         padding: 0 10px;
+    }
+
+    .barra-busqueda {
+        display: none;
     }
 
     /* Grupo de botones derecha (Ayuda + Perfil) */
@@ -321,6 +379,7 @@ header {
         transition: transform 0.2s ease;
     }
 
+ 
     /* Estilos para el texto del título */
     .titulo h1 {
         color: #ffffff;

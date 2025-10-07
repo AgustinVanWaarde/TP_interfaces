@@ -53,7 +53,7 @@
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Animación de pulso */
+/* Animación de pulso del cargando juego*/
 @keyframes pulse {
     0%, 100% {
         opacity: 0.6;
@@ -126,6 +126,7 @@
     animation: moverTranspaarenciaIzqDer 1.5s ease-in-out infinite;
 }
 
+/* Animación para mover el brillo de izquierda a derecha */
 @keyframes moverTranspaarenciaIzqDer {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }

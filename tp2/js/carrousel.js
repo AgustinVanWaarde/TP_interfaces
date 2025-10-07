@@ -359,10 +359,11 @@ export async function inicializarCarrousels(){
         await fetchJuegos();
 
     await crearCarrouselGrande(await juegosMasValorados(),'Mas Valorados');
-    await crearCarrouselChico(await juegosPorGenero('Action'),'Accion');
+    await crearCarrouselChico(await juegosPorGenero('Action'),'Acción');
     await crearCarrouselChico(await juegosPorGenero('Indie'),'Indie');
     await crearCarrouselChico(await juegosPorGenero('Adventure'),'Aventura');
     await crearCarrouselChico(await juegosPorGenero('RPG'),'RPG');
+    await crearCarrouselChico(await juegosPorGenero('Shooter'),'Shooter');
 }
 
 

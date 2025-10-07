@@ -17,16 +17,24 @@
 <body>
     <header>
         <nav class="grid-navbar">
-            <!-- Hamburguesa izquierda -->
-            <div class="menu-hamburguesa">
-                <img id="btn-hamburguesa" src="imgs/menuHamburguesa.png" alt="menu hamburguesa">
-                <nav class="opciones-menu-hamburguesa opciones-menu-hamburguesa-oculto">
-                    <h2>Categorias:</h2>
-                    <div id="categorias-lista">
-                        <!-- Las categorias se cargan dinamicamente desde JS -->
-                    </div>
-                </nav>
+            <div class="hamburguesa-y-busqueda">
+                <!-- Hamburguesa izquierda -->
+                <div class="menu-hamburguesa">
+                    <img id="btn-hamburguesa" src="imgs/menuHamburguesa.png" alt="menu hamburguesa">
+                    <nav class="opciones-menu-hamburguesa opciones-menu-hamburguesa-oculto">
+                        <h2>Categorias:</h2>
+                        <div id="categorias-lista">
+                            <!-- Las categorias se cargan dinamicamente desde JS -->
+                        </div>
+                    </nav>
             </div>
+
+            <div class="barra-busqueda">
+                <input type="text" id="search-input" placeholder="Buscar juegos...">
+                <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            </div>
+            
             
             <!-- Título central (Retro + Logo + Games) -->
             <div class="titulo-grupo">
@@ -52,7 +60,7 @@
                         <div class="grupo-perfil">
                             <div class="perfil-info">
                                 <img src="imgs/fotoPerfil.png" alt="botonPerfil">
-                                <span class="nombre-usuario">Usuario123</span>
+                                <span class="nombre-usuario">Gamer247</span>
                             </div>
                             <a class="opcion-perfil" href="#">Perfil</a>
                             <a class="opcion-perfil" href="#">Configuracion</a>
@@ -73,7 +81,7 @@
         <div class="loader-spinner"></div>
         <p class="loader-text">CARGANDO JUEGOS...</p>
 
-        <!-- ⭐ AGREGAR: Barra de progreso -->
+        <!-- Barra de progreso -->
         <div class="progress-bar-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>

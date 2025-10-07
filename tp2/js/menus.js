@@ -84,7 +84,7 @@ async function cargarGenerosAlMenu(){
         enlaceHome.id = 'btn-home';
         categoriasLista.appendChild(enlaceHome);
 
-        for(let i=0; i< 10; i++){
+        for(let i=0; i< 6; i++){
             const enlace = document.createElement('a');
             enlace.href = '#';
             enlace.textContent = generos[i];
