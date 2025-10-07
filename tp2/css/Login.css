@@ -1,0 +1,480 @@
+/* ================================================ */
+/*                  LOGIN STYLES                     */
+/* ================================================ */
+
+
+
+
+/* Contenedor principal del formulario */
+.formulario-login {
+	min-height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	background-image: url('../imgs/fondoMario.png');
+	background-size: cover;
+	background-position: center;
+	position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	padding: 40px 0 60px 0;
+    font-family: 'Jersey 15', Arial, sans-serif;
+}
+
+
+/* Efecto para pixelear el fondo con la foto de mario */
+.formulario-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../imgs/fondoMario.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(1.5px);
+    z-index: 0;
+}
+
+/* Fondo del formulario */
+.fondo-formulario {
+	position: relative;
+	width: 480px;
+	min-height: 530px;
+	background: #D8B1A0;
+	border: 8px solid #70412C;
+	border-radius: 20px;
+	box-shadow: 0 0 0 8px #422800, 4px 4px 0 #422800;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+	transition: transform 0.6s;
+	transform-style: preserve-3d;
+}
+
+.fondo-formulario.flipping {
+	transform: rotateY(90deg);
+}
+
+/* Formulario de registro menos ancho */
+.formulario-registro {
+	width: 420px;
+	padding: 0px 28px 20px 28px;
+}
+
+.titulo-formulario {
+	font-size: 56px;
+	font-weight: normal;
+	color: #000;
+	margin-bottom: 5px;
+	text-align: center;
+	font-family: 'Jersey 15', Arial, sans-serif;
+}
+
+.botones-sociales {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.boton-google, .boton-facebook {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 384px;
+	height: 52px;
+	border: none;
+	border-radius: 14px;
+	font-size: 22px;
+	font-family: 'Jersey 15', Arial, sans-serif;
+	font-weight: 400;
+	color: #fff;
+	cursor: pointer;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.10);
+	transition: filter 0.2s;
+	margin: 0 auto;
+}
+.boton-google {
+	background: #3992FF;
+}
+.boton-facebook {
+	background: #2C4FFF;
+}
+.boton-google:hover, .boton-facebook:hover {
+	filter: brightness(0.95);
+}
+.logo-google, .logo-facebook {
+	width: 48px;
+	height: 48px;
+	margin-left: 16px;
+	margin-right: 24px;
+	background: transparent;
+	border-radius: 8px;
+	object-fit: cover;
+}
+.texto-google, .texto-facebook {
+	font-size: 28px;
+	font-family: 'Jersey 15', Arial, sans-serif;
+	font-weight: 400;
+	color: #fff;
+}
+
+.formulario-credenciales {
+	width: 100%;
+	max-width: 314px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0px auto 0 auto;
+}
+.formulario-credenciales label {
+	font-size: 26px;
+	color: #222;
+	margin-bottom: 2px;
+	font-family: 'Jersey 15', Arial, sans-serif;
+}
+
+.fondo-formulario:not(.formulario-registro) .formulario-credenciales label {
+	margin-bottom: -5px;
+}
+
+.required {
+	color: #ff0000;
+	font-weight: normal;
+	margin-left: 3px;
+	cursor: help;
+}
+
+.required-text {
+	color: #ff0000;
+	font-size: 14px;
+	margin-left: 5px;
+	display: none;
+}
+
+.required:hover + .required-text {
+	display: inline;
+}
+.formulario-credenciales input {
+	font-size: 24px;
+	padding: 12px 16px;
+	border-radius: 8px;
+	border: 1.5px solid #70412C;
+	margin-bottom: 10px;
+	outline: none;
+	font-family: 'Jersey 15', Arial, sans-serif;
+}
+
+.formulario-credenciales input::placeholder {
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.4);
+	font-family: 'Jersey 15', Arial, sans-serif;
+}
+.boton-iniciar {
+	background: #4169E1;
+	color: #fff;
+	font-size: 26px;
+	border: none;
+	border-radius: 8px;
+	padding: 12px 0;
+	margin-top: 8px;
+	cursor: pointer;
+	font-family: 'Jersey 15', Arial, sans-serif;
+	font-weight: 400;
+	transition: filter 0.2s;
+}
+.boton-iniciar:hover {
+	filter: brightness(0.95);
+}
+.opciones-extra {
+	width: 100%;
+	max-width: 540px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	margin: 18px auto 0 auto;
+	font-size: 18px;
+	text-align: center;
+}
+.texto-no-cuenta, .link-registrate {
+	display: inline-block;
+	text-align: center;
+}
+.link-contrasena, .link-registrate, .link-iniciar {
+	color: #4169E1;
+	text-decoration: none;
+	font-size: 24px;
+	font-family: 'Jersey 15', Arial, sans-serif;
+	margin: 0 4px 15px 4px;
+	transition: text-decoration 0.2s;
+}
+.link-contrasena:hover, .link-registrate:hover, .link-iniciar:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+.texto-no-cuenta {
+	color: #222;
+	font-size: 22px;
+    margin-left: 4px;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+/* ESTILOS ESPECIFICOS PARA EL FORMULARIO DE REGISTRO */
+.formulario-registro .formulario-credenciales {
+	max-width: 336px;
+	gap: 6px;
+}
+
+.formulario-registro .formulario-credenciales label {
+	font-size: 20px;
+	margin-bottom: 1px;
+}
+
+.formulario-registro .formulario-credenciales input {
+	font-size: 18px;
+	padding: 8px 12px;
+	margin-bottom: 8px;
+}
+
+.formulario-registro .formulario-credenciales input::placeholder {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.formulario-registro .boton-iniciar {
+	font-size: 20px;
+	padding: 10px 0;
+}
+
+.formulario-registro .titulo-formulario {
+	font-size: 42px;
+}
+
+.formulario-registro .botones-sociales {
+	gap: 12px;
+    margin-top: 0px;
+}
+
+.formulario-registro .boton-google, 
+.formulario-registro .boton-facebook {
+	height: 50px;
+	font-size: 22px;
+	max-width: 336px;
+}
+
+
+.formulario-registro .logo-google, 
+.formulario-registro .logo-facebook {
+	width: 36px;
+	height: 36px;
+	margin-left: 12px;
+	margin-right: 18px;
+}
+
+.formulario-registro .texto-google, 
+.formulario-registro .texto-facebook {
+	font-size: 22px;
+}
+
+.password-container {
+	position: relative;
+}
+
+.password-container input {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.toggle-password {
+	position: absolute;
+	right: 10px;
+	top: 45%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	border: none;
+	background: transparent;
+}
+
+.edad-recaptcha-container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.edad-input-container {
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+}
+
+.edad-input-container label {
+	margin-bottom: 2px;
+}
+
+.edad-input-container input {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.recaptcha-container-general {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	margin-top: 10px;
+	margin-right: 40px;
+	padding-bottom: 8px;
+}
+
+/* contenedor del captcha (checkbox + imagen) */
+.captcha-container {
+    display: flex;
+    align-items: center;
+	justify-content: center;
+    background-color: #f9f9f9;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+	padding: 10px 10px;
+    min-height: 20px;
+    min-width: 50px;
+}
+
+/* Estilo para el checkbox */
+#captcha-checkbox {
+    width: 24px;
+    height: 24px;
+}
+
+/* Estilo para la imagen del captcha (logo reCAPTCHA) */
+.captcha-container img {
+    width: 32px;
+    height: 32px;
+    margin-left: 20px;
+}
+
+.botones-sociales-registro {
+	margin-top: 18px;
+}
+
+/* Iniciar sesión (texto link azul) */
+.iniciar-sesion-link {
+	font-family: 'Jersey 15', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 100%;
+	color: #4169E1;
+}
+
+/* ¿Ingresar con contraseña? (texto negro) */
+.ingresar-contrasena-label {
+	font-family: 'Jersey 15', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 100%;
+	text-align: center;
+	color: #000000;
+}
+
+/* Continuar con Facebook (botón) */
+.btn-facebook {
+	position: relative;
+	width: 100%;
+	max-width: 540px;
+	height: 80px;
+	background: #2C4FFF;
+	border-radius: 11px;
+	display: flex;
+	align-items: center;
+	margin: 16px 0;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.10);
+	cursor: pointer;
+	border: none;
+	font-family: 'Jersey 15', sans-serif;
+	font-size: 32px;
+	color: #fff;
+	font-weight: 400;
+	transition: filter 0.2s;
+}
+.btn-facebook:hover {
+	filter: brightness(0.95);
+}
+
+/* logo facebook (dentro del botón) */
+.btn-facebook .logo-facebook {
+	width: 56px;
+	height: 56px;
+	margin-left: 16px;
+	margin-right: 24px;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Regístrate (link azul) */
+.registrate-link {
+	font-family: 'Jersey 15', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 100%;
+	color: #4169E1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* CAPTCHA SANTI */
+.captcha-wrapper {
+	position: relative;
+	display: inline-block;
+}
+
+#recaptcha-placeholder {
+	background: #fff;
+	border-radius: 4px;
+	width: 144px;
+	height: 48px;
+	object-fit: contain;
+	display: block;
+}
+
+.captcha-checkbox {
+	position: absolute;
+	top: 15px;
+	left: 5px;
+	width: 12px;
+	height: 12px;
+	border: 2px solid #ccc;
+	background: white;
+	cursor: pointer;
+	border-radius: 2px;
+	transition: background-color 0.2s;
+}
+
+.captcha-checkbox.checked {
+	background-color: #4CAF50;
+	border-color: #4CAF50;
+}

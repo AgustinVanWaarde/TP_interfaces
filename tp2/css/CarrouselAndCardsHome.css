@@ -1,0 +1,643 @@
+/* ================================================ */
+/*      STYLES FOR CARROUSELS AND CARDS HOME       */
+/* ================================================ */
+
+
+
+
+/* Aimacion del carrousel de skew al moverse (se mueve en eje X y Y ligeramente) */
+.card-skew-right {
+    animation: skewRight 0.5s ease;
+}
+
+.card-skew-left {
+    animation: skewLeft 0.5s ease;
+}
+
+@keyframes skewRight {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    50% {
+        transform: skew(5deg, 3deg) translateX(2px);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
+}
+
+@keyframes skewLeft {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    50% {
+        transform: skew(-5deg, -3deg) translateX(-2px);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
+}
+
+
+
+
+/* CARROUESEL CHICO DESDE ACA */
+
+/* Ultima section de carrousels chico le pongo 60px de margin bottom para que no choque con el footer */
+.cards-chicas:last-child {
+    margin-bottom:80px;
+}
+
+/* card chica normal */
+.card-chica {
+    width: 160px;
+    height: 165px;
+    border-radius: 20px;
+    border: 4px solid #70412C;
+    overflow: hidden;
+    position: relative; /* importante: Para que ::before y contenido se posicionen dentro */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* La imagen se pone desde JavaScript: background-image: url(...) */
+}
+
+/* Capa oscura que aparece al hacer hover,semicapa de la card */
+.card-chica::before {
+    position: absolute;
+    opacity: 0;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.75);
+    transition: opacity 0.3s ease;
+}
+
+/* contenido general de la card chica */
+.card-chica > * {
+    position: relative;
+    opacity: 0;
+    z-index: 2;
+    padding: 15px 10px;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    margin: -6px 0 10px 0;
+}
+
+/* titulo del juego */
+.card-chica h2 {
+    color: white;
+    font-family: 'Inter';
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra para legibilidad */
+    line-height: 1.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-chica .boton-jugar {
+    position: absolute;
+    bottom: 5px
+}
+
+.card-chica:hover::before {
+    opacity: 1;
+}
+
+.card-chica:hover > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-chica:hover {
+    transform: scale(1.07);
+}
+
+/* estilos de los textos de categorias (h2) */
+.titulo-categoria-chico {
+    font-family: 'Inter';
+    width: 50%;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+    text-align: left;
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-bottom: 1px;
+}
+
+/* Estilos para el contenedor del carrousel chico nuevo */
+.carrousel-conteiner-chico {
+    max-width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background-color: #8B5F4C;
+    border-radius: 35px;
+    border: solid #70412C 3px;
+    align-content: center;
+    position: relative; /* Necesario para posicionar los botones */
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para donde van las cards dentro del contenedor del carrusel chico desde js */
+.cards-categoria-chico {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: start;
+    gap: 15px;
+    margin-left: 60px;
+    transition: all 0.4s ease;
+}
+
+
+
+
+
+/* CARROUSEL GRANDE DESDE ACA */
+
+/* Estilos para cada card individual */
+.card-grande {
+    width: 330px;
+    height: 400px;
+    border-radius: 20px;
+    border: 4px solid #70412C;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Capa oscura que aparece al hacer hover,semicapa de la card */
+.card-grande::before {
+    position: absolute;
+    opacity: 0;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.75);
+    transition: opacity 0.3s ease;
+}
+
+/* contenido general de la card grande */
+.card-grande > * {
+    position: relative;
+    opacity: 0;
+    z-index: 2;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+/* titulo del juego */
+.card-grande h2 {
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+    line-height: 1.3;
+    text-align: center;
+    padding: 0 15px;
+    background-clip: text;
+}
+
+/* informacion del juego (Lanzamiento, Valoración) */
+.card-grande p {
+    color: #F0E6D2;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 8px 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* destacar valoracion */
+.card-grande p.valoracion {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFD700;
+    margin: 12px 0 20px 0;
+}
+
+/* boton jugar en card grande */
+.card-grande .boton-jugar {
+    width: 140px;
+    height: 45px;
+    margin: 20px auto 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 25px;
+}
+
+/* hover en boton grande con mas sombra */
+.card-grande .boton-jugar:hover {
+    box-shadow: 
+        0 8px 25px rgba(65, 105, 225, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.card-grande:hover::before {
+    opacity: 1;
+}
+
+.card-grande:hover > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-grande:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para el contenedor del carrusel y las cards */
+.carrousel-conteiner-grande{
+    border-radius: 35px;
+    border: solid #70412C 8px;
+    overflow: hidden;
+    position: relative; /* Necesario para posicionar los botones */
+    max-width: 100%;
+    height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 40px;
+    background-color: #8B5F4C;
+}
+
+/* Estilos para el texto del título dentro del contenedor del carrusel grande */
+.titulo-categoria-grande {
+    color: white;
+    font-family: 'inter', sans-serif;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 500;
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    justify-content: center;
+    top: 0px;
+}
+
+/* Estilo para donde van las cards dentro del contenedor del carrusel grande desde js */
+.cards-categoria-grande {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin: 20px 0 0 80px;
+    transition: transform 0.3s ease;
+}
+
+
+
+
+
+/* BOTONES DEL CARROUSEL CHICO Y GRANDE */
+
+.boton-carrusel {
+    border-radius: 30px;
+    background: #426df0 ; /*  Azul sega */
+    border: 3px solid #1E3A8A; /* Azul oscuro para el borde */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.90;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0 #0F1E47; /* Sombra azul muy oscuro */
+    position: relative;
+    z-index: 15;
+}
+
+.boton-carrusel-grande {
+    width: 60px;
+    height: 60px;
+}
+
+.boton-carrusel-chico {
+    width: 45px;
+    height: 45px;
+}
+
+.boton-anterior {
+    left: 5px;
+    position: absolute;
+}
+
+.boton-anterior-hidden {
+    visibility: hidden;
+    transform: translateX(-60px);/* mueve el boton al final de la izquierda */
+    transition: all 0.7s ease;
+}
+
+.boton-siguiente {
+    right: 25px;
+    position: absolute;
+}
+
+.boton-siguiente-hidden {
+    visibility: hidden;
+    transform: translateX(60px);/* mueve el boton al final de la derecha */
+    transition: all 0.7s ease;
+}
+
+.boton-carrusel:hover {
+    opacity: 1;
+    background: #6aaaf3;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 #0F1E47;
+}
+
+.boton-carrusel:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 #0F1E47;
+}
+
+/* Flecha simple con borders */
+.flecha-pixel {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.flecha-derecha {
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 3px;
+}
+
+.flecha-izquierda {
+    border-width: 8px 12px 8px 0;
+    border-color: transparent #fff transparent transparent;
+    margin-right: 3px;
+}
+
+
+
+
+
+/* BOTONES DE LAS CARDS */
+
+/* boton jugar */
+.boton-jugar {
+    background-color: #4169E1 ;
+    filter: brightness(1.4);
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px; /* Bordes muy redondeados */
+    padding: 15px 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3); /* Sombra azulada */
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Hover más oscuro */
+.boton-jugar:hover {
+    background-color: #4169E1;
+    filter: brightness(1);/*/ Cambiado a 1 para que no se aclare más */
+    transform: translateY(-2px); /* Se eleva un poco */
+    box-shadow: 0 6px 20px rgba(26, 11, 141, 0.4); /* Sombra más intensa */
+    animation: rotarSuave 1.2s ease; /* Animación de rotación suave */
+}
+
+/* Cuando se presiona */
+.boton-jugar:active {
+    transform: translateY(0); /* Vuelve a la posición */
+    box-shadow: 0 2px 10px rgba(14, 3, 85, 0.781);
+}
+
+/* Animación de rotación suave del boton jugar */
+@keyframes rotarSuave {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+
+/* ================================================ */
+/* 📱 RESPONSIVE MOBILE - CARRUSELES */
+/* ================================================ */
+
+@media (max-width: 768px) {
+    
+    /* CARRUSEL CHICO */
+    
+    /* Contenedor del carrusel - SCROLLEABLE */
+    .carrousel-conteiner-chico {
+        height: auto;
+        padding: 15px 15px;
+        overflow-x: auto; /* Permite scroll horizontal */
+        border-radius: 20px;
+        scrollbar-width: none; /* ocultar barra de scroll */
+        scroll-behavior: smooth;/* Indicador visual de scroll suave */
+    }
+
+    /* Cards container - Sin transform, con scroll */
+    .cards-categoria-chico {
+        margin-left: 0;
+        gap: 12px;
+        transform: none;
+        transition: none;
+    }
+    
+    /* Cards chicas - Info siempre visible su info */
+    .card-chica {
+        width: 150px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: flex-end;
+        gap: 5px;
+    }
+    
+    /* Overlay difuminado desde mitad hacia abajo - siempre visible la sombra */
+    .card-chica::before {
+        opacity: 1; /* Siempre visible en mobile */
+        background: linear-gradient(/* difumina la card desde mitad hacia abajo y la parte de abajo es la mas opaca */
+            to bottom,
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.5) 60%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+    
+    /* Contenido (título) - siempre visible */
+    .card-chica > * {
+        opacity: 1; /* Siempre visible */
+        transform: none; /* Sin animación */
+        padding: 10px 8px;
+        margin: 0;
+    }
+    
+    /* Título del juego en card chica */
+    .card-chica h2 {
+        font-size: 13px;
+        line-height: 1.1;
+        padding: 0 5px;
+    }
+
+    .card-chica .boton-jugar {
+        width: 40%;
+        height: 12%;
+        margin-bottom: 10px;
+    }
+    
+    /* Desactivar hover effects en mobile */
+    .card-chica:hover {
+        transform: none; /* Sin scale en mobile */
+    }
+    
+    /* Título de categoría */
+    .titulo-categoria-chico {
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        width: auto;
+    }
+    
+    
+
+
+    /* CARRUSEL GRANDE */
+    
+    /* Contenedor del carrusel grande - scrolleable */
+    .carrousel-conteiner-grande {
+        height: auto;
+        padding: 15px 15px;
+        overflow-x: scroll; /* permite scroll horizontal */
+        border-radius: 20px;
+        scrollbar-width: none; /* ocultar barra de scroll */
+        scroll-behavior: smooth;
+    }
+    
+    /* Cards container grande */
+    .cards-categoria-grande {
+        margin-left: 0px;
+        gap: 10px;
+        transform: none; /* desactiva movimiento por botones */
+        transition: none;
+    }
+    
+    /* Cards grandes - Más pequeñas en mobile */
+    .card-grande {
+        width: 220px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: flex-end;
+        gap: 0px;
+        margin: 0px;
+    }
+    
+    /* Overlay difuminado - SIEMPRE VISIBLE */
+    .card-grande::before {
+        opacity: 1;
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent 35%,
+            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 5) 100%
+        );
+    }
+    
+    /* Contenido card grande - siempre visible */
+    .card-grande > * {
+        opacity: 1;
+        position: relative;
+        margin: 0px;
+    }
+    
+    /* Título card grande */
+    .card-grande h2 {
+        font-size: 18px;
+        padding: 0 10px;
+        margin-bottom: -25px;
+    }
+
+    .card-grande p.valoracion {
+        font-size: 14px;
+        margin: 6px 0 12px 0;
+        opacity: 1;
+        visibility: visible;
+        margin: 0px;
+    }
+    
+    /* Texto de plataformas */
+    .card-grande p {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    /* Botón jugar en mobile */
+    .card-grande .boton-jugar {
+        width: 55%;
+        height: 30px;
+        font-size: 14px;
+        margin-bottom: 30px;
+        margin-top: 12px;
+    }
+    
+    /* Desactivar hover effects en mobile */
+    .card-grande:hover {
+        transform: none;
+        transition: none;
+    }
+    
+    /* Título de categoría grande */
+    .titulo-categoria-grande {
+        font-size: 22px;
+        width: 100vw;
+        text-align: center;
+    }
+
+
+
+
+    /* ocultar botones del carrousel */
+    .boton-carrusel {
+        display: none;
+    }
+}

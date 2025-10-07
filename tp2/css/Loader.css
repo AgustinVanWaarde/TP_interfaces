@@ -1,0 +1,142 @@
+/* ================================================ */
+/*                  LOADER STYLES                    */
+/* ================================================ */
+
+
+
+
+/* Contenedor principal del loader - ocupa toda la pantalla */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Clase para ocultar el loader con animación */
+.loader-container-hidden {
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* spinner de loader(circular) */
+.loader-spinner {
+    width: 80px;
+    height: 80px;
+    border: 8px solid rgba(255, 121, 121, 0.2);
+    border-top: 8px solid #FF7979;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;/* duracion de 1.5 segundos, giro continuo, lineal */
+}
+
+/* Animación de giro */
+@keyframes spin {
+    0% { transform: rotate(0deg); }/* arranca en 0 grados */
+    100% { transform: rotate(360deg); }/* termina en 360 grados */
+}
+
+.loader-text {
+    margin-top: 30px;
+    font-family: 'Jersey 15', cursive;
+    font-size: 24px;
+    color: #FF7979;
+    letter-spacing: 3px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Animación de pulso del cargando juego*/
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Logo opcional en el loader */
+.loader-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+    animation: logoFloat 2s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%{
+        transform: translateY(0);/* posición original */
+    }
+    50% {
+        transform: translateY(-10px);/* se eleva 10px */
+    }
+}
+
+
+
+
+/* BARRA DE PROGRESO DEL LOADER */
+
+/* Contenedor de la barra de progreso */
+.progress-bar-container {
+    width: 300px;
+    height: 20px;
+    background: rgba(112, 65, 44, 0.3);
+    border: 3px solid #70412C;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 30px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Barra de progreso */
+.progress-bar {
+    width: 0%; /* Inicia en 0 */
+    height: 100%;
+    background: linear-gradient(90deg, #FF7979 0%, #FF9B9B 100%);
+    border-radius: 7px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 121, 121, 0.5);
+    position: relative;
+}
+
+/* Animación de brillo en la barra */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    /* Animación de brillo que se mueve de izquierda a derecha,de suave a rapido e infinita*/
+    animation: moverTranspaarenciaIzqDer 1.5s ease-in-out infinite;
+}
+
+/* Animación para mover el brillo de izquierda a derecha */
+@keyframes moverTranspaarenciaIzqDer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Texto del porcentaje */
+.progress-text {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 15px;
+    font-family: 'Inter', monospace;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
