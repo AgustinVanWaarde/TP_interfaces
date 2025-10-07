@@ -2,6 +2,7 @@
 
 import { inicializarCarrousels } from './carrousel.js';
 import { generarFormularios } from './login.js';
+import { crearPaginaDeJuego } from './paginaDeJuego.js';
 
 
 const main = document.getElementById('main-content');
@@ -28,7 +29,7 @@ function mostrarLoader() {
         document.body.style.overflow = 'hidden'; // Evita scroll mientras carga
 
         // Iniciar barra de progreso y animacion del loader
-        iniciarBarraProgresoYLoader();
+        iniciarBarraProgresoYLoader(loader);
     }
 }
 
@@ -42,7 +43,7 @@ function ocultarLoader(loader) {
 
 // Barra de progreso y animacion del loader
 // Simula una carga de 5 segundos con actualizaciones cada 1 segundo
-function iniciarBarraProgresoYLoader() {
+function iniciarBarraProgresoYLoader(loader) {
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
     
@@ -53,16 +54,16 @@ function iniciarBarraProgresoYLoader() {
 
     // Resetear al inicio
     progressBar.style.width = '0%';
-    progressText.textContent = '0%';
-
-    // Temporizador para ocultar el loader cuando termine
-    setTimeout(() => {
-        ocultarLoader(loader);
-    }, 5000);
+    progressText.textContent = '0%';   
 
     // Intervalo que actualiza la barra cada segundo
     const timer = setInterval(() => {
         progress += increment;
+
+        // Temporizador para ocultar el loader cuando termine
+        setTimeout(() => {
+            ocultarLoader(loader);
+        }, 5000);
 
         // Si llega al 100% detiene el intervalo
         if (progress >= 100) {
@@ -88,7 +89,21 @@ export async function inicializarCarrouselsEnMain(){
 
     await inicializarCarrousels();
 
+    const btnIrPeg = document.querySelector('.btn-ir-peg');
+    btnIrPeg.addEventListener('click', inicializarPaginaDeJuegoEnMain);
+
     console.log("Carrousels Cargados");
+}
+
+
+
+// Inicializacion de la pagina de juego
+async function inicializarPaginaDeJuegoEnMain(){
+    main.innerHTML = ''; // Limpia todo
+    await crearPaginaDeJuego();
+    scrollToTop();
+
+    console.log("Pagina de juego cargada");
 }
 
 

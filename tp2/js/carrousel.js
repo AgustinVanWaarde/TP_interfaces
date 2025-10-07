@@ -7,7 +7,8 @@ const juegoPropioPeg = {
     name: "Peg Solitarie", 
     background_image: "./imgs/pegSolitariePropio.png",
     released: "2025-05-29",
-    rating: 5
+    rating: 5, 
+    id: "btn-ir-peg"
 }
 
 export async function fetchJuegos(){
@@ -270,6 +271,11 @@ function crearCard(juego,estilo){
         // Prueba pra verificar si llegan los datos --->LLEGAN
         //console.log("Creando card para:", juego.name, "Imagen:", juego.background_image);
 
+        let claseBtn = "boton-jugar";
+        if(juego.id === "btn-ir-peg"){
+            claseBtn += " btn-ir-peg";
+        }
+
         const divImagen = document.createElement('div');
         divImagen.style.backgroundImage = `url(${juego.background_image})`;
 
@@ -282,7 +288,7 @@ function crearCard(juego,estilo){
             <h2>${juego.name}</h2>
             <p>Lanzamiento: ${juego.released}</p>
             <p class="valoracion">Valoración: ${juego.rating}</p>
-            <button class="boton-jugar">Jugar</button>
+            <button class="${claseBtn}">Jugar</button>
         `;
         return card;
     }
