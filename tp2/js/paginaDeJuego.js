@@ -1,5 +1,19 @@
 "use strict";
 
+const juegoPropioPeg = {
+    name: "Peg Solitarie Pac-Man", 
+    load_image: "./imgs/pacmanCarga.png",
+    como_jugar: `Clic izquierdo en la ficha que quieras mover.
+                Luego clic en el agujero vacío donde caerá tras el salto.
+                El juego eliminará automáticamente la ficha intermedia.`,
+    objetivo: "Quedarte con una sola ficha en el tablero, preferentemente en el agujero central.",
+    descripcion: `Guía a una banda de mini-Pac-Man en un tablero de luces neón.
+                Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
+                hasta que solo quede un Pac-Man supremo en el centro.
+                Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.`,
+    id_button_play: "btn-jugar-peg"
+}
+
 // Funcion para crear toda la estructura HTML de la pagina de juego
 export function crearPaginaDeJuego() {
     const main = document.getElementById('main-content');
@@ -11,7 +25,7 @@ export function crearPaginaDeJuego() {
     // HTML completo de la pagina de juego
     section.innerHTML = `
         <div class="contenido-juego-y-breadcrumb">
-            <h2 class="breadcrum">Inicio > Estrategia > Peg solitarie</h2>
+            <h2 class="breadcrum">Inicio > Estrategia > ${juegoPropioPeg.name}</h2>
 
             <div class="contenedor-juego">
                 <div class="pantalla-carga-juego">
@@ -20,7 +34,7 @@ export function crearPaginaDeJuego() {
 
                 <div class="contenedor-titulo-compartir">
                     <div class="tituloJuego-logo">
-                        <h1 class="titulo-juego">Peg Solitarie Pac-man</h1>
+                        <h1 class="titulo-juego">Peg Solitarie Pac-Man</h1>
                         <img src="./imgs/logo.png" alt="logo">
                     </div>
                     <div class="iconos-compartir">
@@ -39,9 +53,7 @@ export function crearPaginaDeJuego() {
                         <h3>Como jugar?</h3>
                     </div>
                     <p>
-                        Clic izquierdo en la ficha que quieras mover.
-                        Luego clic en el agujero vacío donde caerá tras el salto.
-                        El juego eliminará automáticamente la ficha intermedia.
+                        ${juegoPropioPeg.como_jugar}
                     </p>
                 </div>
                 <div class="objetivo-juego">
@@ -50,7 +62,7 @@ export function crearPaginaDeJuego() {
                         <h3>Objetivo del juego</h3>
                     </div>
                     <p>
-                        Quedarte con una sola ficha en el tablero, preferentemente en el agujero central.
+                        ${juegoPropioPeg.objetivo}
                     </p>
                 </div>
                 <div class="descripcion-juego">
@@ -59,10 +71,7 @@ export function crearPaginaDeJuego() {
                         <h3>Descripcion del juego</h3>
                     </div>
                     <p>
-                        Guía a una banda de mini-Pac-Man en un tablero de luces neón.
-                        Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
-                        hasta que solo quede un Pac-Man supremo en el centro.
-                        Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.
+                        ${juegoPropioPeg.descripcion}
                     </p>
                 </div>
             </div>
@@ -142,4 +151,8 @@ export function crearPaginaDeJuego() {
     
     // Insertar la seccion en el main
     main.appendChild(section);
+
+    // Agregar la imagen de carga del juego -- ARREGLAR BACKGROUND DEL BEFORE
+    let fondoPaginaJuego = document.querySelector('.pantalla-carga-juego');
+    fondoPaginaJuego.style.backgroundImage = `url(${juegoPropioPeg.load_image})`;
 }

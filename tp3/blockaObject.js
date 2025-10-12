@@ -119,7 +119,7 @@ class Blocka {
             xImagen = 0;
             
             for(let col = 0; col < this.divisionEnPartes/2; col++) {
-                // Instancion cada sub-imagen
+                // Instancio cada sub-imagen
                 let subImg = new SubImagen(
                     id,
                     xDibujo, yDibujo,
