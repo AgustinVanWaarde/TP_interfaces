@@ -63,7 +63,7 @@ function iniciarBarraProgresoYLoader(loader) {
         // Temporizador para ocultar el loader cuando termine
         setTimeout(() => {
             ocultarLoader(loader);
-        }, 5000);
+        }, duration);
 
         // Si llega al 100% detiene el intervalo
         if (progress >= 100) {
@@ -89,8 +89,16 @@ export async function inicializarCarrouselsEnMain(){
 
     await inicializarCarrousels();
 
-    const btnIrPeg = document.querySelector('.btn-ir-peg');
-    btnIrPeg.addEventListener('click', inicializarPaginaDeJuegoEnMain);
+    const btnIrJuego = document.querySelectorAll('.btn-ir-juego');
+    btnIrJuego.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let valueJuego = btn.value;// Obtengo el value del juego clickeado ("peg-solitarie" o "blocka")
+
+            // console.log("Valor del juego seleccionado: " + valueJuego);
+            
+            inicializarPaginaDeJuegoEnMain(valueJuego);// Cargo la pagina de juego correspondiente con el valor del juego
+        });
+    });
 
     console.log("Carrousels Cargados");
 }
@@ -98,9 +106,9 @@ export async function inicializarCarrouselsEnMain(){
 
 
 // Inicializacion de la pagina de juego
-async function inicializarPaginaDeJuegoEnMain(){
+async function inicializarPaginaDeJuegoEnMain(valueJuego){
     main.innerHTML = ''; // Limpia todo
-    await crearPaginaDeJuego();
+    await crearPaginaDeJuego(valueJuego);// Debo pasar el juego pedido
     scrollToTop();
 
     console.log("Pagina de juego cargada");

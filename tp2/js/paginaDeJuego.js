@@ -1,21 +1,44 @@
 "use strict";
 
-const juegoPropioPeg = {
-    name: "Peg Solitarie Pac-Man", 
-    load_image: "./imgs/pacmanCarga.png",
-    como_jugar: `Clic izquierdo en la ficha que quieras mover.
-                Luego clic en el agujero vacío donde caerá tras el salto.
-                El juego eliminará automáticamente la ficha intermedia.`,
-    objetivo: "Quedarte con una sola ficha en el tablero, preferentemente en el agujero central.",
-    descripcion: `Guía a una banda de mini-Pac-Man en un tablero de luces neón.
-                Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
-                hasta que solo quede un Pac-Man supremo en el centro.
-                Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.`,
-    id_button_play: "btn-jugar-peg"
-}
+// Datos de los juegos propios respecto a la pagina de juego
+const juegosPropios = [
+    {
+        name: "Peg Solitarie Pac-Man", 
+        load_image: "../imgs/pacmanCarga.png",
+        como_jugar: `Clic izquierdo en la ficha que quieras mover.
+                    Luego clic en el agujero vacío donde caerá tras el salto.
+                    El juego eliminará automáticamente la ficha intermedia.`,
+        objetivo: "Quedarte con una sola ficha en el tablero, preferentemente en el agujero central.",
+        descripcion: `Guía a una banda de mini-Pac-Man en un tablero de luces neón.
+                    Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
+                    hasta que solo quede un Pac-Man supremo en el centro.
+                    Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.`,
+        id_juego: "peg-solitarie"
+    }, 
+    {
+        name: "Blocka-Game", 
+        load_image: "../imgs/portadaBlocka.png",
+        como_jugar: `Clic izquierdo en la ficha que quieras mover.
+                    Luego clic en el agujero vacío donde caerá tras el salto.
+                    El juego eliminará automáticamente la ficha intermedia.`,
+        objetivo: "nada",
+        descripcion: `Guía a una banda de mini-Pac-Man en un tablero de luces neón.
+                    Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
+                    hasta que solo quede un Pac-Man supremo en el centro.
+                    Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.`,
+        id_juego: "blocka"
+    }
+];
 
 // Funcion para crear toda la estructura HTML de la pagina de juego
-export function crearPaginaDeJuego() {
+export function crearPaginaDeJuego(juegoPedido) {
+    let indexJuego = 0;// Por defecto el primer juego
+    juegosPropios.forEach(juego => {
+        if(juego.id_juego == juegoPedido){// Si el id("nombre") del juego coincide con el pedido
+            indexJuego = juegosPropios.indexOf(juego);// Obtengo el indice del juego solicitado en el array
+        }
+    })
+
     const main = document.getElementById('main-content');
     
     // Crear la seccion principal
@@ -25,7 +48,7 @@ export function crearPaginaDeJuego() {
     // HTML completo de la pagina de juego
     section.innerHTML = `
         <div class="contenido-juego-y-breadcrumb">
-            <h2 class="breadcrum">Inicio > Estrategia > ${juegoPropioPeg.name}</h2>
+            <h2 class="breadcrum">Inicio > Estrategia > ${juegosPropios[indexJuego].name}</h2>
 
             <div class="contenedor-juego">
                 <div class="pantalla-carga-juego">
@@ -34,7 +57,7 @@ export function crearPaginaDeJuego() {
 
                 <div class="contenedor-titulo-compartir">
                     <div class="tituloJuego-logo">
-                        <h1 class="titulo-juego">Peg Solitarie Pac-Man</h1>
+                        <h1 class="titulo-juego">${juegosPropios[indexJuego].name}</h1>
                         <img src="./imgs/logo.png" alt="logo">
                     </div>
                     <div class="iconos-compartir">
@@ -48,30 +71,30 @@ export function crearPaginaDeJuego() {
         <div class="contenedor-comoJugar-y-propaganda">
             <div class="como-jugar">
                 <div class="instrucciones">
-                    <div class="titulo-como-jugar">
+                    <div class="titulo-instrucciones">
                         <i class="fa-solid fa-arrow-pointer"></i>
                         <h3>Como jugar?</h3>
                     </div>
                     <p>
-                        ${juegoPropioPeg.como_jugar}
+                        ${juegosPropios[indexJuego].como_jugar}
                     </p>
                 </div>
                 <div class="objetivo-juego">
-                    <div class="titulo-objetivo-juego">
+                    <div class="titulo-instrucciones">
                         <i class="fa-regular fa-lightbulb"></i>
                         <h3>Objetivo del juego</h3>
                     </div>
                     <p>
-                        ${juegoPropioPeg.objetivo}
+                        ${juegosPropios[indexJuego].objetivo}
                     </p>
                 </div>
                 <div class="descripcion-juego">
-                    <div class="titulo-descripcion-juego">
+                    <div class="titulo-instrucciones">
                         <i class="fa-solid fa-book-open"></i>
                         <h3>Descripcion del juego</h3>
                     </div>
                     <p>
-                        ${juegoPropioPeg.descripcion}
+                        ${juegosPropios[indexJuego].descripcion}
                     </p>
                 </div>
             </div>
@@ -152,7 +175,9 @@ export function crearPaginaDeJuego() {
     // Insertar la seccion en el main
     main.appendChild(section);
 
-    // Agregar la imagen de carga del juego -- ARREGLAR BACKGROUND DEL BEFORE
+
+    // Agregar la imagen de carga del juego en la pantalla de carga del juego tanto en la clase CSS como en el BEFORE
+    // Utilizo la variable de CSS de la clase del selector para cambiar la imagen dinamicamente
     let fondoPaginaJuego = document.querySelector('.pantalla-carga-juego');
-    fondoPaginaJuego.style.backgroundImage = `url(${juegoPropioPeg.load_image})`;
+    fondoPaginaJuego.style.setProperty('--background-image', `url(${juegosPropios[indexJuego].load_image})`);
 }

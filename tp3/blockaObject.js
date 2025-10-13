@@ -54,8 +54,11 @@ class SubImagen {
         // Mover el origen al centro de la sub-imagen, TRASLADO la coordenada 0,0 del canvas al centro de la sub-imagen
         ctx.translate(cenX, cenY); 
 
-        // Rotar el canvas COMPLETO IMPORTANTE
-        ctx.rotate((this.rotacion * Math.PI) / 180);
+        
+        // Rota el canvas COMPLETO IMPORTANTE
+        // Convierte grados a radianes para rotar en canvas, porque canvas solo acepta radianes
+        // radianes = grados * (Math.PI / 180)
+        ctx.rotate((this.rotacion * Math.PI) / 180); // Aplica la rotación
 
 
         // Coordenadas para dibujar nuevamente por el cambio del translate
@@ -68,7 +71,7 @@ class SubImagen {
             coordDibujo, coordDibujo, this.tamanioSubImagen, this.tamanioSubImagen // Donde y tamaño en el canvas
         );
 
-        ctx.restore(); // Restaurar el estado original del canvas ya que rote y traslade TODO el canvas
+        ctx.restore(); // Restaurar el estado original del canvas ya que lo rote y traslade TODO el canvas
     }
 
 
@@ -93,7 +96,7 @@ class Blocka {
         // Datos del rompecabezas
         this.divisionEnPartes = divisionEnPartes;
         this.tamSubImagen = tamSubImagen;
-        this.ESPACIOENTRESUBIMAGENES = 15;
+        this.ESPACIOENTRESUBIMAGENES = 10;
 
         // Array donde voy a almacenar las sub-imagenes
         this.subImagenes = [];
@@ -198,11 +201,11 @@ class Blocka {
 const canvas = document.getElementById('myCanvas');
 
 const imagen = new Image();
-imagen.src = 'image.png';
+imagen.src = 'posiblesImagenes/pacman.png';
 
 
 imagen.onload = function() {
-    const blocka = new Blocka(canvas, imagen, 4, 300);
+    const blocka = new Blocka(canvas, imagen, 4, 110);
 
     blocka.dibujar();
 

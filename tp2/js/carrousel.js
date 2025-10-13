@@ -3,13 +3,25 @@
 const juegos = [];//--> array global de juegos
 let generos = [];//--> array global de generos
 
-const juegoPropioPeg = {
-    name: "Peg Solitarie", 
-    background_image: "./imgs/pegSolitariePropio.png",
-    released: "2025-05-29",
-    rating: 5, 
-    id: "btn-ir-peg"
-}
+
+// Datos de los juegos propios para crear la card
+const juegosPropios = [
+    {
+        name: "Peg Solitarie", 
+        background_image: "./imgs/pegSolitariePropio.png",
+        released: "2025-05-29",
+        rating: 5, 
+        value: "peg-solitarie"
+    }, 
+    {
+        name: "Blocka", 
+        background_image: "./imgs/portadaBlocka.png",
+        released: "2025-05-29",
+        rating: 5, 
+        value: "blocka"
+    }
+
+];
 
 export async function fetchJuegos(){
     try {
@@ -272,8 +284,8 @@ function crearCard(juego,estilo){
         //console.log("Creando card para:", juego.name, "Imagen:", juego.background_image);
 
         let claseBtn = "boton-jugar";
-        if(juego.id === "btn-ir-peg"){
-            claseBtn += " btn-ir-peg";
+        if(juego.value != undefined){
+            claseBtn += ` btn-ir-juego" value="${juego.value}"`;
         }
 
         const divImagen = document.createElement('div');
@@ -288,7 +300,7 @@ function crearCard(juego,estilo){
             <h2>${juego.name}</h2>
             <p>Lanzamiento: ${juego.released}</p>
             <p class="valoracion">Valoración: ${juego.rating}</p>
-            <button class="${claseBtn}">Jugar</button>
+            <button class="${claseBtn} ${juego.value != '' ? 'btn-con-valoracion' : ''}">Jugar</button>
         `;
         return card;
     }
@@ -338,10 +350,11 @@ async function juegosMasValorados(){
 
     // Toma solo los primeros 20 juegos (del 0 al 19)
     // map crea una copia del array y slice corta desde el inicio hasta la posicion 19
-    const juegosFiltrados = juegos.map(j => j).slice(0, 19);
+    const juegosFiltrados = juegos.map(j => j).slice(0, 18);
     
     // Agrega nuestro juego propio al inicio del array
-    juegosFiltrados.unshift(juegoPropioPeg);
+    juegosFiltrados.unshift(juegosPropios[0]);
+    juegosFiltrados.unshift(juegosPropios[1]);
     return juegosFiltrados;
 }
 
