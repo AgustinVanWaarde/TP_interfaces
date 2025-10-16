@@ -1,5 +1,4 @@
 "use strict";
-import { inicializarCarrousels } from './carrousel.js';
 
 // Alternar formularios con animacion de volteo
 

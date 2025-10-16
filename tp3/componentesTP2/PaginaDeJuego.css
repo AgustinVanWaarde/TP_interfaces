@@ -527,6 +527,7 @@ video {
     align-items: center;
 }
 
+/* Contenedor principal del juego con borde y fondo marron */
 .marco-contenedor-juego {
     display: flex;
     flex-direction: column;
@@ -542,6 +543,21 @@ video {
     background-color: #8B5F4C;
 }
 
+/* Contenedor donde se reproduce el juego */
+.contenedor-juego-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+}
+
+/* Contenedor y marco de instrucciones cuando esta en ejecucion un juego */
 .marco-contenedor-instrucciones {
     display: flex;
     flex-direction: column;
@@ -557,18 +573,23 @@ video {
     width: 20%;
     height: 83%;
     background-color: #8B5F4C;
-    font-size: 15px;
+    font-size: 12px;
     text-align: start;
+    font-family: 'Inter', 'sans-serif';
 }
 
+/* Titulos e iconos dentro del marco de instrucciones */
 .marco-contenedor-instrucciones h3,i {
-    font-size: 24px;
+    font-size: 20px;
 }
 
+/* Evito scroll en el body cuando se muestra la pagina de juego */
+/* Luego se aplica desde el js */
 body {
     overflow: hidden;
 }
 
+/* Breadcrumb dentro de la pagina de juego en ejecucion */
 .breadcrum-en-juego {
     position: absolute;
     top: 10px;
@@ -577,16 +598,4 @@ body {
     font-size: 16px;
 }
 
-.contenedor-juego-main {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    background-color: #FEFEFE;
-}
-
-#myCanvas {
-    margin: auto;
-    border: 2px solid #000000;
-    background-color: #a5a4a4;
-}
 
