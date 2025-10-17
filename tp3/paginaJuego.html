@@ -65,6 +65,7 @@
     </header>
     
     <main>
+        <!-- DESDE ACA CONTENEDOR JUEGO EN EJECUCION -->
         <!-- aside es donde esta contenido el overlay de ejecucio y contenedor del juego -->
         <aside class="fondo-juego-en-ejecucion">
             <!-- Breadcrumb -->
@@ -74,7 +75,7 @@
             <div class="marco-contenedor-juego">
 
                 <!-- Contenedor principal del juego -->
-                <div class="contenedor-juego-main">
+                <div class="contenedor-juego-main" id="contenedor-juego">
 
                     <!-- Pantalla De Inicio + pantalla overlay -->
                     <div id="pantalla-inicio" class="pantalla-overlay">
@@ -91,7 +92,7 @@
                     <div class="panel-juego">
                         <div class="info-nivel">
                             <i class="fa-solid fa-puzzle-piece"></i>
-                            Nivel: <span id="nivel">1</span>
+                            <p>Nivel: <span id="nivel-actual">1</span></p>
                         </div>
 
                         <div class="tiempo-transcurrido">
@@ -118,8 +119,8 @@
                             <h2>🎉 ¡Nivel Completado! 🎉</h2>
                             <p>Tiempo: <span id="tiempo-final">00:00</span></p>
                             <div class="botones-menu-victoria">
-                                <button id="btn-reiniciar" class="btn-game btn-siguiente-nivel">Siguiente Nivel</button>
-                                <button id="btn-siguiente-nivel" class="btn-game btn-menu-principal">Menú Principal</button>
+                                <button id="btn-siguiente-nivel" class="btn-game btn-siguiente-nivel">Siguiente Nivel</button>
+                                <button id="btn-volver-menu" class="btn-game btn-menu-principal">Menú Principal</button>
                             </div>
                         </div>
                     </div>
@@ -177,6 +178,8 @@
                 </div>
             </div>
         </aside>
+
+        <!-- DESDE ACA CONTENIDO DEL JUEGO, PAGINA DEL JUEGO -->
         <section class="contenedor-principal-juego">
 
             <div class="contenido-juego-y-breadcrumb">
@@ -386,6 +389,6 @@
         </div>
     </footer>
 
-    <script type="module" src="main.js"></script>
+    <script type="module" src="GameManager.js"></script>
 </body>
 </html>

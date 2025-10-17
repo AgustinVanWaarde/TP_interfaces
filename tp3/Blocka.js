@@ -81,7 +81,7 @@ class Blocka {
         this.subImagenes.forEach(subImg => {
             // Asigna una rotacion aleatoria entre 0, 90, 180, 270
             const rotacionesPosibles = [0, 90, 180, 270];
-            const indiceAleatorio = Math.round(Math.random() * (rotacionesPosibles.length) - 1);
+            const indiceAleatorio = Math.round(Math.random() * (rotacionesPosibles.length - 1));
             subImg.rotacion = rotacionesPosibles[indiceAleatorio];
         })
     }
