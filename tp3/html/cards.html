@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Header.css">
+    <link rel="stylesheet" href="../css/Footer.css">
+    <link rel="stylesheet" href="../css/CarrouselAndCardsHome.css">
+    <link rel="stylesheet" href="../css/boton.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Jersey+15&display=swap" rel="stylesheet">
+    <title>Retro Games</title>
+</head>
+<body>
+        <header>
+        <nav class="grid-navbar">
+            <!-- Hamburguesa izquierda -->
+            <div class="menu-hamburguesa">
+                <div class="hamburger-icon">
+                    <div class="hamburger-line"></div>
+                </div>
+            </div>
+            
+            <!-- Título central (Retro + Logo + Games) -->
+            <div class="titulo-grupo">
+                <div class="titulo">
+                    <h1>Retro</h1>
+                </div>
+                <div class="titulo">
+                    <img src="imgs/logo.png" alt="logo">
+                </div>
+                <div class="titulo">
+                    <h1>Games</h1>
+                </div>
+            </div>
+            
+            <!-- Botones derecha (Ayuda + Perfil) -->
+            <div class="botones-derecha">
+                <div class="menu-ayuda">
+                    <img src="imgs/botonAyuda.png" alt="botonAyuda">
+                </div>
+                <div class="menu-perfil">
+                    <img src="imgs/botonPerfil.png" alt="botonPerfil">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main id="main-carrousels">
+        <section id="cards-grandes">
+            <div class="carrousel-conteiner-grande">
+                <h2>Categoria</h2>
+
+                <!-- Botón izquierda (anterior) -->
+                <button class="boton-carrusel boton-anterior">
+                    <div class="flecha-pixel flecha-izquierda"></div>
+                </button>                
+
+                <article class="cards-categoria-grande">
+                    <div class="card-grande">
+                        <div></div>
+                        <p>Grand Theft Auto V</p>
+                    </div>
+                    <div class="card-grande"></div>
+                    <div class="card-grande"></div>
+                    <div class="card-grande"></div>           
+                </article>
+
+                <!-- Botón derecha (siguiente) -->
+                <button class="boton-carrusel boton-siguiente">
+                    <div class="flecha-pixel flecha-derecha"></div>
+                </button>
+            </div>
+        </section>
+
+        <section id="cards-chicas">
+            <h2>Categoria</h2>
+            <div class="carrousel-conteiner-chico">
+                <img class="button-carrousel-chico button-prev-chico" src="../imgs/botonCarrusel.png" alt="button">
+                <article class="cards-categoria-chico">
+                    <div class="card-chica"></div>
+                    <div class="card-chica"></div>
+                    <div class="card-chica"></div>
+                    <div class="card-chica"></div>
+                    <div class="card-chica"></div>
+                    <div class="card-chica"></div>
+                    <div class="card-chica"></div>                    
+                </article>
+                <img class="button-carrousel-chico button-next-chico" src="../imgs/botonCarrusel.png" alt="button">
+            </div>
+        </section>
+    </main>
+</body>
+</html>

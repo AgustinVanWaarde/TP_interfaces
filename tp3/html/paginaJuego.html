@@ -1,11 +1,12 @@
-<!DOCTYPE HTML5>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="componentesTP2/Header.css">
-    <link rel="stylesheet" href="componentesTP2/PaginaDeJuego.css">
-    <link rel="stylesheet" href="componentesTP2/General.css">
-    <link rel="stylesheet" href="Blocka.css">
+    <link rel="stylesheet" href="../css/General.css">
+    <link rel="stylesheet" href="../css/Header.css">
+    <link rel="stylesheet" href="../css/Footer.css">
+    <link rel="stylesheet" href="../css/PaginaDeJuego.css">
+    <link rel="stylesheet" href="../css/CarrouselAndCardsHome.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Jersey+15&display=swap&family=Jersey+25&display=swap" rel="stylesheet"> <!-- importo la fuente Inter y Jersey 15 desde Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- importo los iconos de Font Awesome -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,69 +66,12 @@
     </header>
     
     <main>
-        <!-- DESDE ACA CONTENEDOR JUEGO EN EJECUCION -->
-        <!-- aside es donde esta contenido el overlay de ejecucio y contenedor del juego -->
         <aside class="fondo-juego-en-ejecucion">
-            <!-- Breadcrumb -->
             <h2 class="breadcrum-en-juego">Inicio > Estrategia > Peg solitarie </h2>
-
-            <!-- Marco contenedor juego en ejecucion -->
             <div class="marco-contenedor-juego">
-
-                <!-- Contenedor principal del juego -->
-                <div class="contenedor-juego-main" id="contenedor-juego">
-
-                    <!-- Pantalla De Inicio + pantalla overlay -->
-                    <div id="pantalla-inicio" class="pantalla-overlay">
-                        <div class="menu-comenzar-juego">
-                            <h2>🎮 BLOCKA 🎮</h2>
-                            <p>¡Listo para resolver el rompecabezas!</p>
-                            <button id="btn-comenzar" class="btn-jugar-inicio btn-game">Jugar</button>
-                        </div>
-                    </div>
-
-
-
-                    <!-- Panel de juego (nivel actual + tiempo transcurrido) -->
-                    <div class="panel-juego">
-                        <div class="info-nivel">
-                            <i class="fa-solid fa-puzzle-piece"></i>
-                            <p>Nivel: <span id="nivel-actual">1</span></p>
-                        </div>
-
-                        <div class="tiempo-transcurrido">
-                            <i class="fa-solid fa-clock"></i>
-                            Tiempo: <span id="tiempo">00:00</span>
-                        </div>
-                    </div>
-
-                    <!-- Canvas para el juego -->
-                    <canvas id="myCanvas" width="230px" height="230px"></canvas>
-
-                    <!-- Boton reiniciar -->
-                    <div id="control-juego" style="display: none;">
-                        <button id="btn-reiniciar" class="btn-game btn-reiniciar">
-                            <i class="fa-solid fa-rotate-right"></i> Reiniciar
-                        </button>
-                    </div>
-
-
-
-                    <!-- Pantalla del menu de victoria + pantalla overlay -->
-                    <div id="pantalla-victoria" class="pantalla-overlay" style="display: none;">
-                        <div class="menu-victoria">
-                            <h2>🎉 ¡Nivel Completado! 🎉</h2>
-                            <p>Tiempo: <span id="tiempo-final">00:00</span></p>
-                            <div class="botones-menu-victoria">
-                                <button id="btn-siguiente-nivel" class="btn-game btn-siguiente-nivel">Siguiente Nivel</button>
-                                <button id="btn-volver-menu" class="btn-game btn-menu-principal">Menú Principal</button>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="contenedor-juego-main">
+                    <canvas id="myCanvas" width="400px" height="400px"></canvas>
                 </div>
-
-                <!-- Contenedor para el título y botones compartir -->
                 <div class="contenedor-titulo-compartir">
                         <div class="tituloJuego-logo">
                             <h1 class="titulo-juego">Peg Solitarie Pac-man</h1>
@@ -139,9 +83,6 @@
                         </div>
                 </div>
             </div>
-
-            
-            <!-- Marco contenedor instrucciones -->
             <div class="marco-contenedor-instrucciones">
                 <div class="instrucciones">
                     <div class="titulo-instrucciones">
@@ -149,9 +90,9 @@
                         <h3>Como jugar?</h3>
                     </div>
                     <p>
-                        Click Izquierdo: Rota la pieza hacia la izquierda (-90°)<br>
-                        Click Derecho: Rota la pieza hacia la derecha (90°)<br>
-                        Gira todas las piezas hasta formar la imagen completa.
+                        Clic izquierdo en la ficha que quieras mover.
+                        Luego clic en el agujero vacío donde caerá tras el salto.
+                        El juego eliminará automáticamente la ficha intermedia. 
                     </p>
                 </div>
                 <div class="objetivo-juego">
@@ -160,8 +101,7 @@
                         <h3>Objetivo del juego</h3>
                     </div>
                     <p>
-                        Rotar cada pieza del rompecabezas hasta que las 4 partes estén en su posición correcta 
-                        y formen la imagen original. ¡Hazlo en el menor tiempo posible!
+                        Quedarte con una sola ficha en el tablero, pre ferentemente en el agujero central.
                     </p>
                 </div>
                 <div class="descripcion-juego">
@@ -170,16 +110,14 @@
                         <h3>Descripcion del juego</h3>
                     </div>
                     <p>
-                        Blocka es un rompecabezas retro donde cada nivel presenta una imagen dividida en 4 piezas 
-                        con un filtro visual aplicado. A medida que avanzas, los filtros cambian: escala de grises, 
-                        brillo aumentado y colores negativos. Cuando completes el puzzle, ¡verás la imagen original 
-                        sin filtros!
+                        Guía a una banda de mini-Pac-Man en un tablero de luces neón. 
+                        Salta de ficha en ficha para absorber su energía, como si comieras fantasmas, 
+                        hasta que solo quede un Pac-Man supremo en el centro. 
+                        Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.
                     </p>
                 </div>
             </div>
         </aside>
-
-        <!-- DESDE ACA CONTENIDO DEL JUEGO, PAGINA DEL JUEGO -->
         <section class="contenedor-principal-juego">
 
             <div class="contenido-juego-y-breadcrumb">
@@ -389,6 +327,7 @@
         </div>
     </footer>
 
-    <script type="module" src="GameManager.js"></script>
+    <script src="../js/paginaDeJuego.js"></script>
+    <script src="blockaObject.js"></script>
 </body>
 </html>

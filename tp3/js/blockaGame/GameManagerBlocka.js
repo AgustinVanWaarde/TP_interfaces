@@ -5,7 +5,7 @@ import Blocka from "./Blocka.js";
 
 
 // Clase GameManager: gestiona el estado y la lógica del juego
-class GameManager {
+class GameManagerBlocka {
     constructor() {
         // ELEMENTOS DEL DOM USADOS EN EL JUEGO (HTML)
         this.canvas = document.getElementById('myCanvas');
@@ -14,11 +14,13 @@ class GameManager {
         this.pantallaMenuInicio = document.getElementById('pantalla-inicio');
         this.controlesJuego = document.getElementById('control-juego');
         this.pantallaVictoria = document.getElementById('pantalla-victoria');
+        this.pantallaDerrota = document.getElementById('pantalla-derrota');
         this.tiempoMarcador = document.getElementById('tiempo');
         this.nivelMarcador = document.getElementById('nivel-actual');
         this.tiempoFinal = document.getElementById('tiempo-final');
+        this.tiempoEsperadoNivel = document.getElementById('tiempo-esperado-nivel');
         this.btnSiguienteNivel = document.getElementById('btn-siguiente-nivel');
-        this.btnVolverMenu = document.getElementById('btn-volver-menu');
+        this.btnVolverMenu = document.querySelectorAll('.btn-menu-principal');// Tengo el boton volver al menu de victoria y derrota
 
         
         // CONFIGURACION INICIAL DEL JUEGO
@@ -29,17 +31,28 @@ class GameManager {
         this.tiempoTranscurrido = 0; // Tiempo transcurrido en el nivel
         this.intervaloTiempo = null; // Function de interval null
         this.juegoActivo = false; // El juego no esta activo aun
+        this.particionesBlocka = 4; // Cantidad de particiones del blocka, por defecto 4
+        this.posiblesParticiones = [4, 6, 8]; // Posibles particiones del blocka
+
+
+        // NIVELES DEL JUEGO CON SUS FILTROS
+        this.niveles = [
+            { nivel : 1, filtro: 'normal'},
+            { nivel : 2, filtro: 'grayscale' },
+            { nivel : 3, filtro: 'brillo', dificultad: 'dificil', tiempoLimite: '02:00'},
+            { nivel : 4, filtro: 'negative', dificultad: 'dificil', tiempoLimite: '01:00'}
+        ]
 
 
         // POSIBLES IMAGENES DEL ROMPECABEZAS ORIGINALES CON TODAS LAS POSIBLES IMAGENES
         this.imagenesOriginal = [
-            './posiblesImagenes/image.png',
-            './posiblesImagenes/mapa.png',
-            './posiblesImagenes/pacman.png',
-            './posiblesImagenes/sonic.png'
+            '/tp3/js/blockaGame/posiblesImagenes/image.png',
+            '/tp3/js/blockaGame/posiblesImagenes/mapa.png',
+            '/tp3/js/blockaGame/posiblesImagenes/pacman.png',
+            '/tp3/js/blockaGame/posiblesImagenes/sonic.png'
         ]
 
-        // IMAGENES DEL ROMPECABEZAS USADAS EN CADA NIVEL, DONDE EXTRAIGO POR CADA NIVEL
+        // IMAGENES DEL ROMPECABEZAS USADAS EN CADA NIVEL, DONDE EXTRAIGO POR CADA NIVEL COMPLETADO
         this.imagenesNivel = this.imagenesOriginal.slice(); // Copio todas las imagenes inicialmente
 
 
@@ -61,7 +74,9 @@ class GameManager {
         this.btnSiguienteNivel.addEventListener('click', () => this.siguienteNivel());
 
         // Evento para volver al menu de inicio
-        this.btnVolverMenu.addEventListener('click', () => this.volverAlMenu());
+        this.btnVolverMenu.forEach(boton => {
+            boton.addEventListener('click', () => this.volverAlMenu());
+        });
 
         // Evento para manejar clicks en el canvas (rotar piezas)
         this.canvas.addEventListener('mousedown', (e) => this.manejarClickEnCanvas(e));// e es el evento de mouse(van las propiedades del click)
@@ -70,12 +85,22 @@ class GameManager {
         // (deshabilitar menu contextual)
         const pantallaJuego = document.getElementById('contenedor-juego');
         pantallaJuego.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Evento para seleccionar la cantidad de particiones del blocka
+        const botonesParticiones = document.querySelectorAll('.btn-particion');
+        botonesParticiones.forEach(boton => {
+            boton.addEventListener('click', () => {
+                const valor = parseInt(boton.value);// lo parseo a int porque viene como string
+                if(this.posiblesParticiones.includes(valor)) {// solo acepta valores 4,6,8
+                    this.particionesBlocka = valor;
+                }
+            });
+        });
     }
 
 
     // FUNCION PARA COMENZAR EL JUEGO
     comenzarJuego() {
-        this.nivelActual = 1;
         this.iniciarNivel();
         this.mostrarPantalla('juego');
     }
@@ -83,9 +108,10 @@ class GameManager {
     
     // FUNCION PARA INICIAR UN NIVEL
     iniciarNivel() {
+        const nivel = this.niveles[this.nivelActual];
 
         // Actualizar marcador de nivel
-        this.nivelMarcador.textContent = this.nivelActual;
+        this.nivelMarcador.textContent = nivel.nivel;
 
         // Seleccionar imagen para el nivel actual
         let imagenNivel = this.seleccionarImagenAleatoria();
@@ -97,15 +123,21 @@ class GameManager {
         // Cuando la imagen se carga, crear el Blocka y dibujar el nivel
         imagen.onload = () => {
             // Instanciar el Blocka
-            this.blocka = new Blocka(this.canvas, imagen, 4, 110);
+            this.blocka = new Blocka(this.canvas, imagen, this.particionesBlocka, 110);
 
-            // Aplicar filtro en un futuro
+            // Aplicar filtro al Blocka segun el nivel
+            this.aplicarFiltroBlocka(nivel.filtro);
 
             // Dibujar el Blocka en el canvas
             this.blocka.dibujar();
 
             // Iniciar el temporizador del nivel
-            this.inicializarTemporizador();
+            if(nivel.dificultad === 'dificil') {
+                this.inicializarTemporizador(true);
+            }
+            else{
+                this.inicializarTemporizador();
+            }
             
             // Marcar estado del juego como activo
             this.juegoActivo = true;
@@ -137,10 +169,37 @@ class GameManager {
             // Verifijar si el nivel esta completo
             if(this.blocka.blockaCompletado()) {
                 // Detengo el juego como completado con la funcion
-                this.nivelCompletado();
+
+                this.blocka.setEspacioEntreSubImagenes(0);
+                this.blocka.dibujar();
+
+                setTimeout(() => {
+                    this.nivelCompletado();
+                }, 2500);
+                
             }
         }
 
+    }
+
+
+    // FUNCION PARA APLICAR FILTRO A LAS SUBIMAGENES DEL BLOCKA SEGUN EL NIVEL
+    aplicarFiltroBlocka(filtro) {
+        if(!this.blocka) return;
+
+        this.blocka.subImagenes.forEach(subImg => {
+            subImg.filtro = filtro;
+        });
+    }
+
+
+    // FUNCION PARA QUITAR LOS FILTROS LUEGO DE COMPLETAR EL NIVEL
+    quitarFiltroBlocka() {
+        if(!this.blocka) return;
+
+        this.blocka.subImagenes.forEach(subImg => {
+            subImg.filtro = null;
+        });
     }
 
 
@@ -157,7 +216,8 @@ class GameManager {
         // Marcar el juego como inactivo
         this.juegoActivo = false;
 
-        // Quitar filtros a futuro
+        // Quitar filtros
+        this.quitarFiltroBlocka();
 
         // Setear tiempo final en la pantalla de victoria
         this.tiempoFinal.textContent = this.setearTemporizador(this.tiempoTranscurrido);
@@ -168,12 +228,31 @@ class GameManager {
     }
 
 
+    // FUNCION PARA CUANDO PERDES EL JUEGO
+    juegoPerdido() {
+        // Primero detener el temporizador
+        this.detenerTemporizador();
+
+        // Marcar el juego como inactivo
+        this.juegoActivo = false;
+
+        // Quitar filtros
+        this.quitarFiltroBlocka();
+
+        // Setear tiempo final en la pantalla de derrota
+        this.tiempoEsperadoNivel.textContent = this.setearTemporizador(this.tiempoTranscurrido);
+
+        // Mostrar pantalla de derrota
+        this.mostrarPantalla('derrota');
+    }
+
+
     // FUNCION PARA PASAR AL SIGUIENTE NIVEL
     siguienteNivel() {
         this.nivelActual++;
 
-        // Si mi arreglo de nivelesCompletados es mayor a 0, quiere decir que hay niveles disponibles
-        if(this.imagenesNivel.length > 0){
+        // Si mi nivel actual es menor a la cantidad de niveles y hay imagenes disponibles
+        if(this.nivelActual < this.niveles.length && this.imagenesNivel.length > 0) {
             // Iniciar el siguiente nivel si hay mas imagenes disponibles sin completar
             this.iniciarNivel();
             this.mostrarPantalla('juego');
@@ -181,7 +260,7 @@ class GameManager {
         else {
             // Si no hay mas niveles, el juego ha terminado
             alert("¡Felicidades! Has completado todos los niveles disponibles.");
-            // this.volverAlMenu(); // Volver al menú principal
+            this.volverAlMenu(); // Volver al menú principal
         }
     }
 
@@ -218,6 +297,9 @@ class GameManager {
 
         // Restauro las imagenes originales para jugar de nuevo
         this.imagenesNivel = this.imagenesOriginal.slice(); // slice() sin parametros copia todo el array
+
+        // Restauro las particiones del blocka a 4(por defecto)
+        this.particionesBlocka = 4;
     }
 
 
@@ -228,6 +310,8 @@ class GameManager {
         this.pantallaMenuInicio.style.display = 'none';
         this.controlesJuego.style.display = 'none';
         this.pantallaVictoria.style.display = 'none';
+        this.canvas.style.display = 'none';
+        this.pantallaDerrota.style.display = 'none';
 
         // Mostrar la pantalla solicitada
         switch(pantalla) {
@@ -236,9 +320,13 @@ class GameManager {
                 break;
             case 'juego':
                 this.controlesJuego.style.display = 'flex';
+                this.canvas.style.display = 'flex';
                 break;
             case 'victoria':
                 this.pantallaVictoria.style.display = 'flex';
+                break;
+            case 'derrota':
+                this.pantallaDerrota.style.display = 'flex';
                 break;
         }
 
@@ -253,7 +341,7 @@ class GameManager {
 
 
     // FUNCION PARA INICIALIZAR EL TEMPORIZADOR DEL NIVEL
-    inicializarTemporizador() {
+    inicializarTemporizador(cronometradoConTope = false) {
 
         // Devuelve el tiempo actual en milisegundos desde la fecha 1 de Enero de 1970
         this.tiempoInicio = Date.now(); // Tiempo actual en milisegundos
@@ -262,21 +350,34 @@ class GameManager {
         // Actualizar el temporizador cada segundo(1000 ms)
         this.intervaloTiempo = setInterval(() => {
             this.tiempoTranscurrido = Math.floor((Date.now() - this.tiempoInicio) / 1000); // Tiempo transcurrido en segundos
-            this.tiempoMarcador.textContent = this.setearTemporizador(this.tiempoTranscurrido);
+
+            if(cronometradoConTope) {
+                this.tiempoMarcador.textContent = this.setearTemporizador(this.tiempoTranscurrido, cronometradoConTope);
+            }
+            else{
+                this.tiempoMarcador.textContent = this.setearTemporizador(this.tiempoTranscurrido);
+            }
+            
         }, 1000);
 
     }
 
 
     // FUNCION PARA FORMATEAR EL TIEMPO EN MINUTOS:SEGUNDOS
-    setearTemporizador(tiempoEnSegundos) {
+    setearTemporizador(tiempoEnSegundos, cronometradoConTope = false) {
         const minutos = Math.floor(tiempoEnSegundos / 60); // Calculo minutos, redondeando hacia abajo con floor
         const segundos = tiempoEnSegundos % 60; // Calculo segundos restantes con modulo, el resto de la division por 60
 
 
         // Formatear con ceros a la izquierda si es menor a 10 y lo mismo con segundos
         // padStart(2, '0') asegura que tenga al menos 2 digitos, si no los tiene agrega '0' al inicio(start los agrega al inicio al '0')
-        const cadena = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        let cadena = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        if(cronometradoConTope) {
+            if(this.niveles[this.nivelActual].tiempoLimite === cadena){
+                this.juegoPerdido();
+            }
+            cadena += ` / ${this.niveles[this.nivelActual].tiempoLimite}`;
+        }
         return cadena;
     }
 
@@ -291,4 +392,4 @@ class GameManager {
 }
 
 
-new GameManager();
+export default GameManagerBlocka;

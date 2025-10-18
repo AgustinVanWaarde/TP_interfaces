@@ -25,19 +25,44 @@ class Blocka {
     }
 
 
+    // FUNCION PARA SETEAR EL ESPACIO ENTRE SUB-IMAGENES Y DIVIDIR EL ROMPECABEZAS NUEVAMENTE
+    setEspacioEntreSubImagenes(espacio) {
+        this.ESPACIOENTRESUBIMAGENES = espacio;
+        this.subImagenes = [];
+        this.dividirRompecabezas();
+    }
+
     // Divide la imagen original en sub-imagenes y las almacena en el array subImagenes al instanciar el objeto
     dividirRompecabezas() {
-        const w = this.imagen.width / 2; // ancho de cada parte en px de la imagen original, /2 porque quiero 2 sub-imagenes por fila
-        const h = this.imagen.height / (this.divisionEnPartes/2);// alto de cada parte en px de la imagen original, /2 porque quiero 2 sub-imagenes por columna
+        // Ancho de cada parte en px de la imagen original,(divisionEnPartes/2) 
+        // porque quiero la mitad de particiones sub-imagenes por FILA
+        const w = this.imagen.width / (this.divisionEnPartes/2); 
 
-        let yDibujo = 0, xDibujo = 0; // coordenadas donde se va a dibujar la sub-imagen en el canvas
+        // Alto de cada parte en px de la imagen original, /2 porque quiero solamente 2 FILAS
+        const h = this.imagen.height / 2;
+
+        // FÓRMULA PARA CENTRAR: Calculamos el espacio total que ocuparan los bloques,cantidad de columnas
+        const columnas = this.divisionEnPartes/2;
+        const filas = 2;// 2 filas fijas
+        
+        // Calculamos el ancho y alto total que ocuparán todos los bloques con sus espacios
+        // Bloque total de todas las sub-imagnes por FILA
+        // Bloque total de todas las sub-imagnes por COLUMNA COMPLETA
+        const anchoTotal = columnas * this.tamSubImagen + (columnas - 1) * this.ESPACIOENTRESUBIMAGENES;
+        const altoTotal = filas * this.tamSubImagen + (filas - 1) * this.ESPACIOENTRESUBIMAGENES;
+        
+        // Calculamos el punto de inicio para centrar (esquina superior izquierda del primer bloque)
+        const inicioX = (this.canvas.width - anchoTotal) / 2;
+        const inicioY = (this.canvas.height - altoTotal) / 2;
+
+        let yDibujo = inicioY, xDibujo = inicioX; // coordenadas donde se va a dibujar la sub-imagen en el canvas
         let yImagen = 0, xImagen = 0; // coordenadas de la sub-imagen en la imagen original
 
         let id = 0; // id para cada sub-imagen "static y unico"
 
-        // Recorre filas y columnas para dibujar cada sub-imagen
-        for(let fila = 0; fila < this.divisionEnPartes/2; fila++) {
-            xDibujo = 0;
+        // Recorre filas y columnas para dibujar cada sub-imagen, 2 filas fijas
+        for(let fila = 0; fila < 2; fila++) {
+            xDibujo = inicioX;
             xImagen = 0;
             
             for(let col = 0; col < this.divisionEnPartes/2; col++) {

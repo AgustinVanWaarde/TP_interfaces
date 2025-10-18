@@ -507,6 +507,10 @@ video {
 
 
 
+
+
+
+
 /* ================================================ */
 /*     ESTILOS PAGINA DE JUEGO EN EJECUCION         */
 /* ================================================ */
@@ -522,9 +526,22 @@ video {
     left: 0;
     background-color: rgba(116, 115, 115, 0.63); /* Fondo oscuro semi-transparente */
     z-index: 100; /* Por encima de todo */
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
+    animation: aparecer 0.5s ease;
+}
+
+/* Animación de aparición de la pagina de ejecucion de los juegos*/
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Contenedor principal del juego con borde y fondo marron */
@@ -583,12 +600,6 @@ video {
     font-size: 20px;
 }
 
-/* Evito scroll en el body cuando se muestra la pagina de juego */
-/* Luego se aplica desde el js */
-body {
-    overflow: hidden;
-}
-
 /* Breadcrumb dentro de la pagina de juego en ejecucion */
 .breadcrum-en-juego {
     position: absolute;
@@ -599,3 +610,31 @@ body {
 }
 
 
+/* Boton para salir del juego en ejecucion normal,hover y active */
+.btn-salir-juego {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    width: 70px;
+    height: 35px;
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 15px;
+    border: none;
+    background-color: #cf1b0ecc;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+.btn-salir-juego:hover {
+    background-color: #b12626b9;
+    transform: scale(1.1);
+}
+.btn-salir-juego:active {
+    transform: scale(1);
+}
+
+/* Icono dentro del boton salir del juego */
+.btn-salir-juego i {
+    font-size: 28px;
+}
