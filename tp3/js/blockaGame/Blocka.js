@@ -15,10 +15,13 @@ class Blocka {
         // Datos del rompecabezas
         this.divisionEnPartes = divisionEnPartes;
         this.tamSubImagen = tamSubImagen;
-        this.ESPACIOENTRESUBIMAGENES = 10;
+        this.ESPACIOENTRESUBIMAGENES = 5;
 
         // Array donde voy a almacenar las sub-imagenes
         this.subImagenes = [];
+
+        // Array de sub-imagenes donde pongo las que no se revelo su posicion correcta
+        this.subImagenesNoReveladas = [];
 
         this.dividirRompecabezas();
         this.mezclarRotaciones();
@@ -85,6 +88,8 @@ class Blocka {
             yDibujo += this.tamSubImagen + this.ESPACIOENTRESUBIMAGENES;
             yImagen += h;
         }
+
+        this.subImagenesNoReveladas = this.subImagenes.slice(); // Copio todas las sub-imagenes al array de no reveladas
     }
 
 
@@ -105,7 +110,7 @@ class Blocka {
     mezclarRotaciones() {
         this.subImagenes.forEach(subImg => {
             // Asigna una rotacion aleatoria entre 0, 90, 180, 270
-            const rotacionesPosibles = [0, 90, 180, 270];
+            const rotacionesPosibles = [90, 180, 270];
             const indiceAleatorio = Math.round(Math.random() * (rotacionesPosibles.length - 1));
             subImg.rotacion = rotacionesPosibles[indiceAleatorio];
         })
@@ -123,8 +128,8 @@ class Blocka {
 
 
     // Rota la sub-imagen con el id pasado en angulos fijos (90 o -90) y redibuja todo el blocka
-    async rotarSubImagen(id, angulos) {
-        if(id >= 0 && id < this.subImagenes.length) {
+    rotarSubImagen(id, angulos) {
+        if(id >= 0 && id < this.subImagenes.length && this.subImagenes[id].posicionCorrecta === false) {
             this.subImagenes[id].rotarAlClickear(angulos);
             // this.subImagenes[id].dibujar(this.ctx); 
             this.dibujar(); // Redibuja todo el blocka
@@ -135,6 +140,26 @@ class Blocka {
     // Verifica si todas las sub-imagenes estan bien posicionadas para saber si gane el blocka o no
     blockaCompletado() {
         return this.subImagenes.every(subImg => subImg.estaBienPosicionada());
+    }
+
+
+    // Funcion para dejar una pieza en su posicion correcta (para pruebas)
+    dejarPiezaEnPosicionCorrecta() {
+        if(this.subImagenesNoReveladas.length === 0) 
+            return; // Si no hay mas piezas para revelar, salgo
+
+        // Selecciono una sub-imagen aleatoria del array de no reveladas
+        let subimg = Math.round(Math.random() * (this.subImagenesNoReveladas.length - 1));
+        let idSubimg = this.subImagenesNoReveladas[subimg].id;
+
+        // Elimino la sub-imagen del array de no reveladas
+        this.subImagenesNoReveladas.splice(subimg, 1);
+
+        // Pongo la sub-imagen en su posicion correcta
+        this.subImagenes[idSubimg].rotacion = 0;
+        // Pongo su posicionCorrecta en true para que no se pueda rotar mas
+        this.subImagenes[idSubimg].posicionCorrecta = true;
+        this.dibujar();
     }
 }
 

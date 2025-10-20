@@ -6,7 +6,7 @@
 
 
 // Funcion para crear toda la estructura HTML del juego en ejecucion dentro de la aside
-export function crearEstructuraJuego(juegoPedido) {
+export function crearEstructuraJuego(juegoPedido,nombreJuego) {
     // 1. Crear el elemento principal <aside>
     const aside = document.createElement('aside');
     aside.className = 'fondo-juego-en-ejecucion';
@@ -15,7 +15,7 @@ export function crearEstructuraJuego(juegoPedido) {
     if(juegoPedido === 'blocka') {
         // 2. Crear las secciones del contenido (devuelven HTML como string)
         const breadcrumbHTML = crearSeccionBreadcrumb();
-        const marcoJuegoHTML = crearSeccionMarcoJuego();
+        const marcoJuegoHTML = crearSeccionMarcoJuego(nombreJuego);
         const marcoInstruccionesHTML = crearSeccionMarcoInstrucciones();
 
         // 3. Ensamblar todo el HTML de forma limpia y eficiente
@@ -27,7 +27,7 @@ export function crearEstructuraJuego(juegoPedido) {
 
 
 // Crear la seccion del marco del juego BLOCKA
-function crearSeccionMarcoJuego() {
+function crearSeccionMarcoJuego(nombreJuego) {
     return `
     <div class="marco-contenedor-juego">
         <div class="contenedor-juego-main" id="contenedor-juego">
@@ -36,7 +36,7 @@ function crearSeccionMarcoJuego() {
 
             ${crearPanelJuego()}
 
-            <canvas id="myCanvas" width="470px" height="230px" style="display: none;"></canvas>
+            <canvas id="myCanvas" width="495px" height="245px" style="display: none;"></canvas>
 
             ${crearControlesJuego()}
 
@@ -44,7 +44,9 @@ function crearSeccionMarcoJuego() {
 
             ${crearPantallaDerrota()}
 
-        </div> ${crearSeccionTituloCompartir()}
+            ${crearPantallaJuegoCompletado()}
+
+        </div> ${crearSeccionTituloCompartir(nombreJuego)}
     </div> `;
 }
 // ========================================================= //
@@ -103,7 +105,7 @@ function crearControlesJuego() {
         <button class="btn-game btn-menu-principal btn-menu-juego">
             Menú
         </button>
-        <button class="btn-game btn-pista">
+        <button id="btn-dar-pista" class="btn-game btn-pista">
             <i class="fa-solid fa-lightbulb"></i>
         </button>
     </div>
@@ -140,6 +142,21 @@ function crearPantallaDerrota() {
     </div>
     `;
 }
+
+// Crear pantalla de juego completado(TODOS LOS NIVELES DEL BLOCKA)
+function crearPantallaJuegoCompletado() {
+    return `
+    <!-- Pantalla del menu cuando completas todo el juego + pantalla overlay -->
+    <div id="pantalla-juego-completado" class="pantalla-overlay" style="display: none;">
+        <div class="menu-fin-juego">
+            <div class="emoji-grande">🏆</div>
+            <h2>¡Juego Completado!</h2>
+            <p class="mensaje-felicitacion">¡Felicidades, has resuelto todos los rompecabezas de Blocka!</p>
+            <p class="mensaje-redireccion">Redirigiendo al menú principal en: <span id="tiempo-redireccion"></span></p>
+        </div>
+    </div>
+    `;
+}
 // ========================================================= //
 
 
@@ -154,11 +171,11 @@ function crearSeccionBreadcrumb() {
 }
 
 // Crear la seccion del titulo y los iconos de compartir
-function crearSeccionTituloCompartir() {
+function crearSeccionTituloCompartir(nombreJuego) {
     return `
     <div class="contenedor-titulo-compartir">
         <div class="tituloJuego-logo">
-            <h1 class="titulo-juego">Peg Solitarie Pac-man</h1>
+            <h1 class="titulo-juego">${nombreJuego}</h1>
             <img src="./imgs/logo.png" alt="logo">
         </div>
         <div class="iconos-compartir">

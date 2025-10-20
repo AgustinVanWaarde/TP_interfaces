@@ -187,7 +187,7 @@ export function crearPaginaDeJuego(juegoPedido) {
 
     // Insertar la aside(juego en ejecucion) + seccion datos juego en el main
     if(juegosPropios[indexJuego].id_juego === "blocka")// por ahora por ser unico juego implementado
-        main.appendChild(crearEstructuraJuego( juegosPropios[indexJuego].id_juego ));
+        main.appendChild(crearEstructuraJuego( juegosPropios[indexJuego].id_juego, juegosPropios[indexJuego].name ));
 
     main.appendChild(section);
 

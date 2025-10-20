@@ -19,6 +19,9 @@ class SubImagen {
         this.y = y;
         this.tamanioSubImagen = tamanioSubImagen;
 
+        // Posicion correcta por pista
+        this.posicionCorrecta = false;
+
         // Rotacion actual arranca en 0
         this.rotacion = 0;
 

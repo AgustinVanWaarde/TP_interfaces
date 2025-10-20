@@ -107,11 +107,11 @@
     font-family: 'Jersey 25', sans-serif;
     font-size: 37px;
     margin-top: 0px;
-    animation: pulseTituloMenu 1.2s ease infinite;
+    animation: pulse 1.2s ease infinite;
 }
 
 /* Animación de pulso en el título del menu del juego */
-@keyframes pulseTituloMenu {
+@keyframes pulse {
     0%,100% {
         text-shadow: 0 4px 10px rgba(23, 221, 56, 0.63);
     }
@@ -471,4 +471,68 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
+}
+
+
+
+
+
+
+/* ================================ */
+/* Estilos para menu juego completado  */
+/* ================================ */
+
+/* Estilos específicos para el modal de "Juego Completado" */
+.menu-fin-juego {
+    border: 4px solid #3610bdde;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: auto; /* Ancho máximo para que no sea demasiado grande */
+    height: auto;
+    font-family: 'Inter';
+}
+
+.menu-fin-juego h2 {
+    color: #28a745; /* Color verde para el título */
+    font-family: 'Jersey 25', sans-serif;
+    font-size: 42px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.menu-fin-juego .emoji-grande {
+    font-size: 70px; /* Emoticono grande */
+    margin-bottom: 20px;
+    line-height: 1; /* Para que el emoji no tenga espacio extra */
+    transform: rotate(0deg);
+    animation: rotateTrophy 1.5s ease-out infinite alternate; /* Animación de rotación */
+}
+
+.menu-fin-juego .mensaje-felicitacion {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.menu-fin-juego .mensaje-redireccion {
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #007bff; /* Color azul para el tiempo */
+}
+
+.menu-fin-juego .mensaje-redireccion span {
+    color: #d9534f; /* Color rojo para el valor del tiempo */
+    font-size: 20px;
+}
+
+
+/* Animacion de rebote de la copa de un lado para el otro */
+@keyframes rotateTrophy {
+    0% { transform: rotate(-8deg); }
+    100% { transform: rotate(8deg); }
 }

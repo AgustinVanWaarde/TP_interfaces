@@ -509,8 +509,6 @@ video {
 
 
 
-
-
 /* ================================================ */
 /*     ESTILOS PAGINA DE JUEGO EN EJECUCION         */
 /* ================================================ */
@@ -529,18 +527,17 @@ video {
     display: none;
     justify-content: center;
     align-items: center;
-    animation: aparecer 0.5s ease;
+    animation: aparicionEjecucionJuego 0.5s ease-in-out;
 }
 
-/* Animación de aparición de la pagina de ejecucion de los juegos*/
-@keyframes aparecer {
+@keyframes aparicionEjecucionJuego {
     from {
-        opacity: 0;
         transform: scale(0.7);
+        opacity: 0.5;
     }
     to {
-        opacity: 1;
         transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -565,8 +562,8 @@ video {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
-    padding: 20px;
+    gap: 20px;
+    padding: 20px 20px 10px 20px;
     position: relative;
     width: 100%;
     height: 100%;
@@ -638,3 +635,5 @@ video {
 .btn-salir-juego i {
     font-size: 28px;
 }
+
+

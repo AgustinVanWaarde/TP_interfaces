@@ -14,12 +14,14 @@ class GameManagerBlocka {
         this.pantallaMenuInicio = document.getElementById('pantalla-inicio');
         this.controlesJuego = document.getElementById('control-juego');
         this.pantallaVictoria = document.getElementById('pantalla-victoria');
+        this.pantallaJuegoCompletado = document.getElementById('pantalla-juego-completado');
         this.pantallaDerrota = document.getElementById('pantalla-derrota');
         this.tiempoMarcador = document.getElementById('tiempo');
         this.nivelMarcador = document.getElementById('nivel-actual');
         this.tiempoFinal = document.getElementById('tiempo-final');
         this.tiempoEsperadoNivel = document.getElementById('tiempo-esperado-nivel');
         this.btnSiguienteNivel = document.getElementById('btn-siguiente-nivel');
+        this.btnDarPista = document.getElementById('btn-dar-pista');
         this.btnVolverMenu = document.querySelectorAll('.btn-menu-principal');// Tengo el boton volver al menu de victoria y derrota
 
         
@@ -33,6 +35,7 @@ class GameManagerBlocka {
         this.juegoActivo = false; // El juego no esta activo aun
         this.particionesBlocka = 4; // Cantidad de particiones del blocka, por defecto 4
         this.posiblesParticiones = [4, 6, 8]; // Posibles particiones del blocka
+        this.pistaDada = false; // Si se dio pista o no
 
 
         // NIVELES DEL JUEGO CON SUS FILTROS
@@ -49,7 +52,10 @@ class GameManagerBlocka {
             '/tp3/js/blockaGame/posiblesImagenes/image.png',
             '/tp3/js/blockaGame/posiblesImagenes/mapa.png',
             '/tp3/js/blockaGame/posiblesImagenes/pacman.png',
-            '/tp3/js/blockaGame/posiblesImagenes/sonic.png'
+            '/tp3/js/blockaGame/posiblesImagenes/sonic.png',
+            '/tp3/js/blockaGame/posiblesImagenes/mapasonic.png',
+            '/tp3/js/blockaGame/posiblesImagenes/donkeykong.png',
+            '/tp3/js/blockaGame/posiblesImagenes/tele.png'
         ]
 
         // IMAGENES DEL ROMPECABEZAS USADAS EN CADA NIVEL, DONDE EXTRAIGO POR CADA NIVEL COMPLETADO
@@ -77,6 +83,9 @@ class GameManagerBlocka {
         this.btnVolverMenu.forEach(boton => {
             boton.addEventListener('click', () => this.volverAlMenu());
         });
+
+        // Evento para dar pista
+        this.btnDarPista.addEventListener('click', () => this.posicionarSubImgRandomCorrectamente());
 
         // Evento para manejar clicks en el canvas (rotar piezas)
         this.canvas.addEventListener('mousedown', (e) => this.manejarClickEnCanvas(e));// e es el evento de mouse(van las propiedades del click)
@@ -123,7 +132,7 @@ class GameManagerBlocka {
         // Cuando la imagen se carga, crear el Blocka y dibujar el nivel
         imagen.onload = () => {
             // Instanciar el Blocka
-            this.blocka = new Blocka(this.canvas, imagen, this.particionesBlocka, 110);
+            this.blocka = new Blocka(this.canvas, imagen, this.particionesBlocka, 120);
 
             // Aplicar filtro al Blocka segun el nivel
             this.aplicarFiltroBlocka(nivel.filtro);
@@ -169,17 +178,30 @@ class GameManagerBlocka {
             // Verifijar si el nivel esta completo
             if(this.blocka.blockaCompletado()) {
                 // Detengo el juego como completado con la funcion
-
-                this.blocka.setEspacioEntreSubImagenes(0);
-                this.blocka.dibujar();
-
-                setTimeout(() => {
-                    this.nivelCompletado();
-                }, 2500);
-                
+                this.nivelCompletado();                
             }
         }
 
+    }
+
+
+    // FUNCION PARA POSICION UNA SUB-IMG RANDOM EN SU POSICION CORRECTA
+    posicionarSubImgRandomCorrectamente() {
+        if(!this.blocka || this.pistaDada) return;
+
+        // Funcion del blocka para dejar una pieza en su posicion correcta y no se puede rotar mas
+        this.blocka.dejarPiezaEnPosicionCorrecta();
+
+        // Poner pista dada en true
+        this.pistaDada = true;
+
+        // Quitar 5 segundos del tiempo total como penalizacion por usar la pista
+        this.tiempoInicio -= 5000;
+
+        if(this.blocka.blockaCompletado()) {
+            // Detengo el juego como completado con la funcion
+            this.nivelCompletado();
+        }
     }
 
 
@@ -219,11 +241,20 @@ class GameManagerBlocka {
         // Quitar filtros
         this.quitarFiltroBlocka();
 
-        // Setear tiempo final en la pantalla de victoria
-        this.tiempoFinal.textContent = this.setearTemporizador(this.tiempoTranscurrido);
+        // Dibujo el blocka sin espacio entre sub-imagenes
+        this.blocka.setEspacioEntreSubImagenes(0);
+        this.blocka.dibujar();
 
-        // Mostrar pantalla de victoria
-        this.mostrarPantalla('victoria');
+
+        setTimeout(() => {
+
+            // Setear tiempo final en la pantalla de victoria
+            this.tiempoFinal.textContent = this.setearTemporizador(this.tiempoTranscurrido);
+
+            // Mostrar pantalla de victoria
+            this.mostrarPantalla('victoria');
+
+        }, 2500);
 
     }
 
@@ -247,20 +278,47 @@ class GameManagerBlocka {
     }
 
 
+    // FUNCION PARA CUANDO SE COMPLETA TODO EL JUEGO(TODOS LOS NIVELES)
+    juegoCompletado() {
+        // Agarrar el elemento de tiempo de redireccion
+        const tiempoRedireccion = document.getElementById('tiempo-redireccion');
+
+        // Mostrar pantalla de juego completado
+        this.mostrarPantalla('juego-completado');
+
+        // Contador regresivo para redireccionar al menu principal
+        let tiempoRestante = 5; // Segundos para redireccionar
+        tiempoRedireccion.textContent = tiempoRestante;
+
+        // Iniciar contador regresivo hasta que tiempoRestante llegue a 0 y redirija al menu
+        const intervaloRedireccion = setInterval(() => {
+            tiempoRestante--;
+            tiempoRedireccion.textContent = tiempoRestante;
+
+            if(tiempoRestante <= 0) {
+                clearInterval(intervaloRedireccion);
+                this.volverAlMenu();
+            }
+        }, 1000);
+    }
+
+
     // FUNCION PARA PASAR AL SIGUIENTE NIVEL
     siguienteNivel() {
         this.nivelActual++;
 
         // Si mi nivel actual es menor a la cantidad de niveles y hay imagenes disponibles
-        if(this.nivelActual < this.niveles.length && this.imagenesNivel.length > 0) {
+        // Si el nivel actual es menor o igual(<= porque hago nivelActual++ antes del if) a la cantidad de niveles 
+        // y hay imágenes disponibles
+        if(this.nivelActual <= this.niveles.length && this.imagenesNivel.length > 0) {
             // Iniciar el siguiente nivel si hay mas imagenes disponibles sin completar
             this.iniciarNivel();
+            this.pistaDada = false; // Resetear pista dada para el nuevo nivel
             this.mostrarPantalla('juego');
         }
         else {
             // Si no hay mas niveles, el juego ha terminado
-            alert("¡Felicidades! Has completado todos los niveles disponibles.");
-            this.volverAlMenu(); // Volver al menú principal
+            this.juegoCompletado();
         }
     }
 
@@ -269,6 +327,9 @@ class GameManagerBlocka {
     reiniciarNivel() {
         // Detener el temporizador actual
         this.detenerTemporizador();
+
+        // Resetear pista dada
+        this.pistaDada = false;
 
         // Iniciar un nuevo nivel o el mismo, dependiendo el random
         this.iniciarNivel();
@@ -300,6 +361,9 @@ class GameManagerBlocka {
 
         // Restauro las particiones del blocka a 4(por defecto)
         this.particionesBlocka = 4;
+
+        // Restauro pista dada
+        this.pistaDada = false;
     }
 
 
@@ -312,6 +376,7 @@ class GameManagerBlocka {
         this.pantallaVictoria.style.display = 'none';
         this.canvas.style.display = 'none';
         this.pantallaDerrota.style.display = 'none';
+        this.pantallaJuegoCompletado.style.display = 'none';
 
         // Mostrar la pantalla solicitada
         switch(pantalla) {
@@ -327,6 +392,9 @@ class GameManagerBlocka {
                 break;
             case 'derrota':
                 this.pantallaDerrota.style.display = 'flex';
+                break;
+            case 'juego-completado':
+                this.pantallaJuegoCompletado.style.display = 'flex';
                 break;
         }
 
