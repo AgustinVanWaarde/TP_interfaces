@@ -50,11 +50,11 @@
     font-size: 24px;
     color: #FF7979;
     letter-spacing: 3px;
-    animation: pulse 1.5s ease-in-out infinite;
+    animation: pulseLoaderText 1.5s ease-in-out infinite;
 }
 
 /* Animación de pulso del cargando juego*/
-@keyframes pulse {
+@keyframes pulseLoaderText {
     0%, 100% {
         opacity: 0.6;
     }

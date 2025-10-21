@@ -25,7 +25,7 @@ const juegosPropios = [
     {
         name: "Blocka-Game", 
 
-        load_image: "../imgs/portadaBlocka.png",
+        load_image: "../imgs/blockaEjecucion.png",
 
         como_jugar: `Click Izquierdo: Rota la pieza hacia la izquierda (-90°)<br>
                     Click Derecho: Rota la pieza hacia la derecha (90°)<br>

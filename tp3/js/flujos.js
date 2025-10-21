@@ -48,7 +48,7 @@ function iniciarBarraProgresoYLoader(loader) {
     const progressText = document.getElementById('progress-text');
     
     let progress = 0;
-    const duration = 5000; // Duracion total de la animacion en milisegundos
+    const duration = 500; // Duracion total de la animacion en milisegundos
     const interval = 1000; // Frecuencia de actualizacion de la barra
     const increment = (100 / duration) * interval; // Calcula cuanto debe crecer la barra en cada actualizacion (20% por segundo en este caso)
 
@@ -187,6 +187,8 @@ export async function inicializarConLogin(){
 // Incializacion de la pagina con login
 inicializarConLogin();
 
+const alturaViewport = window.innerHeight;
+console.log(`El alto del área visible es: ${alturaViewport}px`);
 
 
 

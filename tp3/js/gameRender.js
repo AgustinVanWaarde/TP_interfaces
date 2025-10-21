@@ -102,11 +102,11 @@ function crearControlesJuego() {
         <button id="btn-reiniciar" class="btn-game btn-reiniciar">
             <i class="fa-solid fa-rotate-right"></i> Reiniciar
         </button>
-        <button class="btn-game btn-menu-principal btn-menu-juego">
-            Menú
-        </button>
         <button id="btn-dar-pista" class="btn-game btn-pista">
             <i class="fa-solid fa-lightbulb"></i>
+        </button>
+        <button class="btn-game btn-menu-principal btn-menu-juego">
+            Menú
         </button>
     </div>
     `;
