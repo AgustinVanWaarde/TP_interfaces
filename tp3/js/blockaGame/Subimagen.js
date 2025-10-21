@@ -134,7 +134,7 @@ class SubImagen {
 
     // Filtros de sub-imagenes
     filtroEscalaGrises(data, index) {
-        const avg = (data[index] + data[index + 1] + data[index + 2]) / 3;
+        const avg = (data[index] * 0.299 + data[index + 1] * 0.587 + data[index + 2] * 0.114);
         data[index] = avg;     // Rojo
         data[index + 1] = avg; // Verde
         data[index + 2] = avg; // Azul
