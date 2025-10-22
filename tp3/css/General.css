@@ -1,0 +1,47 @@
+/* ================================================ */
+/*               ESTILOS GENERALES                  */
+/* ================================================ */
+
+
+
+/* Scrollbar personalizada */
+html::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra */
+}
+
+html::-webkit-scrollbar-track {
+    background: #ffffff; /* Color de fondo */
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #afafaf; /* Color de la barra */
+    border-radius: 10px ;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #666464; /* Color al hacer hover */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Jersey 15", "Inter", 'sans-serif';
+    background-color: #DAC8A2;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    min-height: 100vh; /* ocupa toda la altura de la pantalla como minimo */
+    width: 100%;
+}
+
+/* crece el main para ocupar el espacio restante entre header y footer */
+main {
+    flex: 1;
+}
+
+
+

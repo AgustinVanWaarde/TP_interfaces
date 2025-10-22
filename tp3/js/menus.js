@@ -113,7 +113,7 @@ overlay.addEventListener('click' , () => {
 
 
 
-// Evento para ir al home
+// Evento para ir al home al hacer click en el logo
 const logo = document.querySelector('.titulo-grupo');
 logo.addEventListener('click', inicializarCarrouselsEnMain);
 

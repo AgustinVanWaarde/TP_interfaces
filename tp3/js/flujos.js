@@ -3,7 +3,7 @@
 import { inicializarCarrousels } from './carrousel.js';
 import { generarFormularios } from './login.js';
 import { crearPaginaDeJuego } from './paginaDeJuego.js';
-
+import GameManagerBlocka from './blockaGame/GameManagerBlocka.js';
 
 const main = document.getElementById('main-content');
 
@@ -89,12 +89,12 @@ export async function inicializarCarrouselsEnMain(){
 
     await inicializarCarrousels();
 
+    // Botones para ir a la pagina de juego desde los carrousels(peg y blocka)
     const btnIrJuego = document.querySelectorAll('.btn-ir-juego');
     btnIrJuego.forEach(btn => {
         btn.addEventListener('click', () => {
             let valueJuego = btn.value;// Obtengo el value del juego clickeado ("peg-solitarie" o "blocka")
 
-            // console.log("Valor del juego seleccionado: " + valueJuego);
             
             inicializarPaginaDeJuegoEnMain(valueJuego);// Cargo la pagina de juego correspondiente con el valor del juego
         });
@@ -110,6 +110,36 @@ async function inicializarPaginaDeJuegoEnMain(valueJuego){
     main.innerHTML = ''; // Limpia todo
     await crearPaginaDeJuego(valueJuego);// Debo pasar el juego pedido
     scrollToTop();
+
+    // Aside donde se ejecuta el juego
+    const asideDeEjecucion = document.querySelector('.fondo-juego-en-ejecucion');
+
+    // Evento para el boton de ejecutar juego
+    const btnEjecutarJuego = document.getElementById('btn-ejecutar-juego');
+    btnEjecutarJuego.addEventListener('click', () => {
+        // Scroll al tope
+        scrollToTop();
+
+        // Inicializar el juego correspondiente(instantiar GameManager)
+        if(valueJuego === "blocka"){
+            const gameManagerBlocka = new GameManagerBlocka();
+        }
+
+        // Mostrar aside con el juego
+        asideDeEjecucion.style.display = 'flex';
+
+        // Poner el body para no poder scrollear mientras se juega
+        document.body.style.overflow = 'hidden'; // Evita scroll mientras se juega
+    });
+
+    // Evento para el boton de cerrar juego en ejecucion
+    const btnCerrarJuego = document.getElementById('btn-salir-juego');
+    btnCerrarJuego.addEventListener('click', () => {
+        // Ocultar aside con el juego
+        asideDeEjecucion.style.display = 'none';
+
+        document.body.style.overflow = 'auto'; // Rehabilita scroll
+    });
 
     console.log("Pagina de juego cargada");
 }
@@ -157,6 +187,8 @@ export async function inicializarConLogin(){
 // Incializacion de la pagina con login
 inicializarConLogin();
 
+const alturaViewport = window.innerHeight;
+console.log(`El alto del área visible es: ${alturaViewport}px`);
 
 
 

@@ -1,31 +1,44 @@
 "use strict";
 
+import { crearEstructuraJuego } from "./gameRender.js";
+
 // Datos de los juegos propios respecto a la pagina de juego
 const juegosPropios = [
     {
         name: "Peg Solitarie Pac-Man", 
+
         load_image: "../imgs/pacmanCarga.png",
+        
         como_jugar: `Clic izquierdo en la ficha que quieras mover.
                     Luego clic en el agujero vacío donde caerá tras el salto.
                     El juego eliminará automáticamente la ficha intermedia.`,
+                    
         objetivo: "Quedarte con una sola ficha en el tablero, preferentemente en el agujero central.",
+        
         descripcion: `Guía a una banda de mini-Pac-Man en un tablero de luces neón.
                     Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
                     hasta que solo quede un Pac-Man supremo en el centro.
                     Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.`,
+                    
         id_juego: "peg-solitarie"
     }, 
     {
         name: "Blocka-Game", 
-        load_image: "../imgs/portadaBlocka.png",
-        como_jugar: `Clic izquierdo en la ficha que quieras mover.
-                    Luego clic en el agujero vacío donde caerá tras el salto.
-                    El juego eliminará automáticamente la ficha intermedia.`,
-        objetivo: "nada",
-        descripcion: `Guía a una banda de mini-Pac-Man en un tablero de luces neón.
-                    Salta de ficha en ficha para absorber su energía, como si comieras fantasmas,
-                    hasta que solo quede un Pac-Man supremo en el centro.
-                    Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.`,
+
+        load_image: "../imgs/blockaEjecucion.png",
+
+        como_jugar: `Click Izquierdo: Rota la pieza hacia la izquierda (-90°)<br>
+                    Click Derecho: Rota la pieza hacia la derecha (90°)<br>
+                    Gira todas las piezas hasta formar la imagen completa.`,
+
+        objetivo: `Rotar cada pieza del rompecabezas hasta que las 4 partes estén en su posición correcta
+                    y formen la imagen original. ¡Hazlo en el menor tiempo posible!`,
+                    
+        descripcion: `Blocka es un rompecabezas retro donde cada nivel presenta una imagen dividida en 4 piezas 
+                        con un filtro visual aplicado. A medida que avanzas, los filtros cambian: escala de grises, 
+                        brillo aumentado y colores negativos. Cuando completes el puzzle, ¡verás la imagen original 
+                        sin filtros!`,
+                    
         id_juego: "blocka"
     }
 ];
@@ -52,7 +65,7 @@ export function crearPaginaDeJuego(juegoPedido) {
 
             <div class="contenedor-juego">
                 <div class="pantalla-carga-juego">
-                    <button class="boton-jugar">Jugar</button>
+                    <button id="btn-ejecutar-juego" class="boton-jugar">Jugar</button>
                 </div>
 
                 <div class="contenedor-titulo-compartir">
@@ -171,8 +184,11 @@ export function crearPaginaDeJuego(juegoPedido) {
             </div>
         </div>
     `;
-    
-    // Insertar la seccion en el main
+
+    // Insertar la aside(juego en ejecucion) + seccion datos juego en el main
+    if(juegosPropios[indexJuego].id_juego === "blocka")// por ahora por ser unico juego implementado
+        main.appendChild(crearEstructuraJuego( juegosPropios[indexJuego].id_juego, juegosPropios[indexJuego].name ));
+
     main.appendChild(section);
 
 
@@ -181,3 +197,4 @@ export function crearPaginaDeJuego(juegoPedido) {
     let fondoPaginaJuego = document.querySelector('.pantalla-carga-juego');
     fondoPaginaJuego.style.setProperty('--background-image', `url(${juegosPropios[indexJuego].load_image})`);
 }
+

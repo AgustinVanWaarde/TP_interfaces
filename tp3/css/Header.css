@@ -1,0 +1,468 @@
+/* ================================================ */
+/*                  HEADER STYLES                    */
+/* ================================================ */
+
+
+/* Estilos para la barra de navegación */
+header {
+    background-color: #8B5F4C;
+    padding: 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-height: 55px;
+    border-bottom: #381505 3px solid;
+    z-index: 150;/* Asegura que el header esté por encima de otros elementos */
+    position: sticky;/* Mantener el header visible al hacer scroll */
+    top: 0;/* Posición en la parte superior */
+}
+
+/* Estilos grid para el navbar */
+.grid-navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Grupo de botones izquierda (Hamburguesa + Barra de búsqueda) */
+.hamburguesa-y-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 90px;
+}
+
+.barra-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    border: 2px solid #5c5c5c;
+    border-radius: 50px;
+    background-color: rgba(240, 240, 240, 0.288);
+}
+
+.barra-busqueda input {
+    width: 200px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Inter';
+    font-size: 16px;
+    background-color: transparent;
+    outline: none;
+}
+
+.barra-busqueda input::placeholder {
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.747);
+}
+
+.barra-busqueda button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.barra-busqueda button:hover {
+    color: #426df0;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+/* Grupo del título central (Retro + Logo + Games) */
+.titulo-grupo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Grupo de botones derecha (Ayuda + Perfil) */
+.botones-derecha {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 15px;
+}
+
+/* Estilos para cada elemento del navbar */
+.menu-hamburguesa,
+.menu-ayuda,
+.menu-perfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* medidas y estilos de las imagenes de los botones */
+.menu-hamburguesa img,
+.menu-ayuda img,
+.menu-perfil img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+/* Efecto hover para las imágenes de los botones */
+.menu-hamburguesa img:hover,
+.menu-ayuda img:hover,
+.menu-perfil img:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos para el título y logo */
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para el texto del título */
+.titulo h1 {
+    color: #ffffff;
+    margin: 0;
+    font-family: 'Jersey 15';
+    font-weight: 400;
+    font-size: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para la imagen del logo */
+.titulo img {
+    width: 60px;
+    height: 55px;
+}
+
+
+
+
+
+
+/* DEPLEGABLES Y OVERLAY */
+
+
+/* MENU HAMBURGUESA - OPCIONES */
+
+/* Opciones que se despliegan al hacer click en el icono de hamburguesa */
+.opciones-menu-hamburguesa {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    align-items: start;
+    background-color: #8B5F4C;
+    min-width: 200px;
+    min-height: 180px;
+    padding-bottom: 10px;
+    border-right: 3px solid #381505;
+    border-bottom: 3px solid #381505;
+    z-index: 99;
+    top: 55px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.opciones-menu-hamburguesa-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#categorias-lista {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Opciones del menú hamburguesa */
+.opciones-menu-hamburguesa a {
+    color: #FFFFFF;
+    font-family: 'Jersey 15', 'Inter', 'sans-serif';
+    font-size: 30px;
+    margin-top: 5px;
+    margin-left: 30px;
+    padding-right: 15px;
+    text-decoration: none;
+    text-align: start;
+    transition: transform 0.3s ease;
+}
+
+.opciones-menu-hamburguesa a:hover {
+    color: #4169E1;
+    text-decoration: underline;
+    transform: scale(1.10);
+    transform:  translateY(-2px);
+}
+
+/* Título del menú hamburguesa */
+.opciones-menu-hamburguesa h2 {
+    text-align: start;
+    font-family: 'Inter', 'sans-serif';
+    margin-left: 18px;
+    margin-top: 10px;
+    font-size: 22px;
+    color: #FFFFFF;
+}
+
+
+
+
+/* MENU PERFIL */
+
+/* Opciones que se despliegan al hacer click en el icono de perfil */
+.opciones-perfil {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    align-items: start;
+    background-color: #8B5F4C;
+    min-width: 200px;
+    height: 220px;
+    border-left: 3px solid #381505;
+    border-bottom: 3px solid #381505;
+    top: 55px;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.opciones-perfil-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Grupo que contiene la foto, el nombre de usuario y opciones generales del perfil*/
+.grupo-perfil {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    height: 140px;
+}
+
+/* Info del perfil: foto y nombre de usuario */
+.perfil-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-left: 5px;
+}
+
+/* tamaño de la imagen del perfil */
+.perfil-info img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Nombre de usuario */
+.nombre-usuario {
+    color: #FFFFFF;
+    font-family: 'Jersey 15', 'Inter', 'sans-serif';
+    font-size: 28px;
+}
+
+/* Opciones del perfil */
+.opcion-perfil {
+    color: #FFFFFF;
+    font-family: 'Jersey 15', 'Inter', 'sans-serif';
+    font-size: 28px;
+    margin-top: 5px;
+    margin-left: 25px;
+    text-decoration: none;
+    text-align: start;
+    transition: transform 0.3s ease;
+}
+
+.opcion-perfil:hover {
+    color: #4169E1;
+    text-decoration: underline;
+    transform: scale(1.10);
+    transform: translateY(-2px);
+}
+
+/* Grupo que contiene el botón de cerrar sesión */
+.grupo-cerrar-sesion {
+    margin-top: 20px;
+    border-top: 3px solid #381505;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+/* OVERLAY OSCURO,cuando despliega menus */
+
+/* fondo oscuro que se despliega junto con los menus*/
+.menu-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0,0.5);
+    z-index: 120;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease,visibility 0.3s ease;
+}
+
+.menu-overlay-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================================ */
+/*               MOBILE FIRST - HEADER              */
+/* ================================================ */
+@media (max-width: 768px) {
+    /* Ocultar barra de scroll pero mantener funcionalidad */
+    html{
+        scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+        scroll-behavior: smooth;
+        overflow-y: scroll;
+    }
+
+    header{
+        align-items: center;
+        padding: 5px 0 5px 0;
+        min-height: 40px;
+    }
+
+    /* Estilos grid para el navbar */
+    .grid-navbar {
+        grid-template-columns: auto 1fr auto;
+        padding: 0 10px;
+    }
+
+    .barra-busqueda {
+        display: none;
+    }
+
+    /* Grupo de botones derecha (Ayuda + Perfil) */
+    .botones-derecha {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* medidas y estilos de las imagenes de los botones */
+    .menu-hamburguesa img,
+    .menu-ayuda img,
+    .menu-perfil img {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+ 
+    /* Estilos para el texto del título */
+    .titulo h1 {
+        color: #ffffff;
+        margin: 0;
+        font-family: 'Jersey 15';
+        font-weight: 300;
+        font-size: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Estilos para la imagen del logo */
+    .titulo img {
+        width: 40px;
+        height: 35px;
+    }
+
+
+
+
+    /* MENU HAMBURGUESA - OPCIONES */
+
+    /* Opciones que se despliegan al hacer click en el icono de hamburguesa */
+    .opciones-menu-hamburguesa {
+        min-width: 140px;
+        min-height: 140px;
+        top: 48px;
+    }
+
+    /* Opciones del menú hamburguesa */
+    .opciones-menu-hamburguesa a {
+        color: #FFFFFF;
+        font-size: 24px;
+        margin-top: 4px;
+        margin-left: 16px;
+        padding-right: 10px;
+    }
+
+    /* Título del menú hamburguesa */
+    .opciones-menu-hamburguesa h2 {
+        margin-left: 9px;
+        margin-top: 6px;
+        font-size: 20px;
+        color: #FFFFFF;
+    }
+
+
+
+
+    /* MENU PERFIL */
+
+    /* Opciones que se despliegan al hacer click en el icono de perfil */
+    .opciones-perfil {
+        min-width: 160px;
+        height: 180px;
+        top: 48px;
+    }
+
+    /* tamaño de la imagen del perfil */
+    .perfil-info img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Nombre de usuario */
+    .nombre-usuario {
+        color: #FFFFFF;
+        font-family: 'Jersey 15', 'Inter', 'sans-serif';
+        font-size: 22px;
+    }
+
+    /* Opciones del perfil */
+    .opcion-perfil {
+        font-size: 24px;
+        margin-top: 2px;
+        margin-left: 18px;
+    }
+
+    /* Grupo que contiene el botón de cerrar sesión */
+    .grupo-cerrar-sesion {
+        margin-top: 0;
+        height: 40px;
+    }
+}
+
+
+
