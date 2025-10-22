@@ -42,8 +42,8 @@ class GameManagerBlocka {
         this.niveles = [
             { nivel : 1, filtro: 'normal'},
             { nivel : 2, filtro: 'grayscale' },
-            { nivel : 3, filtro: 'brillo', dificultad: 'dificil', tiempoLimite: '02:00'},
-            { nivel : 4, filtro: 'negative', dificultad: 'dificil', tiempoLimite: '01:00'}
+            { nivel : 3, filtro: 'brillo', dificultad: 'dificil', tiempoLimite: '00:40'},
+            { nivel : 4, filtro: 'negative', dificultad: 'dificil', tiempoLimite: '00:20'}
         ]
 
 
