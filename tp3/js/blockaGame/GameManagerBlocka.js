@@ -49,13 +49,13 @@ class GameManagerBlocka {
 
         // POSIBLES IMAGENES DEL ROMPECABEZAS ORIGINALES CON TODAS LAS POSIBLES IMAGENES
         this.imagenesOriginal = [
-            '/tp3/js/blockaGame/posiblesImagenes/image.png',
-            '/tp3/js/blockaGame/posiblesImagenes/mapa.png',
-            '/tp3/js/blockaGame/posiblesImagenes/pacman.png',
-            '/tp3/js/blockaGame/posiblesImagenes/sonic.png',
-            '/tp3/js/blockaGame/posiblesImagenes/mapasonic.png',
-            '/tp3/js/blockaGame/posiblesImagenes/donkeykong.png',
-            '/tp3/js/blockaGame/posiblesImagenes/tele.png'
+            './posiblesImagenes/image.png',
+            './posiblesImagenes/mapa.png',
+            './posiblesImagenes/pacman.png',
+            './posiblesImagenes/sonic.png',
+            './posiblesImagenes/mapasonic.png',
+            './posiblesImagenes/donkeykong.png',
+            './posiblesImagenes/tele.png'
         ]
 
         // IMAGENES DEL ROMPECABEZAS USADAS EN CADA NIVEL, DONDE EXTRAIGO POR CADA NIVEL COMPLETADO
