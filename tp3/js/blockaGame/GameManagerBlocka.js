@@ -8,7 +8,7 @@ import Blocka from "./Blocka.js";
 class GameManagerBlocka {
     constructor() {
         // ELEMENTOS DEL DOM USADOS EN EL JUEGO (HTML)
-        this.canvas = document.getElementById('myCanvas');
+        this.canvas = document.getElementById('myCanvasBlocka');
         this.btnComenzar = document.getElementById('btn-comenzar');
         this.btnReiniciar = document.getElementById('btn-reiniciar');
         this.pantallaMenuInicio = document.getElementById('pantalla-inicio');

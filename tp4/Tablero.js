@@ -27,12 +27,32 @@ class Tablero {
         ];
 
 
+        // Arreglo de posibles imagenes para las fichas
+        this.imagenesFichasPosibles = [
+            { src : "fichas/pacmanFicha.png", imagen : null},
+            { src: "fichas/fantasmaRojoFicha.png", imagen : null},
+            { src: "fichas/fantasmaCelesteFicha.png", imagen : null},
+            { src: "fichas/fantasmaVerdeFicha.png", imagen : null}
+        ];
+        // Estado de si las imagenes se han cargado
+        this.imagenesCargadas = false;
+        // Invoco la funcion para cargar las imagenes
+        this.cargarImagenes();
+
+
         // Arreglo para almacenar las fichas en el tablero
         this.fichas = [];
 
 
-        // Inicializar las fichas en el tablero según la matriz
-        this.inicializarFichas();
+        // Esperar a que las imagenes se carguen y luego inicializar las fichas
+        const intervalo = setInterval(() => {
+            if(this.imagenesCargadas) {
+                clearInterval(intervalo);
+
+                // Inicializar las fichas en el tablero según la matriz
+                this.inicializarFichas();
+            }
+        }, 50);
     }
 
 
@@ -42,6 +62,7 @@ class Tablero {
         for(let fila = 0; fila < this.matriz.length; fila++) {
             // Recorrer la matriz por columnas
             for(let columna = 0; columna < this.matriz[fila].length; columna++) {
+
                 // Solo agrego fichas donde la matriz tiene un 1(TIENE FICHA)
                 if(this.matriz[fila][columna] === 1) {
                     // Calcular posición X e Y de la ficha en el canvas
@@ -50,15 +71,50 @@ class Tablero {
                     const x = (this.xTablero) + (columna * this.tamanioCelda) + (this.tamanioCelda / 2);
                     const y = (this.yTablero) + (fila * this.tamanioCelda) + (this.tamanioCelda / 2);
 
+                    // Selecciono una imagen para la ficha,segun la region del tablero
+                    let imagenFicha = this.obtenerImagenFicha(fila,columna);
+
                     // Crear una nueva ficha y agregarla al arreglo de fichas
-                    let ficha = new Ficha(fila,columna,x,y,this.radioFichas,"black");
+                    let ficha = new Ficha(fila,columna,x,y,this.radioFichas,"#65849bff", imagenFicha);
 
                     // Agregar la ficha al arreglo
                     this.fichas.push(ficha);
                 }
 
             }
-        
+
+        }
+    }
+
+
+    // Metodo para sacar una imagen aleatoria para la ficha
+    obtenerImagenFicha(fila,columna) {
+        // Diferentes colores según la región del tablero
+        const indice = (fila + columna) % this.imagenesFichasPosibles.length;
+        return this.imagenesFichasPosibles[indice].imagen;
+    }
+
+
+    // Metodo el cual devuelve una imagen para la ficha
+    cargarImagenes() {
+        let contadorCargas = 0;
+        let contadorTotal = this.imagenesFichasPosibles.length;
+
+        for(let imgObj of this.imagenesFichasPosibles) {
+            // Crear un nuevo objeto de imagen
+            const imagen = new Image();
+
+            // Establecer la fuente de la imagen (puedes cambiar la ruta a la imagen que desees)
+            imagen.src = imgObj.src;
+
+            // Evento onload para saber cuando la imagen se ha cargado
+            imagen.onload = () => {
+                contadorCargas++;
+                imgObj.imagen = imagen; // Guardar la imagen cargada en el objeto correspondiente
+                if(contadorCargas === contadorTotal) {
+                    this.imagenesCargadas = true;
+                }
+            }
         }
     }
 
@@ -69,9 +125,30 @@ class Tablero {
         this.dibujarCeldas(ctx);
 
         // Dibujar las fichas una vez dibujado el tablero
-        this.fichas.forEach(ficha => {
-            ficha.dibujar(ctx);
-        })
+        for(let ficha of this.fichas){
+            ficha.dibujarConImagen(ctx);
+        }
+    }
+
+
+    // Metodo para reiniciar el tablero a su estado inicial
+    reiniciarTablero() {
+        // Reiniciar la matriz al estado inicial
+        this.matriz = [
+            [-1, -1, 1, 1, 1, -1, -1],
+            [-1, -1, 1, 1, 1, -1, -1],
+              [1, 1, 1, 1, 1, 1, 1],
+              [1, 1, 1, 0, 1, 1, 1],
+              [1, 1, 1, 1, 1, 1, 1],
+            [-1, -1, 1, 1, 1, -1, -1],
+            [-1, -1, 1, 1, 1, -1, -1]
+        ];
+
+        // Vaciar el arreglo de fichas
+        this.fichas = [];
+
+        // Inicializar las fichas nuevamente
+        this.inicializarFichas();
     }
 
 
@@ -107,7 +184,7 @@ class Tablero {
                         ctx.arc(
                             x + this.tamanioCelda / 2, // Centro X de la celda
                             y + this.tamanioCelda / 2, // Centro Y de la celda
-                            5, // Radio del circulo
+                            7, // Radio del circulo
                             0,
                             Math.PI * 2
                         );
@@ -137,14 +214,13 @@ class Tablero {
 
     // Metodo para obtener una ficha si es que esta en tal posicion
     obtenerFichaEnPosicion(x, y) {
-        // Recorrer todas las fichas en el tablero
-        this.fichas.forEach(ficha => {
-
+        // Recorrer todas las fichas en el tablero usando for (no forEach porque necesitamos return)
+        for(let ficha of this.fichas) {
             // Verificar si la ficha contiene el punto (x, y)
-            if(ficha.contienePunto(x, y))
+            if(ficha.contienePunto(x, y)) {
                 return ficha; // Retornar la ficha encontrada
-
-        });
+            }
+        }
         return null; // No se encontró ninguna ficha en esa posición
     }
 

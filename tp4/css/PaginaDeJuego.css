@@ -1,0 +1,643 @@
+/* ================================================ */
+/*          ESTILOS PARA LA PÁGINA DE JUEGO         */
+/* ================================================ */
+
+
+/* Contenedor principal de toda la pagina de juego */
+.contenedor-principal-juego {
+    padding: 20px 70px 60px 70px;
+    margin: 0;
+    gap: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color:transparent;
+}
+
+/* Contenedor del breadcrumb y el contenedor del juego */
+.contenido-juego-y-breadcrumb {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    min-height: 500px;
+    gap: 8px;
+}
+
+/* Navegacion de migas de pan (Inicio > Categoria > Juego) */
+.breadcrum {
+    display: flex;
+    justify-content: flex-start;
+    text-align: start;
+    min-width: 200px;
+    margin-left: 30px;
+    color: #020202;
+    font-family: 'Inter', 'sans-serif';
+    font-size: 16px;
+}
+
+/* Contenedor principal del juego con borde y fondo marron */
+.contenedor-juego {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: 14px solid #70412C;
+    border-radius: 13px;
+    width: 100%;
+    height: 550px;
+    background-color: #8B5F4C;
+}
+
+/* Pantalla de carga del juego con imagen de fondo */
+.pantalla-carga-juego {
+    --background-image: none; /* Variable CSS para la imagen de fondo, que cargo la imagen desde css*/
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+    background-image: var(--background-image);
+    display: flex;
+    border-radius: 5px 5px 10px 10px;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+/* Capa de desenfoque sobre la imagen de fondo */
+.pantalla-carga-juego::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    border-radius: 5px 5px 10px 10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--background-image);
+    /* background-image: url('../imgs/pacmanCarga.png'); */
+    background-size: cover;
+    background-position: center;
+    filter: blur(2.5px);
+    z-index: 0;
+}
+
+/* Boton jugar en pantalla de carga - Estilo Figma Ovalado */
+.pantalla-carga-juego .boton-jugar {
+    position: absolute;
+    bottom: 185px;
+    width: 220px;
+    height: 65px;
+    z-index: 2;
+    
+    /* Forma ovalada con degradado azul */
+    background: linear-gradient(180deg, #3666b9 0%, #1b5ce9 50%, #5A77B8 100%);
+    border-radius: 45px;
+    
+    /* Texto estilo pixel art */
+    font-family: 'Jersey 25', 'Jersey 15', monospace;
+    font-size: 48px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-shadow: 
+        3px 3px 0 rgba(0, 0, 0, 0.3),
+        -1px -1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    
+    /* Oculto por defecto, aparece solo con hover en la pantalla */
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Mostrar boton cuando se hace hover sobre la pantalla de carga */
+.pantalla-carga-juego:hover .boton-jugar {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+}
+
+/* Hover sobre el boton - se levanta ligeramente */
+.pantalla-carga-juego .boton-jugar:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 10px 0 rgba(0, 0, 0, 0.3),
+        0 15px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Click en el boton - se hunde simulando presion */
+.pantalla-carga-juego .boton-jugar:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 4px 0 rgba(0, 0, 0, 0.3),
+        0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* ================================================ */
+/*          TITULO Y BOTONES DE COMPARTIR           */
+/* ================================================ */
+
+/* Contenedor del titulo del juego y botones de compartir */
+.contenedor-titulo-compartir {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    min-height: 10%;
+    width: 100%;
+}
+
+/* Grupo del titulo del juego con logo */
+.tituloJuego-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo pequeño al lado del titulo */
+.tituloJuego-logo img {
+    width: 45px;
+    height: 45px;
+    margin-top: 10px;
+}
+
+/* Titulo del juego con borde azul simulado con sombras */
+.titulo-juego {
+    font-family: 'Jersey 25', 'Inter', 'sans-serif';
+    color: white;
+    font-size: 38px;
+    text-align: center;
+    height: 100%;
+    
+    /* Borde azul con sombras en las 4 direcciones */
+    text-shadow: 
+        -2px -2px 0 #4169E1,
+        2px -2px 0 #4169E1,
+        -2px 2px 0 #4169E1,
+        2px 2px 0 #4169E1;
+}
+
+/* Contenedor de iconos para compartir y expandir */
+.iconos-compartir {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Iconos de compartir y expandir */
+.iconos-compartir i {
+    color: rgb(206, 204, 204);
+    font-size: 32px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Hover sobre iconos - se agrandan */
+.iconos-compartir i:hover {
+    transform: scale(1.2);
+}
+/* ================================================ */
+/*        SECCION COMO JUGAR Y PUBLICIDAD           */
+/* ================================================ */
+
+/* Contenedor que agrupa las instrucciones del juego y el video publicitario */
+.contenedor-comoJugar-y-propaganda {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 50px;
+    margin-top: 40px;
+    min-height: 200px;
+}
+
+/* Caja con instrucciones, objetivo y descripcion del juego */
+.como-jugar {
+    width: 100%;
+    min-height: 380px;
+    background-color: #8B5F4C;
+    border: 14px solid #70412C;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 35px;
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    box-sizing: border-box;
+    font-family: 'Jersey 25', 'Inter', 'sans-serif';
+    font-size: 18px;
+}
+
+/* Cada subseccion dentro de como jugar (instrucciones, objetivo, descripcion) */
+.instrucciones, .objetivo-juego, .descripcion-juego {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+/* Titulos de cada subseccion con icono */
+.titulo-instrucciones{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    font-size: 25px;
+}
+
+/* Contenedor del video publicitario */
+.propaganda {
+    width: 250px;
+    height: 380px;
+    background-color: #8B5F4C;
+    border: 14px solid #70412C;
+    border-radius: 15px;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Video que se ajusta al contenedor sin deformar */
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* ================================================ */
+/*            PACMANS DECORATIVOS                   */
+/* ================================================ */
+
+/* Imagenes decorativas de pacmans entre secciones */
+.pacmans {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 77%;
+    margin-left: 10px;
+    height: 20%;
+}
+
+.pacmans img {
+    width: 250px;
+}
+/* ================================================ */
+/*        SECCION COMENTARIOS Y DISCORD             */
+/* ================================================ */
+
+/* Contenedor principal que agrupa comentarios y widget de Discord */
+.contenedor-comentarios-y-discord {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+    min-height: 400px;
+}
+
+/* ================================================ */
+/*               WIDGET DE DISCORD                  */
+/* ================================================ */
+
+/* Caja lateral con informacion de Discord */
+.discord-container {
+    width: 250px;
+    height: 427px;
+    background-color: #8B5F4C;
+    border: 14px solid #70412C;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Titulo del widget de Discord */
+.titulo-discord {
+    color: white;
+    font-family: 'Jersey 15', 'sans-serif';
+    font-size: 23px;
+    text-align: center;
+}
+
+/* Imagenes dentro del widget (QR y boton Discord) */
+.discord-container img {
+    width: 150px;
+}
+
+/* Codigo QR para unirse al Discord */
+.qr-discord {
+    height: 140px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Titulo de la seccion importante (reglas) */
+.titulo-importante-discord {
+    font-family: 'Inter', 'sans-serif';
+    color: #8A0000;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Texto con las reglas del Discord */
+.texto-discord {
+    font-family: 'Inter', 'sans-serif';
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+/* ================================================ */
+/*            SECCION DE COMENTARIOS                */
+/* ================================================ */
+
+/* Contenedor principal de comentarios */
+.seccion-comentarios {
+    width: 100%;
+    min-height: 420px;
+    background-color: #8B5F4C;
+    border: 14px solid #70412C;
+    border-radius: 15px;
+}
+
+/* Lista de comentarios con scroll */
+.comentarios-container {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+    width: 100%;
+    color: white;
+    font-family: 'Jersey 25', 'sans-serif';
+    font-size: 20px;
+    border-bottom: 14px solid #70412C;
+}
+
+/* Cada comentario individual */
+.comentario {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+/* Avatar del usuario (icono fantasma) */
+.avatar-pacman i {
+    font-size: 28px;
+}
+
+/* Globo de texto del comentario */
+.comentario-texto {
+    border: 3px solid #c09787;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Boton para ver mas comentarios */
+#ver-mas-comentarios {
+    text-align: end;
+    margin-right: 10px;
+    border: none;
+    color: #4169E1;
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Hover sobre ver mas - cambia a blanco */
+#ver-mas-comentarios:hover {
+    color: white;
+}
+
+/* ================================================ */
+/*          INPUT PARA COMENTAR                     */
+/* ================================================ */
+
+/* Contenedor del input de comentario */
+.input-comentar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    gap: 10px;
+}
+
+/* Wrapper del input y boton enviar */
+.input-container {
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background: #8B5F4C;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+/* Input de texto para escribir comentario */
+.input-container input {
+    flex: 1;
+    height: 39px;
+    background: #B0816E;
+    border: 5px solid #B0816E;
+    font-family: 'Jersey 25', sans-serif;
+    font-size: 14px;
+    color: #FFFFFF;
+    padding: 0 9px;
+    box-sizing: border-box;
+}
+
+/* Placeholder del input */
+.input-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Input en foco - borde blanco */
+.input-container input:focus {
+    outline: none;
+    border-color: #FEFEFE;
+}
+
+/* Boton de enviar comentario */
+.btn-enviar {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover sobre boton enviar - se agranda */
+.btn-enviar:hover {
+    transform: scale(1.8);
+    transition: transform 0.3s ease;
+}
+
+/* Flecha del boton enviar */
+.flecha {
+    font-size: 16px;
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+/* ================================================ */
+/*     ESTILOS PAGINA DE JUEGO EN EJECUCION         */
+/* ================================================ */
+
+
+/* Contenedor de la pagina de juego en ejecucion dentro del main junto a la section de contenedor del juego*/
+.fondo-juego-en-ejecucion {
+    /* display: none; Oculto por defecto, se muestra al iniciar el juego */
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgba(116, 115, 115, 0.63); /* Fondo oscuro semi-transparente */
+    z-index: 100; /* Por encima de todo */
+    /* display: none; */
+    justify-content: center;
+    align-items: center;
+    animation: aparicionEjecucionJuego 0.5s ease-in-out;
+}
+
+@keyframes aparicionEjecucionJuego {
+    from {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Contenedor principal del juego con borde y fondo marron */
+.marco-contenedor-juego {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: 14px solid #70412C;
+    position: absolute;
+    border-radius: 13px;
+    top: 25px;
+    left: 20px;
+    width: 75%;
+    height: 85%;
+    background-color: #8B5F4C;
+}
+
+/* Contenedor donde se reproduce el juego */
+.contenedor-juego-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 20px 10px 20px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+}
+
+/* Contenedor y marco de instrucciones cuando esta en ejecucion un juego */
+.marco-contenedor-instrucciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    gap: 7px;
+    border: 14px solid #70412C;
+    position: absolute;
+    border-radius: 13px;
+    top: 35px;
+    right: 20px;
+    width: 20%;
+    height: 83%;
+    background-color: #8B5F4C;
+    font-size: 12px;
+    text-align: start;
+    font-family: 'Inter', 'sans-serif';
+}
+
+/* Titulos e iconos dentro del marco de instrucciones */
+.marco-contenedor-instrucciones h3,i {
+    font-size: 17px;
+}
+
+/* Breadcrumb dentro de la pagina de juego en ejecucion */
+.breadcrum-en-juego {
+    position: absolute;
+    top: 2px;
+    left: 50px;
+    font-family: 'Inter', 'sans-serif';
+    font-size: 16px;
+}
+
+
+/* Boton para salir del juego en ejecucion normal,hover y active */
+.btn-salir-juego {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    width: 70px;
+    height: 35px;
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 15px;
+    border: none;
+    background-color: #cf1b0ecc;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+.btn-salir-juego:hover {
+    background-color: #b12626b9;
+    transform: scale(1.1);
+}
+.btn-salir-juego:active {
+    transform: scale(1);
+}
+
+body{
+    overflow: hidden; /* Evita el scroll de la pagina al estar en modo juego */
+}
+
+/* Icono dentro del boton salir del juego */
+.btn-salir-juego i {
+    font-size: 28px;
+}
+
+

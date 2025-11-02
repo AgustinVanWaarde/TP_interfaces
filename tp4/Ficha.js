@@ -1,7 +1,7 @@
 "use strict"
 
 class Ficha {
-    constructor(fila, columna, x, y, radio, color) {
+    constructor(fila, columna, x, y, radio, color, imagenFicha) {
         this.fila = fila // Fila en el tablero
         this.columna = columna // Columna en el tablero
         this.x = x // Posición X en el canvas
@@ -11,6 +11,9 @@ class Ficha {
         
         // Atributo para saber si la ficha está seleccionada
         this.seleccionada = false;
+
+        // Atributo que va a contener la imagen de la ficha
+        this.imagenFicha = imagenFicha;
     }
 
 
@@ -26,25 +29,61 @@ class Ficha {
         ctx.fill();
 
         // Dibujar borde de la ficha
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "pink";
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // // Dibujar imagen de fantasma encima de la ficha
-        // const image = new Image();
-        // image.src = 'fantasmaRojoFicha.png'; // Asegúrate de tener esta imagen en la ruta correcta
-        // image.onload = () => {
-        //     // Dibujar la imagen centrada en la ficha
-        //     ctx.drawImage(image, this.x - this.radio, this.y - this.radio, this.radio * 1.5 , this.radio *1.5);
-        // }
+        // Dibujar imagen de fantasma encima de la ficha
 
         ctx.closePath();
 
-        
-
-
         // Restaurar estado del canvas
         ctx.restore();
+    }
+
+
+    dibujarConImagen(ctx) {
+        // Guardar estado actual del canvas
+        ctx.save();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radio, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.clip();
+
+        // Dibujar imagen de fantasma encima de la ficha (75% del tamaño de la ficha)
+        if (this.imagenFicha) {
+            // tamaño de la imagen (3/4 aprox de la ficha)
+            const tamañoImagen = this.radio * 1.5;
+            
+            // Posición para centrar: centro - (tamaño / 2)
+            ctx.drawImage(this.imagenFicha,
+                this.x - (tamañoImagen / 2),  // Centrar horizontalmente
+                this.y - (tamañoImagen / 2),  // Centrar verticalmente
+                tamañoImagen,                  // Ancho
+                tamañoImagen                   // Alto
+            );
+        }
+
+        ctx.restore();
+
+        ctx.beginPath();
+        if(this.seleccionada) {
+            ctx.arc(this.x, this.y, this.radio, 0, Math.PI * 2);
+            ctx.strokeStyle = "yellow";
+            ctx.lineWidth = 4;
+            ctx.stroke();
+        }else{
+            ctx.arc(this.x, this.y, this.radio, 0, Math.PI * 2);
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        ctx.closePath();    
     }
 
 

@@ -36,7 +36,7 @@ function crearSeccionMarcoJuego(nombreJuego) {
 
             ${crearPanelJuego()}
 
-            <canvas id="myCanvas" width="495px" height="245px" style="display: none;"></canvas>
+            <canvas id="myCanvasBlocka" width="495px" height="245px" style="display: none;"></canvas>
 
             ${crearControlesJuego()}
 
