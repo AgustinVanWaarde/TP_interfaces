@@ -29,10 +29,10 @@ class Tablero {
 
         // Arreglo de posibles imagenes para las fichas
         this.imagenesFichasPosibles = [
-            { src : "fichas/pacmanFicha.png", imagen : null},
-            { src: "fichas/fantasmaRojoFicha.png", imagen : null},
-            { src: "fichas/fantasmaCelesteFicha.png", imagen : null},
-            { src: "fichas/fantasmaVerdeFicha.png", imagen : null}
+            { src : "./js/pegGame/fichas/pacmanFicha.png", imagen : null},
+            { src: "./js/pegGame/fichas/fantasmaRojoFicha.png", imagen : null},
+            { src: "./js/pegGame/fichas/fantasmaCelesteFicha.png", imagen : null},
+            { src: "./js/pegGame/fichas/fantasmaVerdeFicha.png", imagen : null}
         ];
         // Estado de si las imagenes se han cargado
         this.imagenesCargadas = false;

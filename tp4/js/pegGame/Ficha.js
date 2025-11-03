@@ -99,7 +99,7 @@ class Ficha {
         const distanciaCuadrada = dx * dx + dy * dy;
 
 
-        // Si la distancia² es menor o igual al radio², el punto está dentro del círculo
+        // Si la distancia cuadrada es menor o igual al radio², el punto está dentro del círculo
         // radio*radio me evito calcular la raíz cuadrada
         return distanciaCuadrada <= this.radio * this.radio;
     }

@@ -11,26 +11,6 @@
 
 
 
-/* ================================ */
-/* Estilo de boton generico RETRO   */
-/* ================================ */
-.btn-game {
-    font-family: 'Jersey 15';
-    font-size: 24px;
-    padding: 10px 30px;
-    color: white;
-    margin: 7px;
-    border: 3px solid;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    transition: all 0.4s ease;
-}
-
-
-
-
 
 
 /* ================================ */
@@ -349,7 +329,7 @@
 /* ================================ */
 
 /* Estilos para el menú de derrota del juego */
-.menu-derrota {
+.menu-derrota-peg {
     width: 400px;
     min-height: 220px;
     padding: 20px;
@@ -361,7 +341,7 @@
 }
 
 /* Estilos para el título dentro del menú de victoria del juego */
-.menu-derrota h2 {
+.menu-derrota-peg h2 {
     color: #ffffff;
     font-family: 'Jersey 25', sans-serif;
     font-size: 38px;
@@ -387,7 +367,7 @@
 }
 
 /* Estilos para el párrafo dentro del menú de victoria del juego */
-.menu-derrota p {
+.menu-derrota-peg p {
     color: #ffffff;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
@@ -395,7 +375,7 @@
     text-align: center;
 }
 
-.menu-derrota div {
+.menu-derrota-peg div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -406,7 +386,7 @@
     font-size: 18px;
 }
 
-.botones-menu-derrota {
+.botones-menu-derrota-peg {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -2,18 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE HTML5>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/Header.css">
-    <link rel="stylesheet" href="css/PaginaDeJuego.css">
-    <link rel="stylesheet" href="css/General.css">
-    <link rel="stylesheet" href="PegSolitarie.css">
+    <link rel="stylesheet" href="../css/General.css">
+    <link rel="stylesheet" href="../css/Header.css">
+    <link rel="stylesheet" href="../css/Footer.css">
+    <link rel="stylesheet" href="../css/PaginaDeJuego.css">
+    <link rel="stylesheet" href="../css/CarrouselAndCardsHome.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Jersey+15&display=swap&family=Jersey+25&display=swap" rel="stylesheet"> <!-- importo la fuente Inter y Jersey 15 desde Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- importo los iconos de Font Awesome -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,106 +66,12 @@
     </header>
     
     <main>
-        <!-- DESDE ACA CONTENEDOR JUEGO EN EJECUCION -->
-        <!-- aside es donde esta contenido el overlay de ejecucio y contenedor del juego -->
         <aside class="fondo-juego-en-ejecucion">
-            <!-- Breadcrumb -->
             <h2 class="breadcrum-en-juego">Inicio > Estrategia > Peg solitarie </h2>
-
-            <!-- Marco contenedor juego en ejecucion -->
             <div class="marco-contenedor-juego">
-
-                <!-- Contenedor principal del juego -->
-                <div class="contenedor-juego-main" id="contenedor-juego">
-
-
-                    <!-- Pantalla De Inicio + pantalla overlay -->
-                    <div id="pantalla-inicio" class="pantalla-overlay">
-                        <button id="btn-salir-juego" class="btn-salir-juego">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </button>
-                        <div class="menu-comenzar-juego">
-                            <div class="titulo-peg">
-                                <h2>🎮</h2>
-                                <h2>Peg Solitarie</h2>
-                                <h2>🎮</h2>
-                            </div>
-                            <p>¡Listo para resolver el juego!</p>
-                            <button id="btn-comenzar" class="btn-jugar-inicio btn-game">Jugar</button>
-                        </div>
-                    </div>
-
-
-
-                    <!-- panel juego un left y otro right -->
-                     <!-- panel de piezas restantes -->
-                    <div >
-                        <div class="piezas-restantes panel-juego-peg">
-                            <i class="fa-solid fa-puzzle-piece"></i>
-                            <p>Fichas Restantes: <span id="fichas-restantes">32</span></p>
-                        </div>
-                        <!-- panel de tiempo transcurrido/restante -->
-                        <div class="tiempo-restante panel-juego-peg">
-                            <i class="fa-solid fa-clock"></i>
-                            Tiempo: <span id="tiempo">00:00</span>
-                        </div>
-                    </div>
-                    
-
-
-
-                    <!-- Contenedor canvas del juego -->
-                    <canvas id="gameCanvasPeg" width="370" height="370" style="display: none;"></canvas>
-                    
-
-                    <!-- Botones de reiniciar y menú dentro del juego -->
-                    <div id="botonera-juego" style="display: none;">
-                        <button id="btn-reiniciar" class="btn-game btn-reiniciar-peg">
-                                <i class="fa-solid fa-rotate-right"></i> Reiniciar
-                        </button>
-                        <button class="btn-game btn-menu-principal btn-menu-juego-peg event-menu">
-                                Menú
-                        </button>
-                    </div>
-                    
-
-                    
-                    <!-- pantalla de derrota -->
-                    <div id="pantalla-derrota" class="pantalla-overlay" style="display: none;">
-                        <div class="menu-derrota">
-                            <h2>💔 ¡Perdiste! 💔</h2>
-
-                            <!-- Mensaje de derrota por movimientos -->
-                            <div id="derrota-por-movimientos">
-                                <p id="causa-derrota">No hay más movimientos posibles</p>
-                                <p>Fichas restantes: <span id="fichas-restantes-derrota">0</span></p>
-                            </div>
-                            <!-- Mensaje de derrota por tiempo limite -->
-                            <div id="derrota-por-tiempoLimite">
-                                <p>Tiempo esperado: <span id="tiempo-esperado-juego">00:00</span></p>
-                            </div>
-
-                            <div class="botones-menu-derrota">
-                                <button class="btn-game btn-menu-principal-peg event-menu">Menú Principal</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Display de juego completado -->
-                    <div id="pantalla-juego-completado" class="pantalla-overlay" style="display: none;">
-                        <div class="menu-fin-juego-peg">
-                            <div class="emoji-grande">🏆</div>
-                            <h2>¡Juego Completado!</h2>
-                            <p class="mensaje-felicitacion">¡Felicidades, has eliminado todas las fichas!</p>
-                            <p>Tiempo: <span id="tiempo-final">00:00</span></p>
-                            <p class="mensaje-redireccion">Redirigiendo al menú principal en: <span id="tiempo-redireccion">10</span></p>
-                        </div>
-                    </div>
-                    
+                <div class="contenedor-juego-main">
+                    <canvas id="myCanvas" width="400px" height="400px"></canvas>
                 </div>
-
-                <!-- Contenedor para el título y botones compartir -->
                 <div class="contenedor-titulo-compartir">
                         <div class="tituloJuego-logo">
                             <h1 class="titulo-juego">Peg Solitarie Pac-man</h1>
@@ -184,9 +83,6 @@
                         </div>
                 </div>
             </div>
-
-            
-            <!-- Marco contenedor instrucciones -->
             <div class="marco-contenedor-instrucciones">
                 <div class="instrucciones">
                     <div class="titulo-instrucciones">
@@ -194,9 +90,9 @@
                         <h3>Como jugar?</h3>
                     </div>
                     <p>
-                        Click y arrastra una ficha hacia un espacio vacío saltando sobre otra ficha.<br>
-                        Solo puedes saltar horizontal o verticalmente (no en diagonal).<br>
-                        La ficha saltada será eliminada del tablero.
+                        Clic izquierdo en la ficha que quieras mover.
+                        Luego clic en el agujero vacío donde caerá tras el salto.
+                        El juego eliminará automáticamente la ficha intermedia. 
                     </p>
                 </div>
                 <div class="objetivo-juego">
@@ -205,8 +101,7 @@
                         <h3>Objetivo del juego</h3>
                     </div>
                     <p>
-                        Eliminar todas las fichas del tablero hasta quedarte con una sola,
-                        preferentemente en el centro. ¡Planifica tus movimientos con cuidado!
+                        Quedarte con una sola ficha en el tablero, pre ferentemente en el agujero central.
                     </p>
                 </div>
                 <div class="descripcion-juego">
@@ -215,16 +110,14 @@
                         <h3>Descripcion del juego</h3>
                     </div>
                     <p>
-                        Peg Solitaire es un clásico juego de estrategia con temática Pac-Man. 
-                        Cada ficha representa un personaje del universo Pac-Man. Deberás saltar 
-                        sobre las fichas para eliminarlas, pero cuidado: ¡solo hay un camino 
-                        correcto hacia la victoria!
+                        Guía a una banda de mini-Pac-Man en un tablero de luces neón. 
+                        Salta de ficha en ficha para absorber su energía, como si comieras fantasmas, 
+                        hasta que solo quede un Pac-Man supremo en el centro. 
+                        Planifica cada movimiento: un paso en falso y tus minipacs quedarán atrapados sin salida.
                     </p>
                 </div>
             </div>
         </aside>
-
-        <!-- DESDE ACA CONTENIDO DEL JUEGO, PAGINA DEL JUEGO -->
         <section class="contenedor-principal-juego">
 
             <div class="contenido-juego-y-breadcrumb">
@@ -434,8 +327,7 @@
         </div>
     </footer>
 
-    <script type="module" src="GameManagerPeg.js"></script>
-</body>
-</html>
+    <script src="../js/paginaDeJuego.js"></script>
+    <script src="blockaObject.js"></script>
 </body>
 </html>

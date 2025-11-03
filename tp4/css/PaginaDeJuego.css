@@ -524,7 +524,7 @@ video {
     left: 0;
     background-color: rgba(116, 115, 115, 0.63); /* Fondo oscuro semi-transparente */
     z-index: 100; /* Por encima de todo */
-    /* display: none; */
+    display: none;
     justify-content: center;
     align-items: center;
     animation: aparicionEjecucionJuego 0.5s ease-in-out;
@@ -550,10 +550,10 @@ video {
     border: 14px solid #70412C;
     position: absolute;
     border-radius: 13px;
-    top: 25px;
+    top: 35px;
     left: 20px;
     width: 75%;
-    height: 85%;
+    height: 83%;
     background-color: #8B5F4C;
 }
 
@@ -600,7 +600,7 @@ video {
 /* Breadcrumb dentro de la pagina de juego en ejecucion */
 .breadcrum-en-juego {
     position: absolute;
-    top: 2px;
+    top: 10px;
     left: 50px;
     font-family: 'Inter', 'sans-serif';
     font-size: 16px;
@@ -629,10 +629,6 @@ video {
 }
 .btn-salir-juego:active {
     transform: scale(1);
-}
-
-body{
-    overflow: hidden; /* Evita el scroll de la pagina al estar en modo juego */
 }
 
 /* Icono dentro del boton salir del juego */

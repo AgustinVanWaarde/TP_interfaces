@@ -3,9 +3,9 @@
 import Tablero from "./Tablero.js";
 
 class GameManagerPeg {
-    constructor(canvasId) {
+    constructor() {
         // Selección de elementos del DOM
-        this.canvas = document.getElementById(canvasId);
+        this.canvas = document.getElementById("myCanvasPeg");
         this.ctx = this.canvas.getContext("2d");
         this.pantallaInicio = document.getElementById("pantalla-inicio");
         this.pantallaDerrota = document.getElementById("pantalla-derrota");
@@ -117,7 +117,7 @@ class GameManagerPeg {
 
         // Dibujar cada posicion valida con un circulo brillante
         this.posiblesMovimientos.forEach((pos) => {
-            console.log('Posición posible movimiento:', pos);
+            // console.log('Posición posible movimiento:', pos);
 
             const coords = this.tablero.posicionMatrizACoordenadas(pos.fila, pos.columna);
 
@@ -466,5 +466,3 @@ class GameManagerPeg {
 }
 
 export default GameManagerPeg;
-
-let manage = new GameManagerPeg("gameCanvasPeg");
