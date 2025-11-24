@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="css/Login.css">
+    <link rel="stylesheet" href="css/Header.css">
+    <link rel="stylesheet" href="css/Footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- importo los iconos de Font Awesome -->
+</head>
+<body>
+    <main>
+        <section class="formulario-login">
+            <!-- Formulario de inicio de sesión, inicialmente visible -->
+            <div class="fondo-formulario">
+                <h2 class="titulo-formulario">Iniciar Sesión</h2>
+                <div class="botones-sociales">
+                    <button class="boton-google">
+                        <span class="fondo-google"></span>
+                        <img class="logo-google" src="imgs/logo google.jpg" alt="Google">
+                        <span class="texto-google">Continuar con Google</span>
+                    </button>
+                    <button class="boton-facebook">
+                        <span class="fondo-facebook"></span>
+                        <img class="logo-facebook" src="imgs/logo facebook.jpg" alt="Facebook">
+                        <span class="texto-facebook">Continuar con Facebook</span>
+                    </button>
+                </div>
+                <form class="formulario-credenciales">
+                    <label for="usuario">Email</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario">
+
+                    <label for="contrasena">Contraseña</label>
+                    <div class="password-container">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña">
+                        <img class="toggle-password" src="imgs/esconder.png" alt="Toggle password">
+                    </div>
+
+                    <button type="submit" class="boton-iniciar">Iniciar sesión</button>
+                </form>
+                <div class="opciones-extra">
+                    <span class="texto-no-cuenta">¿No tienes una cuenta?</span>
+                    <a href="#" class="link-registrate">Regístrate</a>
+                </div>
+            </div><!-- cierre formulario-iniciarSesion -->ç
+
+            <!-- Formulario de registro, inicialmente oculto -->
+            <div class="formulario-registro fondo-formulario" style="display:none;">
+                <h2 class="titulo-formulario">Registro</h2>
+                <form class="formulario-credenciales">
+                    <label>Nombre y apellido <span class="required">*</span><span class="required-text">campo obligatorio</span></label>
+                    <input type="text" placeholder="Nombre y apellido" required>
+
+                    <label>Apodo</label>
+                    <input type="text" placeholder="Apodo">
+                    
+                    <label>Email <span class="required">*</span><span class="required-text">campo obligatorio</span></label>
+                    <input type="email" placeholder="Email" required>
+                    
+                    <label>Contraseña <span class="required">*</span><span class="required-text">campo obligatorio</span></label>
+                    <div class="password-container">
+                        <input type="password" placeholder="Contraseña" required>
+                        <img class="toggle-password" src="imgs/esconder.png" alt="Toggle password">
+                    </div>
+
+                    <label>Repetir contraseña <span class="required">*</span><span class="required-text">campo obligatorio</span></label>
+                    <div class="password-container">
+                        <input type="password" placeholder="Repetir contraseña" required>
+                        <img class="toggle-password" src="imgs/esconder.png" alt="Toggle password">
+                    </div>
+
+                    <div class="edad-recaptcha-container">
+                        <div class="edad-input-container">
+                            <label>Edad <span class="required">*</span><span class="required-text">campo obligatorio</span></label>
+                            <input type="date" placeholder="dd/mm/aaaa" required>
+                        </div>
+
+                        <div class="recaptcha-container-general">
+                            <div class="captcha-container">
+                                <input type="checkbox" id="captcha-checkbox" required>
+                                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA logo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="boton-iniciar">Registrar</button>
+                </form>
+                <div class="opciones-extra">
+                    <span class="texto-no-cuenta">¿Ya tienes una cuenta?</span>
+                    <a href="#" class="link-iniciar">Iniciar sesión</a>
+                </div>
+                <div class="botones-sociales botones-sociales-registro">
+                    <button class="boton-facebook"><img class="logo-facebook" src="imgs/logo facebook.jpg" alt="Facebook"><span class="texto-facebook">Continuar con Facebook</span></button>
+                    <button class="boton-google"><img class="logo-google" src="imgs/logo google.jpg" alt="Google"><span class="texto-google">Continuar con Google</span></button>
+                </div>
+            </div> <!-- cierre formulario-registro -->
+
+        </section>
+    </main>
+
+
+
+    <footer class="gamer-footer">
+        <div class="footer-container">
+            <!-- Columna 1: SOPORTE GAMER -->
+            <div class="footer-column">
+                <h2>Soporte gamer</h2>
+                <ul class="footer-list">
+                    <li><a href="#">Problemas técnicos</a></li>
+                    <li><a href="#">Problemas de jugabilidad</a></li>
+                    <li><a href="#">Problemas con logros</a></li>
+                    <li><a href="#">Problemas del multijugador</a></li>
+                    <li><a href="#">Optimización</a></li>
+                    <li><a href="#">Bajos fps/lag</a></li>
+                </ul>
+            </div>
+
+            <!-- Línea divisoria -->
+            <div class="column-divider"></div>
+
+            <!-- Columna 2: CONTACTO -->
+            <div class="footer-column">
+                <h2>Contactanos</h2>
+                <div class="contact-info">
+                    <p><strong>Email: RetroGames@gmail.com</strong></p>
+                    <p><strong>Teléfono: +1 234 567 890</strong></p>
+                    <p><strong>soporteRetroGames@gmail.com</strong></p>
+                </div>
+                    <h3 class ="footer-subtitulo">Seguinos en:</h3>
+                    <div class="social-links">
+                    <!-- Logos de redes sociales en blanco -->
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- Línea divisoria -->
+            <div class="column-divider"></div>
+
+            <!-- Columna 3: GAMING COMMUNITY -->
+            <div class="footer-column">
+                <h2>Gaming community</h2>
+                <ul class="footer-list">
+                    <li><a href="#">Crea una comunidad</a></li>
+                    <li><a href="#">Foros</a></li>
+                    <li><a href="#">Guias</a></li>
+                    <li><a href="#">Logros</a></li>
+                    <li><a href="#">Nuestra comunidad</a></li>
+                    <li><a href="#">Torneos</a></li>
+                </ul>
+            </div>
+
+            <!-- Línea divisoria -->
+            <div class="column-divider"></div>
+
+            <!-- Columna 4: RETIN NEUS -->
+            <div class="footer-column">
+                <h2>Retro news</h2>
+                <ul class="footer-list">
+                    <li><a href="#">DLCs disponibles</a></li>
+                    <li><a href="#">Eventos activos</a></li>
+                    <li><a href="#">Eventos de temporada</a></li>
+                    <li><a href="#">Próximos lanzamientos</a></li>
+                    <li><a href="#">Últimos parches</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="js/login.js"></script>
+</body>
+</html>

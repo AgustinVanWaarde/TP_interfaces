@@ -1,0 +1,425 @@
+#gameCanvasPeg {
+    border: 4px solid #0793ca;
+    border-radius: 10px;
+    background-color: #1a1a2e;
+    box-shadow: 0 4px 20px rgba(132, 161, 24, 0.3);
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+/* ================================ */
+/*   Estilos para pantalla overlay  */
+/* ================================ */
+
+/* Estilos para la pantalla overlay que cubre todo el contenedor del juego(menu-inicio y victoria) */
+.pantalla-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(24, 24, 24, 0.8); /* Fondo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    backdrop-filter: blur(8px) /* Efecto de desenfoque de fondo(solo el fondo aplica) */;
+}
+
+
+
+
+/* ================================ */
+/*    Estilos para menú de inicio   */
+/* ================================ */
+
+/* Contenedor de particiones y menu del juego */
+#pantalla-inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Estilos para el menú de inicio del juego */
+.menu-comenzar-juego {
+    width: 300px;
+    height: 250px;
+    padding: 20px 30px;
+    margin-top: 30px;
+    text-align: center;
+    border: 4px solid #3610bdde;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    animation: aparecer 0.6s ease;
+}
+
+/* Animación de aparición del menu para jugar y menu victoria tambien aplica*/
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Estilos para el contenedor del título y párrafo dentro del menú de inicio del juego */
+.titulo-peg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Estilos para el título dentro del menú de inicio del juego */
+.menu-comenzar-juego h2 {
+    color: #ffffff;
+    font-family: 'Jersey 25', sans-serif;
+    font-size: 37px;
+    margin-top: 0px;
+    animation: pulse 1.2s ease infinite;
+}
+
+/* Animación de pulso en el título del menu del juego */
+@keyframes pulse {
+    0%,100% {
+        text-shadow: 0 4px 10px rgba(23, 221, 56, 0.63);
+    }
+    50% {
+        text-shadow: 0 6px 12px rgba(23, 221, 56, 0.63);;
+    }
+}
+
+/* Estilos para el párrafo dentro del menú del juego */
+.menu-comenzar-juego p {
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Estilos para el botón de jugar dentro del menú del juego de inicio */
+.btn-jugar-inicio {
+    background-color: #3610bdde;
+    color: #ffffff;
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 22px;
+    padding: 7px 20px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+/* Efectos al pasar el mouse y al hacer click en el botón de jugar */
+.btn-jugar-inicio:hover {
+    background-color: #4e32d9;
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 4px 8px rgba(23, 221, 56, 0.63);
+}
+
+/* Efecto al hacer click en el botón de jugar */
+.btn-jugar-inicio:active {
+    transform: scale(0.95) translateY(2px);
+    box-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+/* ================================ */
+/* Estilos para panel de juego      */
+/* ================================ */
+
+/* Estilos para el panel del juego (nivel actual, tiempo transcurrido e iconos) CONTENEDOR GENERAL */
+.panel-juego-peg {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    height: 50px;
+    border: 3px solid #0793ca;
+    padding: 0 10px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    box-shadow: 0 4px 20px rgba(132, 161, 24, 0.3);
+}
+
+/* Estilos para los textos dentro del panel del juego (nivel actual y tiempo transcurrido) */
+.piezas-restantes,.tiempo-restante {
+    width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(205, 240, 8, 0.63);
+}
+
+.piezas-restantes {
+    position: absolute;
+    left: 30px;
+    top: 20%;
+}
+
+.tiempo-restante {
+    position: absolute;
+    right: 30px;
+    top: 20%;
+}
+
+
+/* Estilos para los iconos dentro del panel del juego */
+.panel-juego i {
+    font-size: 21px;
+    animation: pulseIcons 2s infinite;
+}
+
+/* Animación de pulso para los iconos */
+@keyframes pulseIcons {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ================================ */
+/* Estilos para botones del juego    */
+/* ================================ */
+
+/* Estilos para boton volver al menu en el juego y hover */
+.btn-menu-juego-peg {
+    background-color: #3610bdde;
+    border: none;
+    box-shadow: 0 2px 15px rgba(54, 16, 189, 0.5);
+    position: absolute;
+    left: 80px;
+    bottom: 20%;
+}
+.btn-menu-juego-peg:hover {
+    background-color: #3110a8de;
+    transform: scale(1.05) translateY(-2px);
+}
+
+/* Estilos para boton reiniciar */
+.btn-reiniciar-peg {
+    background-color: #a0e2eec9;
+    border: none;
+    position: absolute;
+    right: 50px;
+    bottom: 20%;
+    width: 180px;
+    height: 45px;
+    border-radius: 15px;
+}
+
+/* Efectos al pasar el mouse y al hacer click en el botón de reiniciar */
+.btn-reiniciar-peg:hover {
+    background-color: #3972c7d2;
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 2px 20px rgba(98, 0, 255, 0.7);
+}
+.btn-reiniciar-peg:active {
+    transform: scale(1) translateY(2px);
+    box-shadow: none;
+}
+
+
+
+
+
+
+
+
+/* ================================ */
+/* Estilos para pantalla de juego completado */
+/* ================================ */
+
+/* Estilos específicos para el modal de "Juego Completado" */
+.menu-fin-juego-peg {
+    border: 4px solid #3610bdde;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: auto; /* Ancho máximo para que no sea demasiado grande */
+    height: auto;
+    font-family: 'Inter';
+}
+
+.menu-fin-juego-peg h2 {
+    color: #28a745; /* Color verde para el título */
+    font-family: 'Jersey 25', sans-serif;
+    font-size: 42px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.menu-fin-juego-peg .emoji-grande {
+    font-size: 70px; /* Emoticono grande */
+    margin-bottom: 20px;
+    line-height: 1; /* Para que el emoji no tenga espacio extra */
+    transform: rotate(0deg);
+    animation: rotateTrophy 1.5s ease-out infinite alternate; /* Animación de rotación */
+}
+
+.menu-fin-juego-peg .mensaje-felicitacion {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.menu-fin-juego-peg .mensaje-redireccion {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #007bff; /* Color azul para el tiempo */
+}
+
+.menu-fin-juego-peg .mensaje-redireccion span {
+    color: #d9534f; /* Color rojo para el valor del tiempo */
+    font-size: 20px;
+}
+
+
+/* Animacion de rebote de la copa de un lado para el otro */
+@keyframes rotateTrophy {
+    0% { transform: rotate(-8deg); }
+    100% { transform: rotate(8deg); }
+}
+
+
+
+
+
+
+
+
+
+/* ================================ */
+/*     Estilos menu derrota      */
+/* ================================ */
+
+/* Estilos para el menú de derrota del juego */
+.menu-derrota-peg {
+    width: 400px;
+    min-height: 220px;
+    padding: 20px;
+    text-align: center;
+    border: 4px solid #3610bdde;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    animation: aparecer 0.6s ease;
+}
+
+/* Estilos para el título dentro del menú de victoria del juego */
+.menu-derrota-peg h2 {
+    color: #ffffff;
+    font-family: 'Jersey 25', sans-serif;
+    font-size: 38px;
+    margin-top: 0px;
+    color: #ce2c2cfd;
+    animation: pulsePerdida 1.5s ease infinite;
+}
+
+/* Animación de pulso en el título del menu de victoria del juego */
+@keyframes pulsePerdida {
+    0% {
+        text-shadow: 0 4px 10px rgba(255, 0, 0, 0.815);
+        opacity: 1;
+    }
+    50% {
+        text-shadow: 0 6px 12px rgba(218, 18, 18, 0.815);
+        opacity: 0.8;
+    }
+    100% {
+        text-shadow: 0 4px 10px rgba(255, 0, 0, 0.815);
+        opacity: 1;
+    }
+}
+
+/* Estilos para el párrafo dentro del menú de victoria del juego */
+.menu-derrota-peg p {
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.menu-derrota-peg div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#fichas-restantes-derrota {
+    color: orange;
+    font-size: 18px;
+}
+
+.botones-menu-derrota-peg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-menu-principal-peg {
+    background-color: #1787e2c9;
+    border-radius: 13px;
+}
+
+.btn-menu-principal-peg:hover {
+    background-color: #5292b877;
+    transform: scale(1.05) translateY(-3px);
+}
+
+.btn-menu-principal-peg:active {
+    transform: scale(1) translateY(3px);
+}
+
+
+
+
+
+
+
+
+/* Media para pantallas mas pequeñas en alto */
+@media (max-height: 600px) {
+    #gameCanvasPeg {
+        position: absolute;
+        top: 0;
+    }
+}
+
+

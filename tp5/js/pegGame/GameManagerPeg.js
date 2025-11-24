@@ -281,19 +281,12 @@ class GameManagerPeg {
         if (!this.tablero.quedanMovimientosPosibles()) {
             this.fichasRestantes = this.tablero.contarFichas();
 
-            if (this.fichasRestantes === 1) {
-                // Gano el juego
-                this.juegoGanado();
+            if(this.fichasRestantes === 1) {
+                this.juegoPerdido("tiempo");
             }
             else{
-                // Perdio el juego
-                if(this.tiempoActual.textContent.split(' / ')[0] >= this.TIEMPOLIMITE){
-                    // Perdio por tiempo
-                    this.juegoPerdido("tiempo");
-                } else {
-                    // Perdio por falta de movimientos
-                    this.juegoPerdido("movimientos");
-                }
+                // Perdio por falta de movimientos
+                this.juegoPerdido("movimientos");
             }
         }
     }
