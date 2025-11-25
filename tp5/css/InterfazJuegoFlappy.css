@@ -262,3 +262,10 @@
     /* Agrega un borde brillante para mayor visibilidad */
     filter: drop-shadow(0 0 10px rgba(228, 228, 228, 0.8));
 }
+
+
+@media (max-height: 600px) {
+    .btn-salir-juego-flappy {
+        bottom: -10px;
+    }
+}
