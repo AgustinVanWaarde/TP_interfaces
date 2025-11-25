@@ -131,27 +131,27 @@ async function inicializarPaginaDeJuegoEnMain(valueJuego){
         else if(valueJuego === "peg-solitarie"){
             const gameManagerPeg = new GameManagerPeg();
         }
-        else if(valueJuego === "flappy-bird"){
-            // Crear instancia del pájaro
+        else if(valueJuego === "flappy-bird"){            
+            // Crear el pájaro controlable por el jugador
             const pajaro = new PajaroFlappy('bird');
 
-            // Crear interfaz sin el juego primero
+            // Crear la interfaz (pantallas, puntaje, vidas)
             const interfazJuego = new InterfazJuegoFlappy(null, pajaro);
             interfazJuego.ocultarPantallaFinJuego();
 
-            // Crear juego con pajaro e interfaz
+            // Crear la lógica principal del juego
             const juegoFlappy = new JuegoFlappy(pajaro, interfazJuego);
 
-            // Establecer la referencia al juego en la interfaz
+            // Conectar interfaz con el juego (referencia circular)
             interfazJuego.juego = juegoFlappy;
 
-            // Configurar el click del pájaro
+            // Configurar el control del pájaro (click para volar)
             pajaro.configurarClick(() => juegoFlappy.obtenerEstadoJuego());
 
-            // Deshabilitar click inicial
+            // Bloquear clicks hasta que empiece la partida
             pajaro.deshabilitarClick();
 
-            // Configurar botones
+            // Asignar funciones a los botones de inicio y menú
             interfazJuego.configurarBotones(
                 () => juegoFlappy.iniciarJuego(),
                 () => juegoFlappy.volverAlMenu());
@@ -164,7 +164,7 @@ async function inicializarPaginaDeJuegoEnMain(valueJuego){
         document.body.style.overflow = 'hidden'; // Evita scroll mientras se juega
     });
 
-    // Evento para el boton de cerrar juego en ejecucion
+    // Evento para el boton de cerrar juego en ejecucion para todos el mismo
     const btnCerrarJuego = document.getElementById('btn-salir-juego');
     btnCerrarJuego.addEventListener('click', () => {
         // Ocultar aside con el juego

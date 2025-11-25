@@ -1,6 +1,9 @@
 import CONFIG from './Configuracion.js';
 
 class JuegoFlappy {
+    /**
+     * Inicializa el juego con todas las variables de estado, puntaje, vidas y dificultad
+     */
     constructor(pajaro, interfazJuego) {
         this.pajaro = pajaro;
         this.interfazJuego = interfazJuego;
@@ -26,6 +29,9 @@ class JuegoFlappy {
         this.tubosPasadosTotal = 0;
     }
 
+    /**
+     * Devuelve el estado actual del juego (inicio, jugando o finJuego)
+     */
     obtenerEstadoJuego() {
         return this.estadoJuego;
     }
@@ -68,7 +74,7 @@ class JuegoFlappy {
     }
 
     /**
-     * Actualiza posición de tubos y genera nuevos
+     * Mueve los tubos hacia la izquierda, elimina los que salen de pantalla y crea nuevos
      */
     actualizarTubos() {
         if (this.estadoJuego !== 'jugando') return;
@@ -118,7 +124,7 @@ class JuegoFlappy {
     }
 
     /**
-     * Crea un corazón con animación de pulso en el hueco del tubo
+     * Crea un corazón (vida extra) posicionado en el centro del hueco de un tubo
      */
     crearCorazon(espacioTuboY) {
         const contenedorJuego = document.getElementById('contenedor-juego');
@@ -141,7 +147,7 @@ class JuegoFlappy {
     }
 
     /**
-     * Actualiza posición de corazones
+     * Mueve los corazones, detecta colisión con el pájaro y otorga vidas extra
      */
     actualizarCorazones() {
         if (this.estadoJuego !== 'jugando') return;
@@ -177,7 +183,7 @@ class JuegoFlappy {
     }
 
     /**
-     * Limpia todos los tubos y corazones
+     * Elimina todos los tubos y corazones del DOM al reiniciar el juego
      */
     limpiarTubos() {
         this.tubos.forEach(tubo => tubo.elemento.remove());
@@ -189,7 +195,7 @@ class JuegoFlappy {
     }
 
     /**
-     * Verifica colisiones con tubos
+     * Detecta si el pájaro choca con los tubos o los bordes, y quita una vida
      */
     verificarColisiones() {
         if (this.estadoJuego !== 'jugando') return;
@@ -231,14 +237,14 @@ class JuegoFlappy {
     }
 
     /**
-     * Incrementa la puntuación
+     * Suma 1 punto al pasar un tubo y aumenta la dificultad cada 5 tubos
      */
     sumarPuntuacion() {
         if (this.estadoJuego === 'jugando') {
             this.puntuacion++;
             this.interfazJuego.actualizarPuntuacion(this.puntuacion, this.nivelActual);
             
-            // ===== SISTEMA DE DIFICULTAD PROGRESIVA =====
+            // SISTEMA DE DIFICULTAD PROGRESIVA
             // Cada vez que pasas un tubo (sumas puntos), aumenta el contador
             this.tubosPasadosTotal++;
             
@@ -256,11 +262,10 @@ class JuegoFlappy {
     }
 
     /**
-     * Aumenta la dificultad del juego incrementando la velocidad de los tubos
-     * y reduciendo el espacio entre tubos superior e inferior
+     * Incrementa la velocidad de tubos y reduce el espacio entre ellos al subir de nivel
      */
     aumentarDificultad() {
-        // ===== AUMENTAR VELOCIDAD DE LOS TUBOS =====
+        // AUMENTAR VELOCIDAD DE LOS TUBOS
         // Suma el incremento configurado a la velocidad actual
         this.velocidadTubos += CONFIG.INCREMENTO_VELOCIDAD;
         
@@ -268,7 +273,7 @@ class JuegoFlappy {
         // Math.min devuelve el número más pequeño entre velocidadTubos y VELOCIDAD_MAXIMA
         this.velocidadTubos = Math.min(this.velocidadTubos, CONFIG.VELOCIDAD_MAXIMA);
         
-        // ===== REDUCIR ESPACIO ENTRE TUBOS =====
+        // REDUCIR ESPACIO ENTRE TUBOS
         // Resta la reducción configurada al espacio actual
         this.tamanoEspacio -= CONFIG.REDUCCION_ESPACIO;
         
@@ -276,7 +281,7 @@ class JuegoFlappy {
         // Math.max devuelve el número más grande entre tamanoEspacio y ESPACIO_MINIMO
         this.tamanoEspacio = Math.max(this.tamanoEspacio, CONFIG.ESPACIO_MINIMO);
         
-        // ===== FEEDBACK VISUAL AL JUGADOR =====
+        // FEEDBACK VISUAL AL JUGADOR
         // Muestra un mensaje temporal en la pantalla indicando el nuevo nivel
         this.mostrarMensajeNivel();
         
@@ -285,7 +290,7 @@ class JuegoFlappy {
     }
 
     /**
-     * Muestra un mensaje temporal en pantalla cuando subes de nivel
+     * Muestra un mensaje "¡NIVEL X!" durante 2 segundos al cambiar de nivel
      */
     mostrarMensajeNivel() {
         // Busca si ya existe un mensaje de nivel en la pantalla
@@ -320,6 +325,9 @@ class JuegoFlappy {
         }, 2000);
     }
 
+    /**
+     * Inicia una nueva partida reseteando todas las variables y arrancando el bucle del juego
+     */
     iniciarJuego() {
         this.estadoJuego = 'jugando';
         this.puntuacion = 0;
@@ -329,7 +337,7 @@ class JuegoFlappy {
         this.invulnerable = false;
         this.saltarProximaPuntuacion = false;
         
-        // ===== REINICIAR SISTEMA DE DIFICULTAD =====
+        // REINICIAR SISTEMA DE DIFICULTAD
         // Cuando empieza un nuevo juego, todo vuelve a los valores iniciales
         this.nivelActual = 1;
         this.tubosPasadosTotal = 0;
@@ -355,6 +363,9 @@ class JuegoFlappy {
         }, 16);
     }
 
+    /**
+     * Detiene el juego, muestra la pantalla de Game Over con el puntaje final
+     */
     terminarJuego() {
         this.estadoJuego = 'finJuego';
         clearInterval(this.bucleJuego);
@@ -366,11 +377,17 @@ class JuegoFlappy {
         this.pajaro.detener();
     }
 
+    /**
+     * Reinicia el juego desde cero sin volver al menú principal
+     */
     reiniciarJuego() {
         document.body.classList.remove('game-over-state', 'game-frozen');
         this.iniciarJuego();
     }
 
+    /**
+     * Resetea el juego completamente y vuelve a la pantalla de inicio
+     */
     volverAlMenu() {
         // Limpiar el estado del juego
         document.body.classList.remove('game-over-state', 'game-frozen');

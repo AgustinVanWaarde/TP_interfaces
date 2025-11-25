@@ -1,6 +1,9 @@
 import CONFIG from './Configuracion.js';
 
 class InterfazJuegoFlappy {
+    /**
+     * Inicializa la interfaz obteniendo referencias a todos los elementos HTML del juego
+     */
     constructor(juego, pajaro) {
         this.juego = juego;
         this.pajaro = pajaro;
@@ -16,12 +19,12 @@ class InterfazJuegoFlappy {
     }
 
     /**
-     * Actualiza la puntuación en la interfaz
+     * Muestra el puntaje actual y el nivel en la pantalla
      */
     actualizarPuntuacion(puntuacion, nivelActual) {
         this.elementoPuntuacion.textContent = puntuacion;
         
-        // ===== ACTUALIZAR EL NIVEL EN LA INTERFAZ =====
+        // ACTUALIZAR EL NIVEL EN LA INTERFAZ 
         // Cada vez que cambia la puntuación, también actualizamos el nivel mostrado
         if (this.elementoNivel) {
             this.elementoNivel.textContent = `Nivel ${nivelActual}`;
@@ -29,7 +32,7 @@ class InterfazJuegoFlappy {
     }
 
     /**
-     * Actualiza las vidas en la interfaz
+     * Dibuja los iconos de corazón según la cantidad de vidas restantes
      */
     actualizarVidas(vidas) {
         this.contenedorVidas.innerHTML = '';
@@ -41,7 +44,7 @@ class InterfazJuegoFlappy {
     }
 
     /**
-     * Suma una vida
+     * Añade una vida extra cuando el pájaro recolecta un corazón (máximo 6 vidas)
      */
     sumarVida() {
         if (this.juego.obtenerEstadoJuego() === 'jugando' && this.juego.vidas < 6) {
@@ -51,7 +54,7 @@ class InterfazJuegoFlappy {
     }
 
     /**
-     * Quita una vida
+     * Resta una vida al chocar, reposiciona el pájaro o termina el juego si no quedan vidas
      */
     perderVida() {
         if (this.juego.obtenerEstadoJuego() === 'jugando' && !this.juego.invulnerable) {
@@ -65,13 +68,13 @@ class InterfazJuegoFlappy {
                 // Congela el juego temporalmente
                 document.body.classList.add('game-frozen');
                 
-                // ===== LÓGICA DE RESPAWN MEJORADA =====
+                // LÓGICA DE RESPAWN MEJORADA
                 // Busca el próximo tubo que está adelante del pájaro
                 const rectPajaro = this.pajaro.obtenerElemento().getBoundingClientRect();
                 const proximoTubo = this.juego.tubos.find(tubo => tubo.x + 80 > rectPajaro.left);
                 
                 if (proximoTubo) {
-                    // ===== REPOSICIONAR EL PRÓXIMO TUBO =====
+                    // REPOSICIONAR EL PRÓXIMO TUBO 
                     // Coloca el próximo tubo en una posición adelante del pájaro
                     const objetivoX = 400;
                     const desplazamiento = objetivoX - proximoTubo.x;
@@ -90,7 +93,7 @@ class InterfazJuegoFlappy {
                     
                     this.juego.proximaDistanciaTubo = CONFIG.DISTANCIA_ENTRE_TUBOS;
                     
-                    // ===== CENTRAR EL PÁJARO EN EL HUECO DEL PRÓXIMO TUBO =====
+                    // CENTRAR EL PÁJARO EN EL HUECO DEL PRÓXIMO TUBO
                     const contenedorJuego = document.getElementById('contenedor-juego');
                     const alturaContenedor = contenedorJuego.clientHeight;
                     const centroHuecoAbsoluto = proximoTubo.espacioY + (this.juego.tamanoEspacio / 2);
@@ -110,7 +113,7 @@ class InterfazJuegoFlappy {
                     this.pajaro.establecerAlturaActual(0);
                 }
                 
-                // ===== APLICAR LA NUEVA POSICIÓN AL PÁJARO =====
+                // APLICAR LA NUEVA POSICIÓN AL PÁJARO
                 this.pajaro.establecerEstaCayendo(false);
                 this.pajaro.deshabilitarClick();
                 clearInterval(this.pajaro.obtenerIntervaloCaida());
@@ -128,7 +131,7 @@ class InterfazJuegoFlappy {
                 elementoPajaro.style.setProperty('--target-height', `${alturaActual}px`);
                 elementoPajaro.style.backgroundImage = 'url("./js/flappyGame/img/pajaro normal.png")';
                 
-                // ===== EFECTO VISUAL DE PARPADEO =====
+                // EFECTO VISUAL DE PARPADEO
                 setTimeout(() => {
                     elementoPajaro.classList.remove('blinking');
                 }, CONFIG.TIEMPO_PARPADEO);
@@ -136,7 +139,7 @@ class InterfazJuegoFlappy {
                 // No suma puntos en el siguiente tubo que pase
                 this.juego.saltarProximaPuntuacion = true;
                 
-                // ===== DESCONGELAR EL JUEGO =====
+                // DESCONGELAR EL JUEGO
                 setTimeout(() => {
                     document.body.classList.remove('game-frozen');
                     this.pajaro.habilitarClick();
@@ -150,7 +153,7 @@ class InterfazJuegoFlappy {
                     this.pajaro.establecerIntervaloCaida(intervalo);
                 }, CONFIG.TIEMPO_CONGELADO);
                 
-                // ===== QUITAR INVULNERABILIDAD =====
+                // QUITAR INVULNERABILIDAD
                 setTimeout(() => {
                     this.juego.invulnerable = false;
                     console.log('Invulnerabilidad terminada - ¡Cuidado!');
@@ -159,23 +162,38 @@ class InterfazJuegoFlappy {
         }
     }
 
+    /**
+     * Oculta la pantalla de inicio al comenzar el juego
+     */
     ocultarPantallaInicio() {
         this.pantallaInicio.style.display = 'none';
     }
 
+    /**
+     * Muestra la pantalla de inicio con el botón "Comenzar"
+     */
     mostrarPantallaInicio() {
         this.pantallaInicio.style.display = 'block';
     }
 
+    /**
+     * Oculta la pantalla de Game Over
+     */
     ocultarPantallaFinJuego() {
         this.pantallaFinJuego.style.display = 'none';
     }
 
+    /**
+     * Muestra la pantalla de Game Over con el puntaje final
+     */
     mostrarPantallaFinJuego(puntuacion) {
         this.elementoPuntuacionFinal.textContent = puntuacion;
         this.pantallaFinJuego.style.display = 'block';
     }
 
+    /**
+     * Asigna las funciones a los botones de Iniciar y Reiniciar
+     */
     configurarBotones(onIniciar, onReiniciar) {
         this.botonIniciar.addEventListener('click', onIniciar);
         this.botonReiniciar.addEventListener('click', onReiniciar);

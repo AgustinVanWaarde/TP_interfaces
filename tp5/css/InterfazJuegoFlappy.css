@@ -1,9 +1,10 @@
-/* Ocultar barras de scroll */
-/* body {
-    overflow: hidden;
-} */
+/**
+ * CSS para la Interfaz del Juego Flappy Bird
+ * Maneja todas las pantallas, elementos de UI, animaciones y estados visuales
+ */
 
-/* Interfaz del juego */
+/* CONTENEDOR PRINCIPAL */
+/* Interfaz general del juego */
 .game-ui {
     width: 100%;
     height: 100%;
@@ -14,7 +15,8 @@
     z-index: 20;
 }
 
-/* Puntuación en pantalla */
+/* ELEMENTOS DE UI (HUD) */
+/* Contador de puntos (arriba izquierda) */
 .score {
     position: absolute;
     top: 20px;
@@ -26,7 +28,7 @@
     pointer-events: none;
 }
 
-/* Indicador de nivel en pantalla */
+/* Indicador de nivel actual (arriba derecha con fondo dorado) */
 .nivel-display {
     position: absolute;
     top: 20px;
@@ -42,7 +44,7 @@
     border: 2px solid #FFD700;
 }
 
-/* Vidas en pantalla */
+/* Contador de vidas con iconos de corazón (debajo del puntaje) */
 .lives-display {
     position: absolute;
     top: 60px;
@@ -62,6 +64,7 @@
     align-items: center;
 }
 
+/* Icono individual de vida (corazón) */
 .vida-icono {
     display: inline-block;
     width: 25px;
@@ -72,7 +75,8 @@
     margin-right: 5px;
 }
 
-/* Pantalla de inicio */
+/* PANTALLAS DEL JUEGO */
+/* Pantalla de inicio con botón "Comenzar" */
 .start-screen {
     position: absolute;
     background: rgba(0,0,0,0.8);
@@ -126,7 +130,7 @@
     font-size: 18px;
 }
 
-/* Pantalla de game over */
+/* Pantalla de Game Over con puntaje final */
 .game-over {
     position: absolute;
     top: 50%;
@@ -151,7 +155,8 @@
     font-size: 18px;
 }
 
-/* Botones */
+/* BOTONES DEL JUEGO */
+/* Estilo base para botones */
 .btn-flappy {
     background: #4CAF50;
     color: white;
@@ -175,7 +180,8 @@
     background: #3388f7;
 }
 
-/* Estados del juego */
+/* ESTADOS DEL JUEGO */
+/* Oculta pantalla inicio cuando está jugando */
 .game-playing .start-screen {
     display: none;
 }
@@ -188,6 +194,8 @@
     display: none;
 }
 
+/* OBSTÁCULOS (TUBOS) */
+/* Contenedor de par de tubos (superior e inferior) */
 .tube-container {
     position: absolute;
     top: 0;
@@ -197,6 +205,7 @@
     pointer-events: none;
 }
 
+/* Tubo superior (imagen volteada) */
 .tube-top {
     position: absolute;
     top: 0;
@@ -206,6 +215,7 @@
     transform: scaleY(-1);
 }
 
+/* Tubo inferior (imagen normal) */
 .tube-bottom {
     position: absolute;
     width: 80px;
@@ -218,6 +228,8 @@
     animation-play-state: paused;
 }
 
+/* CORAZONES (VIDAS EXTRA) */
+/* Corazón coleccionable con animación de pulso */
 .heart {
     position: absolute;
     width: 40px;
@@ -229,7 +241,7 @@
     animation: heartPulse 1s ease-in-out infinite;
 }
 
-/* Animación de pulso para corazones */
+/* Animación: corazón crece y encoge continuamente */
 @keyframes heartPulse {
     0% { transform: rotate(-45deg) scale(1); }
     50% { transform: rotate(-45deg) scale(1.2); }
@@ -241,7 +253,7 @@
     animation-play-state: paused;
 }
 
-/* ===== ANIMACIÓN DE PARPADEO PARA INMUNIDAD =====
+/* ANIMACIÓN DE PARPADEO PARA INMUNIDAD
  * El pájaro parpadea mientras es invulnerable después de perder una vida
  * Esto da feedback visual al jugador de que está protegido temporalmente
  */

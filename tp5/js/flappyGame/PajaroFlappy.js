@@ -1,6 +1,9 @@
 import CONFIG from './Configuracion.js';
 
 class PajaroFlappy {
+    /**
+     * Inicializa el pájaro con su elemento HTML y variables de control de movimiento
+     */
     constructor(elementoId) {
         this.pajaro = document.getElementById(elementoId);
         this.alturaActual = 0;
@@ -10,7 +13,7 @@ class PajaroFlappy {
     }
 
     /**
-     * Actualiza la posición actual del pájaro leyendo su transform CSS
+     * Lee la posición Y actual del pájaro desde su transformación CSS durante la caída
      */
     actualizarPosicionActual() {
         if (this.estaCayendo) {
@@ -25,7 +28,7 @@ class PajaroFlappy {
     }
 
     /**
-     * Resetea la posicion del pájaro
+     * Devuelve el pájaro a su posición inicial (centro de la pantalla)
      */
     reiniciar() {
         this.alturaActual = 0;
@@ -41,12 +44,11 @@ class PajaroFlappy {
     }
 
     /**
-     * Resetea el pájaro al último tubo pasado
-     * FUNCIÓN MEJORADA: Ahora calcula correctamente la posición para evitar bucles de colisión
+     * Reposiciona el pájaro al centro del último tubo pasado después de perder una vida
      */
     reiniciarAlUltimoTubo(ultimoTuboPasado, tubos, corazones, tamanoEspacio, proximaDistanciaTubo) {
         if (ultimoTuboPasado) {
-            // ===== REPOSICIONAR TUBOS =====
+            // REPOSICIONAR TUBOS
             // Mueve todos los tubos para que el último tubo pasado quede a la izquierda del pájaro
             const objetivoX = 70; // Posición X donde queremos que quede el tubo
             const desplazamiento = objetivoX - ultimoTuboPasado.x;
@@ -63,7 +65,7 @@ class PajaroFlappy {
                 corazon.elemento.style.left = corazon.x + 'px';
             });
             
-            // ===== CALCULAR POSICIÓN CENTRADA DEL PÁJARO =====
+            // CALCULAR POSICIÓN CENTRADA DEL PÁJARO
             // El pájaro está centrado verticalmente en el contenedor (top: 50%)
             // Necesitamos calcular cuánto debe moverse desde ese centro
             
@@ -105,7 +107,7 @@ class PajaroFlappy {
     }
 
     /**
-     * Detiene el pájaro y congela todo el juego
+     * Congela el movimiento del pájaro y todo el juego al terminar la partida
      */
     detener() {
         this.estaCayendo = false;
@@ -121,7 +123,7 @@ class PajaroFlappy {
     }
 
     /**
-     * Configura el evento de click para que solo funcione durante el juego
+     * Establece el evento de click para hacer volar al pájaro (sube y luego cae)
      */
     configurarClick(obtenerEstadoJuego) {
         document.addEventListener('click', (e) => {
@@ -162,14 +164,21 @@ class PajaroFlappy {
         });
     }
 
+    /**
+     * Permite que el jugador pueda hacer click para volar
+     */
     habilitarClick() {
         this.puedeHacerClick = true;
     }
 
+    /**
+     * Bloquea los clicks del jugador temporalmente
+     */
     deshabilitarClick() {
         this.puedeHacerClick = false;
     }
 
+    // Métodos getter y setter para acceder a las propiedades del pájaro
     obtenerElemento() {
         return this.pajaro;
     }
