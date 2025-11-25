@@ -1,0 +1,148 @@
+/* ===== ANIMACIONES DE PARALLAX SCROLLING =====
+ * Estas animaciones mueven el fondo de forma continua
+ * Cada capa se mueve a diferente velocidad para dar efecto de profundidad
+ * 
+ * IMPORTANTE: Para evitar saltos, el valor debe ser exactamente el ancho
+ * de tu imagen multiplicado por 2 (porque usamos background-size: auto 100%)
+ * Si tus imágenes miden 1920px de ancho, usa 3840px
+ * Si miden 2880px de ancho, usa 5760px
+ * Ajusta estos valores según el tamaño real de tus imágenes
+ */
+
+/* Animación rápida para capas cercanas (edificios) */
+@keyframes scrollRapido {
+    0% { background-position-x: 0px; }
+    /* Desplazamiento total: ajusta 3840px según el ancho de tu imagen */
+    /* Fórmula: (ancho de la imagen) * 2 */
+    100% { background-position-x: -1920px; }
+}
+
+/* Animación lenta para capas lejanas (nubes) */
+@keyframes scrollLento {
+    0% { background-position-x: 0px; }
+    /* Mismo desplazamiento pero más lento */
+    100% { background-position-x: -1920px; }
+}
+
+/* ===== ESTILO BASE PARA TODAS LAS CAPAS =====
+ * Configuración común que comparten todas las capas del parallax
+ */
+.layer {
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /* repeat-x: repite la imagen horizontalmente de forma infinita */
+    background-repeat: repeat-x;
+    /* auto 100%: mantiene el ancho original pero ajusta la altura al 100% de la pantalla */
+    background-size: auto 100%;
+    pointer-events: none; /* Las capas no interfieren con el click */
+}
+
+/* ===== CAPA 5: EDIFICIOS (más cerca, se mueve más rápido) ===== */
+.layer-5 {
+    background-image: url("../js/flappyGame/img/edificios.png");
+    /* 15 segundos para completar un ciclo (velocidad rápida) */
+    /* infinite: se repite eternamente sin pausas */
+    /* linear: velocidad constante, sin aceleración ni desaceleración */
+    animation: scrollRapido 15s infinite linear;
+    z-index: 3; /* Aparece delante de las otras capas de fondo */
+}
+
+/* ===== CAPA 4: NUBES (más lejos, se mueve más lento) ===== */
+.layer-4 {
+    background-image: url("../js/flappyGame/img/nubes.png");
+    /* 25 segundos = más lento que los edificios (efecto de profundidad) */
+    animation: scrollLento 25s infinite linear;
+    z-index: 2; /* Detrás de los edificios pero delante del cielo */
+}
+
+/* ===== CAPA 3: CIELO (fondo estático, no se mueve) ===== */
+.layer-3 {
+    background-image: url("../js/flappyGame/img/cielo.png");
+    /* cover: estira la imagen para cubrir toda la pantalla */
+    background-size: cover;
+    /* Sin animación = permanece fijo como fondo base */
+    z-index: 1; /* La capa más atrás de todas */
+}
+
+/* Estilo base del pájaro */
+.bird {
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    top: 50%; /* Centrado verticalmente */
+    left: 200px; /* Posición fija horizontal */
+    background-image: url("../js/flappyGame/img/pajaro normal.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10; /* Aparece sobre todas las capas */
+    --target-height: 0px; /* Variable CSS para la altura objetivo */
+}
+
+/* el pajaro sube */
+.bird.flying {
+    animation: flyUp 0.4s ease-out forwards;
+    /* ease-out: empieza rápido y desacelera */
+    /* forwards: mantiene la posición final */
+}
+
+/* el pajaro baja*/
+.bird.falling {
+    animation: fallDown 2s ease-in infinite;
+    /* ease-in: empieza lento y acelera*/
+    /* infinite: se repite hasta ser interrumpida */
+}
+
+/* Estado de juego congelado y detiene todas las animaciones */
+.game-frozen .layer {
+    animation-play-state: paused;
+}
+
+.game-frozen .bird {
+    animation-play-state: paused;
+}
+
+/* Animación de subida del pájaro */
+@keyframes flyUp {
+    /* Desde la posicion actual*/
+    from { transform: translateY(var(--current-height)); }
+    /* Hasta la nueva posición */
+    to { transform: translateY(var(--target-height)); }
+}
+
+/* Animación de caída del pájaro */
+@keyframes fallDown {
+    /* Desde la posicion donde termino de subir */
+    from { transform: translateY(var(--target-height)); }
+    /* Hasta el suelo fijo (50vh desde el centro hacia abajo) */
+    to { transform: translateY(50vh); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* MARCO CONTENEDOR DONDE CORRE EL JUEGO TIENE OTROS ESTILOS QUE LOS OTROS JUEGOS */
+/* Contenedor donde se reproduce el juego */
+.contenedor-juego-main-flappy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden; /* IMPORTANTE: Oculta las partes de las capas que se salen del contenedor */
+    background: transparent; /* Sin fondo para que se vean las capas del parallax */
+}

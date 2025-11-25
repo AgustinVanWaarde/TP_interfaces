@@ -5,6 +5,9 @@ import { generarFormularios } from './login.js';
 import { crearPaginaDeJuego } from './paginaDeJuego.js';
 import GameManagerBlocka from './blockaGame/GameManagerBlocka.js';
 import GameManagerPeg from './pegGame/GameManagerPeg.js';
+import JuegoFlappy from './flappyGame/JuegoFlappy.js'; 
+import InterfazJuegoFlappy from './flappyGame/InterfazJuegoFlappy.js';
+import PajaroFlappy from './flappyGame/PajaroFlappy.js';
 
 const main = document.getElementById('main-content');
 
@@ -127,6 +130,31 @@ async function inicializarPaginaDeJuegoEnMain(valueJuego){
         } 
         else if(valueJuego === "peg-solitarie"){
             const gameManagerPeg = new GameManagerPeg();
+        }
+        else if(valueJuego === "flappy-bird"){
+            // Crear instancia del pájaro
+            const pajaro = new PajaroFlappy('bird');
+
+            // Crear interfaz sin el juego primero
+            const interfazJuego = new InterfazJuegoFlappy(null, pajaro);
+            interfazJuego.ocultarPantallaFinJuego();
+
+            // Crear juego con pajaro e interfaz
+            const juegoFlappy = new JuegoFlappy(pajaro, interfazJuego);
+
+            // Establecer la referencia al juego en la interfaz
+            interfazJuego.juego = juegoFlappy;
+
+            // Configurar el click del pájaro
+            pajaro.configurarClick(() => juegoFlappy.obtenerEstadoJuego());
+
+            // Deshabilitar click inicial
+            pajaro.deshabilitarClick();
+
+            // Configurar botones
+            interfazJuego.configurarBotones(
+                () => juegoFlappy.iniciarJuego(),
+                () => juegoFlappy.volverAlMenu());
         }
 
         // Mostrar aside con el juego

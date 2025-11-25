@@ -1,0 +1,264 @@
+/* Ocultar barras de scroll */
+/* body {
+    overflow: hidden;
+} */
+
+/* Interfaz del juego */
+.game-ui {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* Puntuación en pantalla */
+.score {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+/* Indicador de nivel en pantalla */
+.nivel-display {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #FFD700; /* Color dorado para resaltar */
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #FFD700;
+}
+
+/* Vidas en pantalla */
+.lives-display {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#lives {
+    display: flex;
+    align-items: center;
+}
+
+.vida-icono {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url('../js/flappyGame/img/vida.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+}
+
+/* Pantalla de inicio */
+.start-screen {
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    top: 100px;
+    pointer-events: auto;
+}
+
+.start-screen h1 {
+    margin: 0 0 20px 0;
+    font-size: 36px;
+}
+
+/* Boton para salir del juego en ejecucion normal,hover y active */
+.btn-salir-juego-flappy {
+    position: absolute;
+    bottom: -70px;
+    right: -300px;
+    width: 70px;
+    height: 35px;
+    z-index: 40;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: none;
+    background-color: #83130b;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+.btn-salir-juego-flappy:hover {
+    background-color: #ff0202fd;
+    transform: scale(1.1);
+}
+.btn-salir-juego-flappy:active {
+    transform: scale(1);
+}
+
+/* Icono dentro del boton salir del juego */
+.btn-salir-juego-flappy i {
+    font-size: 28px;
+}
+
+.start-screen p {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+
+/* Pantalla de game over */
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,0,0,0.9);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    pointer-events: auto;
+    display: none;
+}
+
+.game-over h2 {
+    margin: 0 0 20px 0;
+    font-size: 32px;
+}
+
+.game-over p {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+
+/* Botones */
+.btn-flappy {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-flappy:hover {
+    background: #45a049;
+}
+
+#restartBtn {
+    background: #064ba5;
+}
+
+#restartBtn:hover {
+    background: #3388f7;
+}
+
+/* Estados del juego */
+.game-playing .start-screen {
+    display: none;
+}
+
+.game-over-state .game-over {
+    display: block;
+}
+
+.game-over-state .score {
+    display: none;
+}
+
+.tube-container {
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.tube-top {
+    position: absolute;
+    top: 0;
+    width: 80px;
+    background: url('../js/flappyGame/img/tubo.png') no-repeat;
+    background-size: 80px 100%;
+    transform: scaleY(-1);
+}
+
+.tube-bottom {
+    position: absolute;
+    width: 80px;
+    background: url('../js/flappyGame/img/tubo.png') no-repeat;
+    background-size: 80px 100%;
+}
+
+/* Congelar tubos cuando el juego termina */
+.game-frozen .tube-container {
+    animation-play-state: paused;
+}
+
+.heart {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('../js/flappyGame/img/vida.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 15;
+    animation: heartPulse 1s ease-in-out infinite;
+}
+
+/* Animación de pulso para corazones */
+@keyframes heartPulse {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.2); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+/* Congelar corazones cuando el juego termina */
+.game-frozen .heart {
+    animation-play-state: paused;
+}
+
+/* ===== ANIMACIÓN DE PARPADEO PARA INMUNIDAD =====
+ * El pájaro parpadea mientras es invulnerable después de perder una vida
+ * Esto da feedback visual al jugador de que está protegido temporalmente
+ */
+@keyframes blink {
+    /* Alterna entre opacidad completa y semi-transparente */
+    0%, 50% { 
+        opacity: 1; /* Visible al 100% */
+    }
+    51%, 100% { 
+        opacity: 0.3; /* Semi-transparente al 30% */
+    }
+}
+
+/* Aplica el parpadeo al pájaro cuando tiene la clase "blinking" */
+.bird.blinking {
+    /* Parpadea cada 0.2 segundos de forma continua */
+    animation: blink 0.2s infinite;
+    /* Agrega un borde brillante para mayor visibilidad */
+    filter: drop-shadow(0 0 10px rgba(228, 228, 228, 0.8));
+}

@@ -22,11 +22,20 @@ export function crearEstructuraJuego(juegoPedido,nombreJuego) {
         aside.innerHTML = breadcrumbHTML + marcoJuegoHTML + marcoInstruccionesHTML;
     } 
     else if (juegoPedido === 'peg-solitarie') {
-        console.log("Creando estructura del peg");
         // 2. Crear las secciones del contenido (devuelven HTML como string)
         const breadcrumbHTML = crearSeccionBreadcrumb(nombreJuego);
         const marcoJuegoHTML = crearSeccionMarcoJuegoPeg(nombreJuego);
         const marcoInstruccionesHTML = crearSeccionMarcoInstruccionesPeg();
+
+        // 3. Ensamblar todo el HTML de forma limpia y eficiente
+        aside.innerHTML = breadcrumbHTML + marcoJuegoHTML + marcoInstruccionesHTML;
+    }
+    else if (juegoPedido === 'flappy-bird') {
+        // 2. Crear las secciones del contenido (devuelven HTML como string)
+        const breadcrumbHTML = crearSeccionBreadcrumb(nombreJuego);
+        const marcoJuegoHTML = crearSeccionMarcoJuegoFlappy(nombreJuego);
+        const marcoInstruccionesHTML = crearSeccionMarcoInstruccionesFlappy();
+
 
         // 3. Ensamblar todo el HTML de forma limpia y eficiente
         aside.innerHTML = breadcrumbHTML + marcoJuegoHTML + marcoInstruccionesHTML;
@@ -461,3 +470,105 @@ function crearSeccionMarcoInstruccionesPeg() {
     `;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================= */
+//            Desde aqui comienza el creador del Flappy      */
+// ========================================================= //
+
+function crearSeccionMarcoJuegoFlappy(nombreJuego) {
+    return `
+    <div class="marco-contenedor-juego">
+        <div class="contenedor-juego-main-flappy" id="contenedor-juego">
+
+            <!-- Capas del parallax -->
+            <div class="layer layer-1"></div>
+            <div class="layer layer-2"></div>
+            <div class="layer layer-3"></div>
+            <div class="layer layer-4"></div>
+            <div class="layer layer-5"></div>
+            
+            <!-- pajaro -->
+            <div class="bird" id="bird"></div>
+
+            
+            <!-- Interfaz del juego -->
+            <div class="game-ui">
+                
+                <div class="score">Puntuación: <span id="score">0</span></div>
+                <!-- Indicador de nivel actual -->
+                <div class="nivel-display"><span id="nivel">Nivel 1</span></div>
+                <div class="lives-display">Vidas: <div id="lives"></div></div>
+                <div class="game-over" id="gameOver">
+                    <h2>¡Game Over!</h2>
+                    <p>Puntuación final: <span id="finalScore">0</span></p>
+                    <button class="btn-flappy" id="restartBtn">Menú</button>
+                </div>
+                <div class="start-screen" id="startScreen">
+                    <button id="btn-salir-juego" class="btn-salir-juego-flappy">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                    <h1>Flappy Bird</h1>
+                    <p>Haz click para volar</p>
+                    <button class="btn-flappy" id="startBtn">Comenzar</button>
+                </div>
+            </div>
+        
+        </div> 
+        ${crearSeccionTituloCompartir(nombreJuego)}
+    </div> `;
+}
+
+
+
+
+function crearSeccionMarcoInstruccionesFlappy() {
+    return `
+    <!-- Marco contenedor instrucciones -->
+    <div class="marco-contenedor-instrucciones">
+        <div class="instrucciones">
+            <div class="titulo-instrucciones">
+                <i class="fa-solid fa-arrow-pointer"></i>
+                <h3>Como jugar?</h3>
+            </div>
+            <p>
+                Haz clic en cualquier parte de la pantalla para hacer volar al pájaro.<br>
+                Cada clic lo impulsa hacia arriba, soltándolo caerá por gravedad.<br>
+                Evita chocar con los tubos y los bordes de la pantalla.
+            </p>
+        </div>
+        <div class="objetivo-juego">
+            <div class="titulo-instrucciones">
+                <i class="fa-regular fa-lightbulb"></i>
+                <h3>Objetivo del juego</h3>
+            </div>
+            <p>
+                Pasa entre los tubos sin chocar para sumar puntos.
+                Recolecta corazones para ganar vidas extra. ¡Supera tu récord!
+            </p>
+        </div>
+        <div class="descripcion-juego">
+            <div class="titulo-instrucciones">
+                <i class="fa-solid fa-book-open"></i>
+                <h3>Descripcion del juego</h3>
+            </div>
+            <p>
+                Flappy Bird es un clásico juego arcade de reflejos y coordinación. 
+                Controla un pájaro que vuela entre tubos infinitos mientras la dificultad 
+                aumenta progresivamente. ¡Un juego simple pero adictivo que pondrá a prueba 
+                tu paciencia y habilidad!
+            </p>
+        </div>
+    </div>
+    `;
+}

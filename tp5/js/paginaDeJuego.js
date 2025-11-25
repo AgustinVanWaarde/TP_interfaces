@@ -40,6 +40,25 @@ const juegosPropios = [
                         sin filtros!`,
                     
         id_juego: "blocka"
+    },
+    {
+        name: "Flappy Bird", 
+
+        load_image: "../imgs/portadaEjecucionFlappy.png",
+        
+        como_jugar: `Haz clic en cualquier parte de la pantalla para hacer volar al pájaro.
+                        Cada clic lo impulsa hacia arriba, soltándolo caerá por gravedad.
+                        Evita chocar con los tubos y los bordes de la pantalla.`,
+                    
+        objetivo: `Pasa entre los tubos sin chocar para sumar puntos.
+                        Recolecta corazones para ganar vidas extra. ¡Supera tu récord!`,
+        
+        descripcion: `Flappy Bird es un clásico juego arcade de reflejos y coordinación. 
+                        Controla un pájaro que vuela entre tubos infinitos mientras la dificultad 
+                        aumenta progresivamente. ¡Un juego simple pero adictivo que pondrá a prueba 
+                        tu paciencia y habilidad!`,
+                    
+        id_juego: "flappy-bird"
     }
 ];
 
@@ -190,6 +209,9 @@ export function crearPaginaDeJuego(juegoPedido) {
         main.appendChild(crearEstructuraJuego( juegosPropios[indexJuego].id_juego, juegosPropios[indexJuego].name ));
     }
     else if (juegosPropios[indexJuego].id_juego === "peg-solitarie") {
+        main.appendChild(crearEstructuraJuego( juegosPropios[indexJuego].id_juego, juegosPropios[indexJuego].name ));
+    }
+    else if (juegosPropios[indexJuego].id_juego === "flappy-bird") {
         main.appendChild(crearEstructuraJuego( juegosPropios[indexJuego].id_juego, juegosPropios[indexJuego].name ));
     }
 

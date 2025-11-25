@@ -19,8 +19,14 @@ const juegosPropios = [
         released: "2025-05-29",
         rating: 5, 
         value: "blocka"
+    },
+    {
+        name: "Flappy Bird", 
+        background_image: "./imgs/cardFlappy.png",
+        released: "2025-05-29",
+        rating: 5, 
+        value: "flappy-bird"
     }
-
 ];
 
 export async function fetchJuegos(){
@@ -350,11 +356,12 @@ async function juegosMasValorados(){
 
     // Toma solo los primeros 20 juegos (del 0 al 19)
     // map crea una copia del array y slice corta desde el inicio hasta la posicion 19
-    const juegosFiltrados = juegos.map(j => j).slice(0, 18);
+    const juegosFiltrados = juegos.map(j => j).slice(0, 17);
     
     // Agrega nuestro juego propio al inicio del array
     juegosFiltrados.unshift(juegosPropios[0]);
     juegosFiltrados.unshift(juegosPropios[1]);
+    juegosFiltrados.unshift(juegosPropios[2]);
     return juegosFiltrados;
 }
 
